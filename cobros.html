@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="css/feedback.css" />
   <style>body { font-family: 'Inter', system-ui, sans-serif; }
-  .pay-methods { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(120px, 100%), 1fr)); gap: .5rem; }
+  .pay-methods { display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; }
   .pay-methods button {
     border: 1px solid rgb(var(--muted) / .3); background: rgb(var(--surface));
     color: rgb(var(--ink)); border-radius: 8px; padding: .7rem .4rem;
@@ -62,7 +62,7 @@
     </header>
 
     <main class="app-content">
-      <div class="proto-grid-2-1">
+      <div class="grid gap-3" style="grid-template-columns: 1.15fr 1fr;">
         <!-- Left: cart -->
         <div>
           <div class="card mb-3">
