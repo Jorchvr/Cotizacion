@@ -486,9 +486,41 @@
   }
 
   // ============================================================
-  // Render — Chatbot
+  // Persistencia del estado del chatbot (sobrevive navegación)
+  // ============================================================
+  const STORAGE_KEY = 'pp_chatbot_state_v1';
+
+  function loadChatState() {
+    try {
+      const raw = sessionStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+      const state = JSON.parse(raw);
+      if (!state || !Array.isArray(state.messages)) return null;
+      return state;
+    } catch (e) { return null; }
+  }
+
+  function saveChatState(state) {
+    try {
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (e) { /* storage lleno o bloqueado — ignorar */ }
+  }
+
+  // Estado global compartido entre helpers de esta función
+  let chatState = loadChatState() || {
+    open: false,
+    greeted: false,
+    messages: [],           // {who: 'bot'|'user', text: string}
+    suggestions: SUGGESTIONS_INITIAL.slice(),
+  };
+
+  // ============================================================
+  // Render — Chatbot (persistente entre páginas)
   // ============================================================
   function renderChatbot() {
+    // Si ya existe (por algún motivo raro de re-init), no duplicar
+    if (document.querySelector('.chatbot-fab')) return;
+
     // FAB
     const fab = document.createElement('button');
     fab.className = 'chatbot-fab';
@@ -520,18 +552,24 @@
     `;
     document.body.appendChild(panel);
 
-    const messagesEl = panel.querySelector('.chatbot-messages');
+    const messagesEl    = panel.querySelector('.chatbot-messages');
     const suggestionsEl = panel.querySelector('.chatbot-suggestions');
-    const inputEl = panel.querySelector('.chatbot-input');
-    const sendBtn = panel.querySelector('.chatbot-send');
-    const closeBtn = panel.querySelector('.chatbot-close');
+    const inputEl       = panel.querySelector('.chatbot-input');
+    const sendBtn       = panel.querySelector('.chatbot-send');
+    const closeBtn      = panel.querySelector('.chatbot-close');
 
-    function appendMsg(text, who) {
+    function paintMsg(text, who) {
       const msg = document.createElement('div');
       msg.className = 'chatbot-msg ' + who;
       msg.innerHTML = text;
       messagesEl.appendChild(msg);
       messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function appendMsg(text, who) {
+      paintMsg(text, who);
+      chatState.messages.push({ who, text });
+      saveChatState(chatState);
     }
 
     function appendTyping() {
@@ -543,7 +581,7 @@
       return t;
     }
 
-    function renderSuggestions(list) {
+    function paintSuggestions(list) {
       suggestionsEl.innerHTML = '';
       (list || []).forEach(text => {
         const b = document.createElement('button');
@@ -553,6 +591,13 @@
         b.addEventListener('click', () => submit(text));
         suggestionsEl.appendChild(b);
       });
+    }
+
+    function renderSuggestions(list) {
+      const arr = (list && list.length) ? list : SUGGESTIONS_INITIAL.slice();
+      paintSuggestions(arr);
+      chatState.suggestions = arr;
+      saveChatState(chatState);
     }
 
     function submit(text) {
@@ -575,24 +620,31 @@
       }[c]));
     }
 
+    function ensureGreeting() {
+      if (chatState.greeted) return;
+      chatState.greeted = true;
+      appendMsg(
+        '¡Hola! 👋 Soy el asistente de <strong>Pro Padel</strong>. Puedo responder tus preguntas sobre el sistema, ' +
+        'precios, tiempos de entrega, o cómo funciona cada módulo.',
+        'bot'
+      );
+      renderSuggestions(SUGGESTIONS_INITIAL);
+    }
+
     function open() {
       panel.setAttribute('data-open', 'true');
       fab.style.display = 'none';
-      inputEl.focus();
-      // saludo inicial una sola vez
-      if (!panel.dataset.greeted) {
-        panel.dataset.greeted = '1';
-        appendMsg(
-          '¡Hola! 👋 Soy el asistente de <strong>Pro Padel</strong>. Puedo responder tus preguntas sobre el sistema, ' +
-          'precios, tiempos de entrega, o cómo funciona cada módulo.',
-          'bot'
-        );
-        renderSuggestions(SUGGESTIONS_INITIAL);
-      }
+      chatState.open = true;
+      saveChatState(chatState);
+      ensureGreeting();
+      // enfocar sin scroll brusco
+      setTimeout(() => inputEl.focus({ preventScroll: true }), 40);
     }
     function close() {
       panel.setAttribute('data-open', 'false');
       fab.style.display = 'flex';
+      chatState.open = false;
+      saveChatState(chatState);
     }
 
     fab.addEventListener('click', open);
@@ -601,6 +653,27 @@
     inputEl.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') { e.preventDefault(); submit(inputEl.value); }
     });
+
+    // ============ RESTAURAR ESTADO al cambiar de página ============
+    // 1) Repintar mensajes previos (sin re-guardarlos)
+    chatState.messages.forEach(m => paintMsg(m.text, m.who));
+
+    // 2) Repintar sugerencias previas
+    if (chatState.messages.length > 0) {
+      paintSuggestions(chatState.suggestions && chatState.suggestions.length
+        ? chatState.suggestions
+        : SUGGESTIONS_INITIAL);
+    }
+
+    // 3) Si estaba abierto, mantener abierto
+    if (chatState.open) {
+      panel.setAttribute('data-open', 'true');
+      fab.style.display = 'none';
+      // scroll al final por si el historial es largo
+      setTimeout(() => {
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+      }, 50);
+    }
   }
 
   // ============================================================
