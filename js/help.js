@@ -227,9 +227,9 @@
       keywords: ['precio', 'costo', 'cuanto', 'cuánto', 'cotizacion', 'cotización', 'vale'],
       answer:
         'Hay <strong>dos opciones</strong>:<ul>' +
-        '<li><strong>Sistema Web:</strong> $70,000 de desarrollo + $2,000/mes de hosting. Se usa desde cualquier dispositivo.</li>' +
-        '<li><strong>Sistema de Escritorio:</strong> $60,000 pago único, sin mensualidad. Se instala en la computadora del club.</li></ul>' +
-        '¿Quieres saber cuál te conviene?',
+        '<li><strong>Sistema Web:</strong> $60,000 de desarrollo + $2,000/mes de hosting. Se usa desde cualquier dispositivo.</li>' +
+        '<li><strong>Sistema de Escritorio:</strong> $50,000 pago único, sin mensualidad. Se instala en la computadora del club.</li></ul>' +
+        'Se entrega en <strong>6 semanas</strong>. ¿Quieres saber cuál te conviene?',
       followups: ['¿Cuál me conviene?', '¿Qué incluye el hosting?', '¿Cuánto tarda?'],
     },
     {
@@ -278,14 +278,14 @@
     {
       keywords: ['tiempo', 'cuando', 'cuándo', 'tarda', 'entrega', 'semanas', 'meses', 'plazo'],
       answer:
-        'El desarrollo toma <strong>9 semanas</strong>: 1 semana de descubrimiento (Semana 0) + 8 semanas de desarrollo. ' +
-        'Cada semana se entrega un módulo funcional para que lo revise.',
+        'El desarrollo toma <strong>6 semanas</strong>. Cada semana se entrega un módulo funcional para que lo revise. ' +
+        'La Semana 6 incluye pruebas finales, capacitación y puesta en marcha.',
     },
     {
       keywords: ['pagos', 'como pagar', 'cómo pagar', 'forma de pago', 'esquema', 'anticipo'],
       answer:
-        'El pago del desarrollo se hace en <strong>3 partes</strong>: 40% al firmar, 30% a la mitad (Semana 4), 30% al entregar (Semana 8). ' +
-        'Podemos ajustar el esquema si prefieres pagos mensuales fijos.',
+        'El pago del desarrollo se hace en <strong>3 partes</strong>: 40% al firmar, 30% a la mitad (Semana 3), 30% al entregar (Semana 6). ' +
+        'Podemos ajustar el esquema si prefieres pagos semanales fijos.',
     },
     {
       keywords: ['soporte', 'ayuda', 'mantenimiento', 'actualizaciones', 'cambios', 'mejoras'],
