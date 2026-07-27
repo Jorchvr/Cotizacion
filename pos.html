@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="es" data-theme="light" data-layout="comodo" data-persona="admin">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pro Padel — Punto de venta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{surface:'rgb(var(--surface) / <alpha-value>)',elevated:'rgb(var(--elevated) / <alpha-value>)',accent:'rgb(var(--accent) / <alpha-value>)',muted:'rgb(var(--muted) / <alpha-value>)',ink:'rgb(var(--ink) / <alpha-value>)',ink2:'rgb(var(--ink2) / <alpha-value>)'},fontFamily:{heading:['Manrope','system-ui','sans-serif'],body:['Inter','system-ui','sans-serif']},borderRadius:{proto:'var(--radius)'}}}};</script>
+  <link rel="stylesheet" href="css/styles.css" /><link rel="stylesheet" href="css/feedback.css" />
+  <style>body { font-family: 'Inter', system-ui, sans-serif; }
+  .cat-tabs { display: flex; gap: .35rem; overflow-x: auto; padding-bottom: .5rem; }
+  .cat-tabs button { padding: .4rem .85rem; border-radius: 999px; border: 1px solid rgb(var(--muted) / .3); background: rgb(var(--elevated)); color: rgb(var(--ink)); font: inherit; font-size: .78rem; cursor: pointer; white-space: nowrap; }
+  .cat-tabs button.active { background: rgb(var(--accent)); color: #fff; border-color: rgb(var(--accent)); }
+  </style>
+</head>
+<body class="bg-surface text-ink antialiased">
+<div class="app-shell">
+  <aside class="app-sidebar">
+    <div class="brand-row"><div class="brand-mark">PP</div><div><div class="brand-name text-white">Pro Padel</div><span class="brand-city">Polanco · CDMX</span></div></div>
+    <div class="nav-section-label">Operación</div>
+    <a href="dashboard.html" class="nav-link"><span class="nav-icon">📊</span>Tablero</a>
+    <a href="reservas.html" class="nav-link"><span class="nav-icon">📅</span>Reservas <span class="nav-badge">12</span></a>
+    <a href="cobros.html" class="nav-link"><span class="nav-icon">💳</span>Cobros</a>
+    <a href="clientes.html" class="nav-link"><span class="nav-icon">👥</span>Clientes</a>
+    <a href="pos.html" class="nav-link active"><span class="nav-icon">🛒</span>Punto de venta</a>
+    <a href="caja.html" class="nav-link"><span class="nav-icon">💰</span>Caja</a>
+    <div class="nav-section-label">Comercial</div>
+    <a href="membresias.html" class="nav-link"><span class="nav-icon">🎫</span>Membresías</a>
+    <a href="promociones.html" class="nav-link"><span class="nav-icon">🏷️</span>Promociones</a>
+    <a href="torneos.html" class="nav-link"><span class="nav-icon">🏆</span>Torneos y ligas</a>
+    <div class="nav-section-label">Gestión</div>
+    <a href="inventario.html" class="nav-link"><span class="nav-icon">📦</span>Inventario</a>
+    <a href="reportes.html" class="nav-link"><span class="nav-icon">📈</span>Reportes</a>
+    <a href="usuarios.html" class="nav-link" data-persona-show="admin"><span class="nav-icon">⚙️</span>Usuarios y permisos</a>
+    <div class="sidebar-user"><div class="avatar" data-persona-text="user.initials">RS</div>
+    <div class="sidebar-user-info"><strong data-persona-text="user.name">Roberto Salazar</strong><span data-persona-text="user.role">Administrador general</span></div></div>
+  </aside>
+
+  <div class="app-main">
+    <header class="topbar">
+      <button class="sidebar-mobile-btn" data-sidebar-toggle>☰</button>
+      <div><h1>Punto de venta</h1><div class="breadcrumbs"><a href="dashboard.html">Tablero</a> / POS · Ticket #742</div></div>
+      <div class="topbar-search"><span>🔎</span><input type="text" placeholder="Producto o código de barras…" /></div>
+      <button class="btn btn-secondary btn-sm" data-toast="Comanda enviada a cocina">🍴 Comanda cocina</button>
+    </header>
+
+    <main class="app-content">
+      <div class="pos-grid">
+        <!-- CATALOG -->
+        <div>
+          <div class="cat-tabs mb-2">
+            <button class="active">Todos</button>
+            <button>🎾 Deportivos</button>
+            <button>🎽 Ropa</button>
+            <button>🥤 Bebidas</button>
+            <button>🍔 Alimentos</button>
+            <button>🍟 Snacks</button>
+            <button>🔧 Servicios</button>
+            <button>📦 Paquetes</button>
+          </div>
+
+          <div class="pos-catalog">
+            <button class="product-tile"><div class="thumb">🎾</div><div class="name">Bote pelotas Head Pro (3 uds)</div><div class="price">$220</div><div class="stock">Existencia: 24</div></button>
+            <button class="product-tile"><div class="thumb">🎾</div><div class="name">Bote pelotas Wilson X2 (3 uds)</div><div class="price">$180</div><div class="stock">Existencia: 8 ⚠︎</div></button>
+            <button class="product-tile"><div class="thumb">🏓</div><div class="name">Pala Head Delta Pro 2024</div><div class="price">$4,890</div><div class="stock">3 · S/M/L</div></button>
+            <button class="product-tile"><div class="thumb">🏓</div><div class="name">Pala Bullpadel Vertex 03</div><div class="price">$5,290</div><div class="stock">Existencia: 2</div></button>
+            <button class="product-tile"><div class="thumb">🎽</div><div class="name">Playera oficial club (uni)</div><div class="price">$350</div><div class="stock">S · M · L · XL</div></button>
+            <button class="product-tile"><div class="thumb">🧤</div><div class="name">Overgrip Wilson Pro (3)</div><div class="price">$180</div><div class="stock">Existencia: 46</div></button>
+            <button class="product-tile"><div class="thumb">🥤</div><div class="name">Gatorade 600 ml Naranja</div><div class="price">$45</div><div class="stock">Existencia: 42</div></button>
+            <button class="product-tile"><div class="thumb">💧</div><div class="name">Agua Ciel 1 L</div><div class="price">$25</div><div class="stock">Existencia: 88</div></button>
+            <button class="product-tile"><div class="thumb">🍺</div><div class="name">Corona 355 ml</div><div class="price">$65</div><div class="stock">Existencia: 60</div></button>
+            <button class="product-tile"><div class="thumb">🍹</div><div class="name">Aperol Spritz</div><div class="price">$180</div><div class="stock">Bar</div></button>
+            <button class="product-tile"><div class="thumb">🥪</div><div class="name">Sándwich pavo</div><div class="price">$120</div><div class="stock">Cocina</div></button>
+            <button class="product-tile"><div class="thumb">🌮</div><div class="name">Orden de tacos (3)</div><div class="price">$140</div><div class="stock">Cocina</div></button>
+            <button class="product-tile"><div class="thumb">🥗</div><div class="name">Ensalada César</div><div class="price">$155</div><div class="stock">Cocina</div></button>
+            <button class="product-tile"><div class="thumb">🍟</div><div class="name">Papas a la francesa</div><div class="price">$85</div><div class="stock">Cocina</div></button>
+            <button class="product-tile"><div class="thumb">🍦</div><div class="name">Barra proteica RXBar</div><div class="price">$70</div><div class="stock">Existencia: 30</div></button>
+            <button class="product-tile"><div class="thumb">🔧</div><div class="name">Renta pala 1 h</div><div class="price">$90</div><div class="stock">Servicio</div></button>
+            <button class="product-tile"><div class="thumb">👟</div><div class="name">Calzado Asics Gel Padel</div><div class="price">$3,290</div><div class="stock">7 · 8 · 9 · 10</div></button>
+            <button class="product-tile"><div class="thumb">🧢</div><div class="name">Gorra club oficial</div><div class="price">$290</div><div class="stock">Existencia: 15</div></button>
+          </div>
+        </div>
+
+        <!-- CART -->
+        <div>
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Ticket #PP-2026-0742</div>
+                <div class="card-sub">Recepción · Diego R. · 17:24</div>
+              </div>
+              <span class="chip is-info">4 productos</span>
+            </div>
+
+            <div class="field"><label>Cliente (opcional)</label><input value="Andrea Villalobos" /></div>
+
+            <div style="max-height: 340px; overflow-y: auto; margin-bottom: .8rem;">
+              <div class="cart-line">
+                <div class="name">Bote pelotas Head Pro <small>3 pelotas × $220</small></div>
+                <div class="qty"><button>−</button><span>1</span><button>+</button></div>
+                <div class="amount">$220.00</div>
+              </div>
+              <div class="cart-line">
+                <div class="name">Corona 355 ml <small>Bar · × 4</small></div>
+                <div class="qty"><button>−</button><span>4</span><button>+</button></div>
+                <div class="amount">$260.00</div>
+              </div>
+              <div class="cart-line">
+                <div class="name">Orden de tacos (3) <small>Cocina · pastor</small></div>
+                <div class="qty"><button>−</button><span>2</span><button>+</button></div>
+                <div class="amount">$280.00</div>
+              </div>
+              <div class="cart-line">
+                <div class="name">Renta pala 1 h <small>Head Delta Pro</small></div>
+                <div class="qty"><button>−</button><span>1</span><button>+</button></div>
+                <div class="amount">$90.00</div>
+              </div>
+            </div>
+
+            <div class="stat-row"><span class="lbl">Subtotal</span><span class="val">$850.00</span></div>
+            <div class="stat-row"><span class="lbl">Descuento Premium 15%</span><span class="val" style="color: rgb(var(--danger))">−$127.50</span></div>
+            <div class="stat-row"><span class="lbl">Propina (sugerida 10%)</span><span class="val">$72.25</span></div>
+            <div class="stat-row"><span class="lbl">IVA 16%</span><span class="val">$115.60</span></div>
+            <div class="grand-total"><span>Total</span><span>$910.35</span></div>
+
+            <div class="proto-actions mt-3" style="gap: .35rem">
+              <button class="btn btn-ghost btn-sm">Dividir cuenta</button>
+              <button class="btn btn-ghost btn-sm">Propina</button>
+              <button class="btn btn-ghost btn-sm" data-toast="Aplicando cupón…">Cupón</button>
+              <button class="btn btn-ghost btn-sm">Nota</button>
+            </div>
+
+            <a class="btn btn-primary btn-lg w-full justify-center mt-3"
+               href="dashboard.html"
+               data-loading="Procesando…"
+               data-toast="Venta cerrada · comprobante enviado">
+              ✓ Cobrar $910.35
+            </a>
+            <div class="text-xs text-ink2 text-center mt-2">Emitir CFDI · imprimir · enviar por correo</div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<div id="proto-controls">
+  <div class="proto-bar">
+    <div class="proto-bar-section"><span class="proto-bar-label">Tema</span><div class="proto-seg-group">
+      <button class="proto-seg" data-theme-option="light" aria-pressed="true">Claro</button>
+      <button class="proto-seg" data-theme-option="dark" aria-pressed="false">Oscuro</button></div></div>
+    <div class="proto-bar-section"><span class="proto-bar-label">Densidad</span><div class="proto-seg-group">
+      <button class="proto-seg" data-layout-option="comodo" aria-pressed="true">Cómodo</button>
+      <button class="proto-seg" data-layout-option="compacto" aria-pressed="false">Compacto</button></div></div>
+    <div class="proto-bar-section"><span class="proto-bar-label">Rol</span><div class="proto-seg-group">
+      <button class="proto-seg" data-persona-option="admin" aria-pressed="true">Admin</button>
+      <button class="proto-seg" data-persona-option="gerente" aria-pressed="false">Gerente</button>
+      <button class="proto-seg" data-persona-option="recepcion" aria-pressed="false">Recepción</button></div></div>
+    <div class="proto-bar-section">
+      <button class="proto-seg" data-share>🔗 Compartir</button>
+      <button class="proto-seg" data-feedback-toggle>💬 Comentar</button>
+    </div>
+  </div>
+  <p class="proto-hint">Shift + ? · pantallas recientes</p>
+</div>
+
+<script>
+  document.querySelectorAll('.cat-tabs button').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('.cat-tabs button').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+    });
+  });
+  document.querySelectorAll('.product-tile').forEach(t => {
+    t.addEventListener('click', () => window.UI?.toast(t.querySelector('.name').textContent + ' agregado', 'success'));
+  });
+</script>
+<script src="js/state.js"></script><script src="js/theme.js"></script><script src="js/layout.js"></script>
+<script src="js/data.js"></script><script src="js/persona.js"></script><script src="js/ui.js"></script>
+<script src="js/app.js"></script><script src="js/feedback.js"></script>
+</body>
+</html>

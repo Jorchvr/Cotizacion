@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="es" data-theme="light" data-layout="comodo" data-persona="admin">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pro Padel — Cobros</title>
+  <meta name="description" content="Cobros de canchas y servicios con múltiples formas de pago y facturación." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{surface:'rgb(var(--surface) / <alpha-value>)',elevated:'rgb(var(--elevated) / <alpha-value>)',accent:'rgb(var(--accent) / <alpha-value>)',muted:'rgb(var(--muted) / <alpha-value>)',ink:'rgb(var(--ink) / <alpha-value>)',ink2:'rgb(var(--ink2) / <alpha-value>)'},fontFamily:{heading:['Manrope','system-ui','sans-serif'],body:['Inter','system-ui','sans-serif']},borderRadius:{proto:'var(--radius)'}}}};</script>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/feedback.css" />
+  <style>body { font-family: 'Inter', system-ui, sans-serif; }
+  .pay-methods { display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; }
+  .pay-methods button {
+    border: 1px solid rgb(var(--muted) / .3); background: rgb(var(--surface));
+    color: rgb(var(--ink)); border-radius: 8px; padding: .7rem .4rem;
+    font-size: .78rem; font-weight: 500; cursor: pointer; text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: .35rem;
+    font-family: inherit; transition: border-color .1s, background .1s;
+  }
+  .pay-methods button.selected { border-color: rgb(var(--accent)); background: rgb(var(--accent) / .1); color: rgb(var(--accent)); }
+  .pay-methods button .emj { font-size: 1.2rem; }
+  .split-row { display: grid; grid-template-columns: 1fr auto auto; gap: .5rem; align-items: center; padding: .5rem 0; border-bottom: 1px dashed rgb(var(--muted) / .25); font-size: .84rem; }
+  .split-row:last-child { border-bottom: 0; }
+  </style>
+</head>
+<body class="bg-surface text-ink antialiased">
+<div class="app-shell">
+  <aside class="app-sidebar">
+    <div class="brand-row"><div class="brand-mark">PP</div><div><div class="brand-name text-white">Pro Padel</div><span class="brand-city">Polanco · CDMX</span></div></div>
+    <div class="nav-section-label">Operación</div>
+    <a href="dashboard.html" class="nav-link"><span class="nav-icon">📊</span>Tablero</a>
+    <a href="reservas.html" class="nav-link"><span class="nav-icon">📅</span>Reservas <span class="nav-badge">12</span></a>
+    <a href="cobros.html" class="nav-link active"><span class="nav-icon">💳</span>Cobros</a>
+    <a href="clientes.html" class="nav-link"><span class="nav-icon">👥</span>Clientes</a>
+    <a href="pos.html" class="nav-link"><span class="nav-icon">🛒</span>Punto de venta</a>
+    <a href="caja.html" class="nav-link"><span class="nav-icon">💰</span>Caja</a>
+    <div class="nav-section-label">Comercial</div>
+    <a href="membresias.html" class="nav-link"><span class="nav-icon">🎫</span>Membresías</a>
+    <a href="promociones.html" class="nav-link"><span class="nav-icon">🏷️</span>Promociones</a>
+    <a href="torneos.html" class="nav-link"><span class="nav-icon">🏆</span>Torneos y ligas</a>
+    <div class="nav-section-label">Gestión</div>
+    <a href="inventario.html" class="nav-link"><span class="nav-icon">📦</span>Inventario</a>
+    <a href="reportes.html" class="nav-link"><span class="nav-icon">📈</span>Reportes</a>
+    <a href="usuarios.html" class="nav-link" data-persona-show="admin"><span class="nav-icon">⚙️</span>Usuarios y permisos</a>
+    <div class="sidebar-user"><div class="avatar" data-persona-text="user.initials">RS</div>
+    <div class="sidebar-user-info"><strong data-persona-text="user.name">Roberto Salazar</strong><span data-persona-text="user.role">Administrador general</span></div></div>
+  </aside>
+
+  <div class="app-main">
+    <header class="topbar">
+      <button class="sidebar-mobile-btn" data-sidebar-toggle>☰</button>
+      <div>
+        <h1>Cobrar reserva</h1>
+        <div class="breadcrumbs"><a href="reservas.html">Reservas</a> / Cobrar</div>
+      </div>
+      <span class="ml-auto chip is-info">Folio provisional · PP-2026-0742</span>
+      <a href="reservas.html" class="btn btn-ghost btn-sm">Cancelar</a>
+    </header>
+
+    <main class="app-content">
+      <div class="grid gap-3" style="grid-template-columns: 1.15fr 1fr;">
+        <!-- Left: cart -->
+        <div>
+          <div class="card mb-3">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Reserva</div>
+                <div class="card-sub">Cancha 4 · Cristal · 26 jul, 17:00 – 18:30</div>
+              </div>
+              <span class="chip is-info">1.5 horas</span>
+            </div>
+            <div class="grid grid-cols-2 gap-3 text-sm">
+              <div><div class="text-ink2 text-xs">Cliente</div><div class="font-medium">Andrea Villalobos Peña</div></div>
+              <div><div class="text-ink2 text-xs">Teléfono</div><div>55 4482 1730</div></div>
+              <div><div class="text-ink2 text-xs">Membresía</div><div>Premium mensual · activa</div></div>
+              <div><div class="text-ink2 text-xs">Compañeros</div><div>Emilio Corcuera · Marta Padilla · Julio Yáñez</div></div>
+            </div>
+          </div>
+
+          <div class="card mb-3">
+            <div class="card-header"><div class="card-title">Conceptos</div><button class="btn btn-ghost btn-sm">＋ Agregar</button></div>
+            <div class="stat-row"><span class="lbl">Cancha 4 (Cristal) · 1.5 h</span><span class="val">$825.00</span></div>
+            <div class="stat-row"><span class="lbl">Renta pala Head Delta Pro (×2)</span><span class="val">$180.00</span></div>
+            <div class="stat-row"><span class="lbl">Bote pelotas Head Pro</span><span class="val">$220.00</span></div>
+            <div class="stat-row"><span class="lbl">Descuento membresía Premium (15%)</span><span class="val" style="color: rgb(var(--danger))">−$183.75</span></div>
+            <hr class="divider" />
+            <div class="stat-row"><span class="lbl">Subtotal</span><span class="val">$1,041.25</span></div>
+            <div class="stat-row"><span class="lbl">IVA 16%</span><span class="val">$166.60</span></div>
+            <div class="grand-total"><span>Total a cobrar</span><span>$1,207.85</span></div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><div class="card-title">Dividir cuenta entre jugadores</div>
+              <label class="text-sm inline-flex items-center gap-2"><input type="checkbox" checked /> Activo</label>
+            </div>
+            <div class="split-row"><span>Andrea Villalobos</span><span class="text-ink2">$302.00</span><span class="chip is-success">Pagado ✓</span></div>
+            <div class="split-row"><span>Emilio Corcuera</span><span class="text-ink2">$302.00</span><span class="chip is-warning">Pendiente</span></div>
+            <div class="split-row"><span>Marta Padilla</span><span class="text-ink2">$302.00</span><span class="chip">Sin cobrar</span></div>
+            <div class="split-row"><span>Julio Yáñez</span><span class="text-ink2">$301.85</span><span class="chip">Sin cobrar</span></div>
+          </div>
+        </div>
+
+        <!-- Right: payment -->
+        <div>
+          <div class="card mb-3">
+            <div class="card-header"><div class="card-title">Forma de pago</div><span class="chip">Autoriza gerente para cortesías / crédito</span></div>
+            <div class="pay-methods" id="pay-methods">
+              <button type="button" class="selected"><span class="emj">💵</span>Efectivo</button>
+              <button type="button"><span class="emj">💳</span>Tarjeta</button>
+              <button type="button"><span class="emj">🏦</span>Transferencia</button>
+              <button type="button"><span class="emj">🖥️</span>Terminal</button>
+              <button type="button"><span class="emj">🎁</span>Saldo a favor</button>
+              <button type="button"><span class="emj">🎫</span>Membresía</button>
+              <button type="button"><span class="emj">📦</span>Paquete horas</button>
+              <button type="button"><span class="emj">🌟</span>Cortesía</button>
+            </div>
+          </div>
+
+          <div class="card mb-3">
+            <div class="card-header"><div class="card-title">Detalle del cobro</div></div>
+            <div class="field"><label>Monto recibido</label><input value="$1,500.00" /></div>
+            <div class="field"><label>Cambio a devolver</label><input value="$292.15" readonly /></div>
+            <div class="field"><label>Cupón / código de descuento</label><input placeholder="Ej. VERANO26" /></div>
+            <div class="field">
+              <label class="inline-flex gap-2 items-center"><input type="checkbox" checked /> Emitir factura fiscal (CFDI 4.0)</label>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div class="field"><label>RFC</label><input value="VIPA890215QW3" /></div>
+              <div class="field"><label>Uso CFDI</label><select><option>G03 · Gastos generales</option><option>P01 · Por definir</option></select></div>
+            </div>
+            <div class="field"><label>Enviar comprobante a</label><input value="andrea.villalobos@correo.mx" /></div>
+          </div>
+
+          <div class="flex gap-2">
+            <a class="btn btn-primary btn-lg flex-1 justify-center"
+               href="dashboard.html"
+               data-loading="Procesando cobro…"
+               data-toast="Cobro registrado y comprobante enviado">
+              ✓ Cobrar $1,207.85
+            </a>
+            <button class="btn btn-secondary btn-lg" data-open-modal="reembolso">Reembolso</button>
+          </div>
+          <p class="text-xs text-ink2 mt-3">
+            Todo cobro genera folio, comprobante digital y queda registrado con
+            usuario, fecha y dispositivo en la bitácora.
+          </p>
+        </div>
+      </div>
+
+      <!-- Recent -->
+      <div class="card mt-4">
+        <div class="card-header">
+          <div class="card-title">Cobros recientes</div>
+          <a href="#" class="text-accent text-sm">Ver historial completo</a>
+        </div>
+        <div class="proto-table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Folio</th><th>Fecha / hora</th><th>Cliente</th><th>Concepto</th><th>Método</th><th class="num">Monto</th><th>Usuario</th><th>Estado</th></tr></thead>
+            <tbody>
+              <tr><td>PP-2026-0741</td><td>26 jul 16:52</td><td>Sergio Márquez</td><td>Cancha 1 · 1 h</td><td>💳 Tarjeta</td><td class="num">$696.00</td><td>Diego R.</td><td><span class="chip is-success">Cobrado</span></td></tr>
+              <tr><td>PP-2026-0740</td><td>26 jul 16:35</td><td>Paola Estrada</td><td>Membresía Premium</td><td>🏦 Transferencia</td><td class="num">$1,850.00</td><td>Diego R.</td><td><span class="chip is-success">Cobrado</span></td></tr>
+              <tr><td>PP-2026-0739</td><td>26 jul 16:14</td><td>Rafael Ceballos</td><td>Renta pala + bote</td><td>💵 Efectivo</td><td class="num">$385.00</td><td>Diego R.</td><td><span class="chip is-success">Cobrado</span></td></tr>
+              <tr><td>PP-2026-0738</td><td>26 jul 15:48</td><td>Miguel Alcántara</td><td>Cancha 4 · anticipo</td><td>💳 Tarjeta</td><td class="num">$300.00</td><td>Diego R.</td><td><span class="chip is-warning">Parcial</span></td></tr>
+              <tr><td>PP-2026-0737</td><td>26 jul 15:12</td><td>Corporativo Bimbo</td><td>Paquete 4 canchas</td><td>🏦 Transferencia</td><td class="num">$4,800.00</td><td>Mariana O.</td><td><span class="chip is-success">Cobrado</span></td></tr>
+              <tr><td>PP-2026-0736</td><td>26 jul 14:20</td><td>Nicolás Herrera</td><td>Clínica infantil</td><td>💳 Tarjeta</td><td class="num">$450.00</td><td>Diego R.</td><td><span class="chip is-danger">Reembolsado</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- Reembolso modal -->
+<div data-modal="reembolso" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-panel">
+    <div class="modal-header"><h3>Solicitar reembolso</h3><button class="modal-close" data-close-modal>×</button></div>
+    <div class="modal-body">
+      <div class="chip is-warning mb-3">Requiere autorización de gerente</div>
+      <div class="field"><label>Motivo</label><select><option>Cliente no se presentó (justificado)</option><option>Cancelación por lluvia</option><option>Error de cobro</option><option>Otro</option></select></div>
+      <div class="field"><label>Monto a reembolsar</label><input value="$1,207.85" /></div>
+      <div class="field"><label>Forma de reembolso</label><select><option>Saldo a favor</option><option>Efectivo</option><option>Reversa a tarjeta</option></select></div>
+      <div class="field"><label>Notas</label><textarea rows="3">Detalle del motivo…</textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" data-close-modal>Cancelar</button>
+      <button class="btn btn-danger" data-close-modal data-toast="Solicitud enviada al gerente">Solicitar</button>
+    </div>
+  </div>
+</div>
+
+<div id="proto-controls">
+  <div class="proto-bar">
+    <div class="proto-bar-section"><span class="proto-bar-label">Tema</span><div class="proto-seg-group">
+      <button class="proto-seg" data-theme-option="light" aria-pressed="true">Claro</button>
+      <button class="proto-seg" data-theme-option="dark" aria-pressed="false">Oscuro</button></div></div>
+    <div class="proto-bar-section"><span class="proto-bar-label">Densidad</span><div class="proto-seg-group">
+      <button class="proto-seg" data-layout-option="comodo" aria-pressed="true">Cómodo</button>
+      <button class="proto-seg" data-layout-option="compacto" aria-pressed="false">Compacto</button></div></div>
+    <div class="proto-bar-section"><span class="proto-bar-label">Rol</span><div class="proto-seg-group">
+      <button class="proto-seg" data-persona-option="admin" aria-pressed="true">Admin</button>
+      <button class="proto-seg" data-persona-option="gerente" aria-pressed="false">Gerente</button>
+      <button class="proto-seg" data-persona-option="recepcion" aria-pressed="false">Recepción</button></div></div>
+    <div class="proto-bar-section">
+      <button class="proto-seg" data-share>🔗 Compartir</button>
+      <button class="proto-seg" data-feedback-toggle>💬 Comentar</button>
+    </div>
+  </div>
+  <p class="proto-hint">Shift + ? · pantallas recientes</p>
+</div>
+
+<script>
+  document.querySelectorAll('#pay-methods button').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('#pay-methods button').forEach(x => x.classList.remove('selected'));
+      b.classList.add('selected');
+    });
+  });
+</script>
+<script src="js/state.js"></script><script src="js/theme.js"></script><script src="js/layout.js"></script>
+<script src="js/data.js"></script><script src="js/persona.js"></script><script src="js/ui.js"></script>
+<script src="js/app.js"></script><script src="js/feedback.js"></script>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="es" data-theme="light" data-layout="comodo" data-persona="admin">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pro Padel — Reportes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{surface:'rgb(var(--surface) / <alpha-value>)',elevated:'rgb(var(--elevated) / <alpha-value>)',accent:'rgb(var(--accent) / <alpha-value>)',muted:'rgb(var(--muted) / <alpha-value>)',ink:'rgb(var(--ink) / <alpha-value>)',ink2:'rgb(var(--ink2) / <alpha-value>)'},fontFamily:{heading:['Manrope','system-ui','sans-serif'],body:['Inter','system-ui','sans-serif']},borderRadius:{proto:'var(--radius)'}}}};</script>
+  <link rel="stylesheet" href="css/styles.css" /><link rel="stylesheet" href="css/feedback.css" />
+  <style>body { font-family: 'Inter', system-ui, sans-serif; }
+  .heatmap { display: grid; grid-template-columns: 40px repeat(7, 1fr); gap: 3px; }
+  .heatmap div { padding: .35rem .2rem; font-size: .7rem; text-align: center; border-radius: 4px; font-variant-numeric: tabular-nums; }
+  .heatmap .lbl { background: transparent; color: rgb(var(--ink2)); text-align: right; padding-right: .5rem; }
+  .heatmap .h { color: #fff; }
+  .h-0 { background: rgb(var(--muted) / .12); color: rgb(var(--ink2)) !important; }
+  .h-1 { background: rgb(var(--accent) / .18); color: rgb(var(--ink)) !important; }
+  .h-2 { background: rgb(var(--accent) / .35); color: rgb(var(--ink)) !important; }
+  .h-3 { background: rgb(var(--accent) / .55); }
+  .h-4 { background: rgb(var(--accent) / .75); }
+  .h-5 { background: rgb(var(--accent)); }
+  .bar-h { height: 100px; display: flex; align-items: flex-end; gap: 6px; }
+  .bar-h > div { flex: 1; background: rgb(var(--accent) / .5); border-radius: 4px 4px 0 0; position: relative; }
+  .bar-h > div span { position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); font-size: .65rem; color: rgb(var(--ink2)); }
+  </style>
+</head>
+<body class="bg-surface text-ink antialiased">
+<div class="app-shell">
+  <aside class="app-sidebar">
+    <div class="brand-row"><div class="brand-mark">PP</div><div><div class="brand-name text-white">Pro Padel</div><span class="brand-city">Polanco · CDMX</span></div></div>
+    <div class="nav-section-label">Operación</div>
+    <a href="dashboard.html" class="nav-link"><span class="nav-icon">📊</span>Tablero</a>
+    <a href="reservas.html" class="nav-link"><span class="nav-icon">📅</span>Reservas <span class="nav-badge">12</span></a>
+    <a href="cobros.html" class="nav-link"><span class="nav-icon">💳</span>Cobros</a>
+    <a href="clientes.html" class="nav-link"><span class="nav-icon">👥</span>Clientes</a>
+    <a href="pos.html" class="nav-link"><span class="nav-icon">🛒</span>Punto de venta</a>
+    <a href="caja.html" class="nav-link"><span class="nav-icon">💰</span>Caja</a>
+    <div class="nav-section-label">Comercial</div>
+    <a href="membresias.html" class="nav-link"><span class="nav-icon">🎫</span>Membresías</a>
+    <a href="promociones.html" class="nav-link"><span class="nav-icon">🏷️</span>Promociones</a>
+    <a href="torneos.html" class="nav-link"><span class="nav-icon">🏆</span>Torneos y ligas</a>
+    <div class="nav-section-label">Gestión</div>
+    <a href="inventario.html" class="nav-link"><span class="nav-icon">📦</span>Inventario</a>
+    <a href="reportes.html" class="nav-link active"><span class="nav-icon">📈</span>Reportes</a>
+    <a href="usuarios.html" class="nav-link" data-persona-show="admin"><span class="nav-icon">⚙️</span>Usuarios y permisos</a>
+    <div class="sidebar-user"><div class="avatar" data-persona-text="user.initials">RS</div>
+    <div class="sidebar-user-info"><strong data-persona-text="user.name">Roberto Salazar</strong><span data-persona-text="user.role">Administrador general</span></div></div>
+  </aside>
+
+  <div class="app-main">
+    <header class="topbar">
+      <button class="sidebar-mobile-btn" data-sidebar-toggle>☰</button>
+      <div><h1>Reportes y análisis</h1><div class="breadcrumbs"><a href="dashboard.html">Tablero</a> / Reportes</div></div>
+      <div class="topbar-search ml-auto"><span>📅</span><input type="text" value="01 jul – 26 jul 2026" /></div>
+      <button class="btn btn-secondary btn-sm" data-toast="Reporte exportado en Excel">⬇︎ Exportar</button>
+      <button class="btn btn-primary btn-sm" data-toast="Reporte programado por correo">📧 Programar envío</button>
+    </header>
+
+    <main class="app-content">
+      <div class="tabs">
+        <button data-tab="financiero" aria-selected="true">Financieros</button>
+        <button data-tab="deportivo" aria-selected="false">Deportivos</button>
+        <button data-tab="comercial" aria-selected="false">Comerciales</button>
+        <button data-tab="bitacora" aria-selected="false">Bitácora</button>
+      </div>
+
+      <!-- FINANCIERO -->
+      <div data-tab-panel="financiero">
+        <section class="grid gap-3 mb-4" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))">
+          <div class="card"><div class="kpi"><span class="kpi-label">Ingresos período</span><span class="kpi-value">$684,240</span><span class="kpi-delta up">▲ 14.2 % vs jun</span></div></div>
+          <div class="card"><div class="kpi"><span class="kpi-label">Gastos período</span><span class="kpi-value">$342,180</span><span class="kpi-delta">50 % de ingresos</span></div></div>
+          <div class="card"><div class="kpi"><span class="kpi-label">Utilidad estimada</span><span class="kpi-value" style="color: rgb(var(--success))">$342,060</span><span class="kpi-delta up">▲ 22 %</span></div></div>
+          <div class="card"><div class="kpi"><span class="kpi-label">Flujo efectivo</span><span class="kpi-value">$196,540</span></div></div>
+          <div class="card"><div class="kpi"><span class="kpi-label">Cuentas por cobrar</span><span class="kpi-value">$12,340</span><span class="kpi-delta">18 clientes</span></div></div>
+        </section>
+
+        <div class="grid gap-3 mb-4" style="grid-template-columns: 1.4fr 1fr;">
+          <div class="card">
+            <div class="card-header"><div class="card-title">Ingresos diarios</div><div class="text-xs text-ink2">1–26 jul 2026</div></div>
+            <div class="bar-h">
+              <div style="height:55%"><span>1</span></div><div style="height:72%"><span>3</span></div>
+              <div style="height:48%"><span>5</span></div><div style="height:63%"><span>7</span></div>
+              <div style="height:80%"><span>9</span></div><div style="height:38%"><span>11</span></div>
+              <div style="height:52%"><span>13</span></div><div style="height:88%"><span>15</span></div>
+              <div style="height:74%"><span>17</span></div><div style="height:65%"><span>19</span></div>
+              <div style="height:92%"><span>21</span></div><div style="height:58%"><span>23</span></div>
+              <div style="height:96%"><span>25</span></div><div style="height:100%"><span>26</span></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><div class="card-title">Distribución de ingresos</div></div>
+            <div class="stat-row"><span class="lbl">Canchas</span><span class="val">$318,420 · 47%</span></div>
+            <div class="progress mb-2"><span style="width:47%"></span></div>
+            <div class="stat-row"><span class="lbl">Membresías</span><span class="val">$142,300 · 21%</span></div>
+            <div class="progress mb-2"><span style="width:21%"></span></div>
+            <div class="stat-row"><span class="lbl">Clases y academia</span><span class="val">$96,540 · 14%</span></div>
+            <div class="progress mb-2"><span style="width:14%"></span></div>
+            <div class="stat-row"><span class="lbl">Tienda deportiva</span><span class="val">$54,120 · 8%</span></div>
+            <div class="progress mb-2"><span style="width:8%"></span></div>
+            <div class="stat-row"><span class="lbl">Bar y cocina</span><span class="val">$44,320 · 6%</span></div>
+            <div class="progress mb-2"><span style="width:6%"></span></div>
+            <div class="stat-row"><span class="lbl">Torneos y eventos</span><span class="val">$28,540 · 4%</span></div>
+            <div class="progress"><span style="width:4%"></span></div>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-header"><div class="card-title">Ingresos vs meses anteriores</div></div>
+          <div class="proto-table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Mes</th><th class="num">Canchas</th><th class="num">Membresías</th><th class="num">POS</th><th class="num">Bar</th><th class="num">Torneos</th><th class="num">Total</th><th class="num">vs mes ant.</th></tr></thead>
+              <tbody>
+                <tr><td>Julio 2026 (parcial)</td><td class="num">$318,420</td><td class="num">$142,300</td><td class="num">$54,120</td><td class="num">$44,320</td><td class="num">$28,540</td><td class="num"><strong>$684,240</strong></td><td class="num" style="color: rgb(var(--success))">▲ 14 %</td></tr>
+                <tr><td>Junio 2026</td><td class="num">$276,180</td><td class="num">$138,420</td><td class="num">$49,220</td><td class="num">$40,190</td><td class="num">$18,900</td><td class="num"><strong>$599,120</strong></td><td class="num" style="color: rgb(var(--success))">▲ 6 %</td></tr>
+                <tr><td>Mayo 2026</td><td class="num">$261,340</td><td class="num">$134,110</td><td class="num">$45,120</td><td class="num">$38,720</td><td class="num">$85,600</td><td class="num"><strong>$564,890</strong></td><td class="num" style="color: rgb(var(--success))">▲ 12 %</td></tr>
+                <tr><td>Abril 2026</td><td class="num">$232,410</td><td class="num">$128,900</td><td class="num">$41,240</td><td class="num">$36,900</td><td class="num">$65,140</td><td class="num"><strong>$504,590</strong></td><td class="num" style="color: rgb(var(--danger))">▼ 3 %</td></tr>
+                <tr><td>Marzo 2026</td><td class="num">$249,230</td><td class="num">$124,510</td><td class="num">$44,180</td><td class="num">$34,220</td><td class="num">$68,830</td><td class="num"><strong>$520,970</strong></td><td class="num" style="color: rgb(var(--success))">▲ 8 %</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- DEPORTIVO -->
+      <div data-tab-panel="deportivo" hidden>
+        <div class="grid gap-3 mb-4" style="grid-template-columns: 1.5fr 1fr">
+          <div class="card">
+            <div class="card-header"><div class="card-title">Ocupación por día y hora</div><div class="text-xs text-ink2">Últimas 4 semanas</div></div>
+            <div class="heatmap">
+              <div class="lbl"></div>
+              <div class="lbl">Lun</div><div class="lbl">Mar</div><div class="lbl">Mié</div><div class="lbl">Jue</div><div class="lbl">Vie</div><div class="lbl">Sáb</div><div class="lbl">Dom</div>
+
+              <div class="lbl">07:00</div>
+              <div class="h h-4">84</div><div class="h h-4">82</div><div class="h h-3">65</div><div class="h h-4">80</div><div class="h h-5">92</div><div class="h h-5">96</div><div class="h h-4">78</div>
+              <div class="lbl">09:00</div>
+              <div class="h h-2">42</div><div class="h h-2">38</div><div class="h h-2">40</div><div class="h h-3">55</div><div class="h h-3">62</div><div class="h h-5">98</div><div class="h h-4">88</div>
+              <div class="lbl">11:00</div>
+              <div class="h h-1">22</div><div class="h h-1">18</div><div class="h h-1">20</div><div class="h h-2">32</div><div class="h h-2">38</div><div class="h h-4">78</div><div class="h h-4">72</div>
+              <div class="lbl">13:00</div>
+              <div class="h h-1">28</div><div class="h h-1">24</div><div class="h h-1">26</div><div class="h h-2">34</div><div class="h h-2">40</div><div class="h h-3">52</div><div class="h h-3">58</div>
+              <div class="lbl">15:00</div>
+              <div class="h h-3">62</div><div class="h h-3">58</div><div class="h h-3">60</div><div class="h h-3">66</div><div class="h h-4">72</div><div class="h h-4">80</div><div class="h h-4">76</div>
+              <div class="lbl">17:00</div>
+              <div class="h h-4">72</div><div class="h h-4">70</div><div class="h h-4">74</div><div class="h h-4">78</div><div class="h h-5">88</div><div class="h h-5">94</div><div class="h h-4">82</div>
+              <div class="lbl">19:00</div>
+              <div class="h h-5">96</div><div class="h h-5">94</div><div class="h h-5">98</div><div class="h h-5">96</div><div class="h h-5">100</div><div class="h h-5">100</div><div class="h h-4">88</div>
+              <div class="lbl">21:00</div>
+              <div class="h h-3">60</div><div class="h h-3">56</div><div class="h h-3">64</div><div class="h h-4">72</div><div class="h h-4">78</div><div class="h h-3">64</div><div class="h h-2">48</div>
+            </div>
+            <div class="mt-3 text-xs text-ink2">Verde intenso = más ocupación. Identifica horarios muertos: mañanas de lunes-jueves 11:00–13:00.</div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><div class="card-title">Entrenadores más activos</div></div>
+            <div class="proto-table-wrap">
+              <table class="data-table">
+                <thead><tr><th>Entrenador</th><th class="num">Clases</th><th class="num">Ingresos</th></tr></thead>
+                <tbody>
+                  <tr><td>Fernando López</td><td class="num">128</td><td class="num">$57,600</td></tr>
+                  <tr><td>Julieta Márquez</td><td class="num">96</td><td class="num">$44,800</td></tr>
+                  <tr><td>Pablo Sánchez</td><td class="num">72</td><td class="num">$32,400</td></tr>
+                  <tr><td>Carla Ruvalcaba</td><td class="num">48</td><td class="num">$21,600</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><div class="card-title">Jugadores más activos</div></div>
+          <div class="proto-table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Cliente</th><th>Membresía</th><th class="num">Reservas 30 días</th><th class="num">Horas</th><th class="num">Ingresos</th></tr></thead>
+              <tbody>
+                <tr><td>Andrea Villalobos</td><td>Premium</td><td class="num">18</td><td class="num">27</td><td class="num">$8,420</td></tr>
+                <tr><td>Rodrigo Fuentes</td><td>Corporativa</td><td class="num">16</td><td class="num">24</td><td class="num">$7,880</td></tr>
+                <tr><td>Emilio Corcuera</td><td>Familiar</td><td class="num">14</td><td class="num">21</td><td class="num">$6,120</td></tr>
+                <tr><td>Sergio Márquez</td><td>Anual Premium</td><td class="num">12</td><td class="num">18</td><td class="num">$5,940</td></tr>
+                <tr><td>Paola Estrada</td><td>Premium</td><td class="num">11</td><td class="num">16.5</td><td class="num">$5,280</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- COMERCIAL -->
+      <div data-tab-panel="comercial" hidden>
+        <div class="grid gap-3 mb-4" style="grid-template-columns: 1fr 1fr;">
+          <div class="card">
+            <div class="card-header"><div class="card-title">Productos más vendidos</div></div>
+            <div class="proto-table-wrap">
+              <table class="data-table">
+                <thead><tr><th>Producto</th><th class="num">Unidades</th><th class="num">Ingresos</th></tr></thead>
+                <tbody>
+                  <tr><td>Bote pelotas Head Pro</td><td class="num">184</td><td class="num">$40,480</td></tr>
+                  <tr><td>Corona 355 ml</td><td class="num">312</td><td class="num">$20,280</td></tr>
+                  <tr><td>Renta pala 1 h</td><td class="num">168</td><td class="num">$15,120</td></tr>
+                  <tr><td>Overgrip Wilson Pro</td><td class="num">78</td><td class="num">$14,040</td></tr>
+                  <tr><td>Gatorade Naranja</td><td class="num">220</td><td class="num">$9,900</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><div class="card-title">Ticket promedio por área</div></div>
+            <div class="stat-row"><span class="lbl">Canchas</span><span class="val">$620</span></div>
+            <div class="stat-row"><span class="lbl">Membresías</span><span class="val">$1,780</span></div>
+            <div class="stat-row"><span class="lbl">Tienda deportiva</span><span class="val">$487</span></div>
+            <div class="stat-row"><span class="lbl">Bar y cocina</span><span class="val">$185</span></div>
+            <div class="stat-row"><span class="lbl">Clases privadas</span><span class="val">$450</span></div>
+            <div class="stat-row"><span class="lbl">Torneos</span><span class="val">$900</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><div class="card-title">Clientes con mayor consumo (30 días)</div></div>
+          <div class="proto-table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Cliente</th><th>Membresía</th><th class="num">Compras</th><th class="num">Total</th></tr></thead>
+              <tbody>
+                <tr><td>Corporativo Bimbo</td><td>Corporativa</td><td class="num">12</td><td class="num">$54,600</td></tr>
+                <tr><td>Andrea Villalobos</td><td>Premium</td><td class="num">18</td><td class="num">$18,240</td></tr>
+                <tr><td>Emilio Corcuera</td><td>Familiar</td><td class="num">14</td><td class="num">$12,780</td></tr>
+                <tr><td>Paola Estrada</td><td>Premium</td><td class="num">11</td><td class="num">$11,420</td></tr>
+                <tr><td>Sergio Márquez</td><td>Anual Premium</td><td class="num">12</td><td class="num">$8,940</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- BITACORA -->
+      <div data-tab-panel="bitacora" hidden>
+        <div class="card mb-3">
+          <div class="proto-actions">
+            <select class="btn btn-secondary btn-sm"><option>Todos los usuarios</option></select>
+            <select class="btn btn-secondary btn-sm"><option>Todas las acciones</option></select>
+            <select class="btn btn-secondary btn-sm"><option>Todos los módulos</option></select>
+            <input class="btn btn-secondary btn-sm" placeholder="Fecha desde…" />
+            <input class="btn btn-secondary btn-sm" placeholder="Fecha hasta…" />
+          </div>
+        </div>
+        <div class="card">
+          <div class="proto-table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Fecha / hora</th><th>Usuario</th><th>Rol</th><th>Módulo</th><th>Acción</th><th>Detalle</th><th>Dispositivo</th></tr></thead>
+              <tbody>
+                <tr><td>26 jul 17:24</td><td>Diego Ramírez</td><td>Recepción</td><td>POS</td><td>Cerrar ticket</td><td>Ticket #742 · $910</td><td>iPad-01 · 192.168.1.24</td></tr>
+                <tr><td>26 jul 17:22</td><td>Diego Ramírez</td><td>Recepción</td><td>Caja</td><td>Registrar propina</td><td>+$260 · Mesa 4</td><td>iPad-01</td></tr>
+                <tr><td>26 jul 16:52</td><td>Diego Ramírez</td><td>Recepción</td><td>Cobros</td><td>Cobrar reserva</td><td>PP-741 · Cancha 1 · $696</td><td>iPad-01</td></tr>
+                <tr><td>26 jul 15:20</td><td>Mariana Ochoa</td><td>Gerente</td><td>Caja</td><td>Autorizar gasto</td><td>Compra hielo · $450</td><td>PC-Oficina · 192.168.1.14</td></tr>
+                <tr><td>26 jul 14:20</td><td>Mariana Ochoa</td><td>Gerente</td><td>Cobros</td><td>Autorizar reembolso</td><td>PP-736 · $450 · N. Herrera</td><td>PC-Oficina</td></tr>
+                <tr><td>26 jul 14:00</td><td>Diego Ramírez</td><td>Recepción</td><td>Caja</td><td>Abrir caja</td><td>Fondo $2,000 · turno vespertino</td><td>iPad-01</td></tr>
+                <tr><td>26 jul 13:44</td><td>Roberto Salazar</td><td>Admin</td><td>Usuarios</td><td>Editar permisos</td><td>Rol "Entrenador" · +ver reportes</td><td>Mac-Roberto · VPN</td></tr>
+                <tr><td>26 jul 10:15</td><td>Roberto Salazar</td><td>Admin</td><td>Inventario</td><td>Registrar entrada</td><td>OC-89 · +24 uds Wilson X2</td><td>Mac-Roberto</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<div id="proto-controls">
+  <div class="proto-bar">
+    <div class="proto-bar-section"><span class="proto-bar-label">Tema</span><div class="proto-seg-group">
+      <button class="proto-seg" data-theme-option="light" aria-pressed="true">Claro</button>
+      <button class="proto-seg" data-theme-option="dark" aria-pressed="false">Oscuro</button></div></div>
+    <div class="proto-bar-section"><span class="proto-bar-label">Densidad</span><div class="proto-seg-group">
+      <button class="proto-seg" data-layout-option="comodo" aria-pressed="true">Cómodo</button>
+      <button class="proto-seg" data-layout-option="compacto" aria-pressed="false">Compacto</button></div></div>
+    <div class="proto-bar-section"><span class="proto-bar-label">Rol</span><div class="proto-seg-group">
+      <button class="proto-seg" data-persona-option="admin" aria-pressed="true">Admin</button>
+      <button class="proto-seg" data-persona-option="gerente" aria-pressed="false">Gerente</button>
+      <button class="proto-seg" data-persona-option="recepcion" aria-pressed="false">Recepción</button></div></div>
+    <div class="proto-bar-section">
+      <button class="proto-seg" data-share>🔗 Compartir</button>
+      <button class="proto-seg" data-feedback-toggle>💬 Comentar</button>
+    </div>
+  </div>
+  <p class="proto-hint">Shift + ? · pantallas recientes</p>
+</div>
+
+<script src="js/state.js"></script><script src="js/theme.js"></script><script src="js/layout.js"></script>
+<script src="js/data.js"></script><script src="js/persona.js"></script><script src="js/ui.js"></script>
+<script src="js/app.js"></script><script src="js/feedback.js"></script>
+</body>
+</html>

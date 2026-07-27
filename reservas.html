@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="es" data-theme="light" data-layout="comodo" data-persona="admin">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pro Padel — Reservas</title>
+  <meta name="description" content="Calendario de reservas por cancha, con estados y filtros." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{surface:'rgb(var(--surface) / <alpha-value>)',elevated:'rgb(var(--elevated) / <alpha-value>)',accent:'rgb(var(--accent) / <alpha-value>)',muted:'rgb(var(--muted) / <alpha-value>)',ink:'rgb(var(--ink) / <alpha-value>)',ink2:'rgb(var(--ink2) / <alpha-value>)'},fontFamily:{heading:['Manrope','system-ui','sans-serif'],body:['Inter','system-ui','sans-serif']},borderRadius:{proto:'var(--radius)'}}}};</script>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/feedback.css" />
+  <style>body { font-family: 'Inter', system-ui, sans-serif; }</style>
+</head>
+<body class="bg-surface text-ink antialiased">
+<div class="app-shell">
+  <aside class="app-sidebar">
+    <div class="brand-row">
+      <div class="brand-mark">PP</div>
+      <div><div class="brand-name text-white">Pro Padel</div><span class="brand-city">Polanco · CDMX</span></div>
+    </div>
+    <div class="nav-section-label">Operación</div>
+    <a href="dashboard.html"   class="nav-link"><span class="nav-icon">📊</span>Tablero</a>
+    <a href="reservas.html"    class="nav-link active"><span class="nav-icon">📅</span>Reservas <span class="nav-badge">12</span></a>
+    <a href="cobros.html"      class="nav-link"><span class="nav-icon">💳</span>Cobros</a>
+    <a href="clientes.html"    class="nav-link"><span class="nav-icon">👥</span>Clientes</a>
+    <a href="pos.html"         class="nav-link"><span class="nav-icon">🛒</span>Punto de venta</a>
+    <a href="caja.html"        class="nav-link"><span class="nav-icon">💰</span>Caja</a>
+    <div class="nav-section-label">Comercial</div>
+    <a href="membresias.html"  class="nav-link"><span class="nav-icon">🎫</span>Membresías</a>
+    <a href="promociones.html" class="nav-link"><span class="nav-icon">🏷️</span>Promociones</a>
+    <a href="torneos.html"     class="nav-link"><span class="nav-icon">🏆</span>Torneos y ligas</a>
+    <div class="nav-section-label">Gestión</div>
+    <a href="inventario.html"  class="nav-link"><span class="nav-icon">📦</span>Inventario</a>
+    <a href="reportes.html"    class="nav-link"><span class="nav-icon">📈</span>Reportes</a>
+    <a href="usuarios.html"    class="nav-link" data-persona-show="admin"><span class="nav-icon">⚙️</span>Usuarios y permisos</a>
+    <div class="sidebar-user">
+      <div class="avatar" data-persona-text="user.initials">RS</div>
+      <div class="sidebar-user-info">
+        <strong data-persona-text="user.name">Roberto Salazar</strong>
+        <span data-persona-text="user.role">Administrador general</span>
+      </div>
+    </div>
+  </aside>
+
+  <div class="app-main">
+    <header class="topbar">
+      <button class="sidebar-mobile-btn" data-sidebar-toggle aria-label="Abrir menú">☰</button>
+      <div>
+        <h1>Reservas de canchas</h1>
+        <div class="breadcrumbs"><a href="dashboard.html">Tablero</a> / Reservas</div>
+      </div>
+      <div class="topbar-search"><span>🔎</span><input type="text" placeholder="Buscar cliente o folio…" /></div>
+      <button class="btn btn-primary btn-sm" data-open-modal="nueva-reserva">＋ Nueva reserva</button>
+    </header>
+
+    <main class="app-content">
+      <!-- Filters -->
+      <div class="card mb-3">
+        <div class="proto-actions" style="justify-content: space-between">
+          <div class="proto-actions">
+            <button class="btn btn-secondary btn-sm">◀</button>
+            <button class="btn btn-secondary btn-sm">Hoy</button>
+            <button class="btn btn-secondary btn-sm">▶</button>
+            <strong class="ml-2">Viernes 26 de julio, 2026</strong>
+          </div>
+          <div class="proto-actions">
+            <div class="proto-seg-group">
+              <button class="proto-seg" aria-pressed="true">Día</button>
+              <button class="proto-seg" aria-pressed="false">Semana</button>
+              <button class="proto-seg" aria-pressed="false">Mes</button>
+            </div>
+            <select class="btn btn-secondary btn-sm" style="min-width: 140px">
+              <option>Todas las canchas</option><option>Panorámicas</option><option>Cristal</option><option>Muro</option>
+            </select>
+            <button class="btn btn-ghost btn-sm" data-toast="Exportando CSV…">Exportar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Legend -->
+      <div class="legend mb-3 px-1">
+        <span><span class="swatch" style="background: rgb(var(--accent) / .35)"></span>Confirmada</span>
+        <span><span class="swatch" style="background: rgb(var(--warning) / .35)"></span>Tentativa</span>
+        <span><span class="swatch" style="background: rgb(var(--info) / .35)"></span>Clase</span>
+        <span><span class="swatch" style="background: rgb(var(--danger) / .3)"></span>Torneo</span>
+        <span><span class="swatch" style="background: rgb(var(--muted) / .2); border: 1px dashed rgb(var(--muted))"></span>Libre</span>
+      </div>
+
+      <!-- Calendar -->
+      <div class="card" style="padding: .5rem;">
+        <div class="proto-table-wrap">
+          <div class="cal-grid">
+            <div class="cal-head">Hora</div>
+            <div class="cal-head">Cancha 1<br><small class="text-xs text-ink2">Panorámica</small></div>
+            <div class="cal-head">Cancha 2<br><small class="text-xs text-ink2">Panorámica</small></div>
+            <div class="cal-head">Cancha 3<br><small class="text-xs text-ink2">Cristal</small></div>
+            <div class="cal-head">Cancha 4<br><small class="text-xs text-ink2">Cristal</small></div>
+            <div class="cal-head">Cancha 5<br><small class="text-xs text-ink2">Muro</small></div>
+            <div class="cal-head">Cancha 6<br><small class="text-xs text-ink2">Muro</small></div>
+
+            <div class="cal-time">07:00</div>
+            <div class="cal-cell"><div class="cal-slot confirmed"><strong>Corcuera / Ruiz</strong><small>1.5 h · $900</small></div></div>
+            <div class="cal-cell"><div class="cal-slot confirmed"><strong>Grupo mañanero</strong><small>1.5 h · $900</small></div></div>
+            <div class="cal-cell"><div class="cal-slot class"><strong>Clase · Coach López</strong><small>4 alumnos</small></div></div>
+            <div class="cal-cell"><div class="cal-slot free">＋ libre</div></div>
+            <div class="cal-cell"><div class="cal-slot confirmed"><strong>Reta abierta</strong><small>Nivel 3</small></div></div>
+            <div class="cal-cell"><div class="cal-slot free">＋ libre</div></div>
+
+            <div class="cal-time">09:00</div>
+            <div class="cal-cell"><div class="cal-slot class"><strong>Academia infantil</strong><small>6 alumnos</small></div></div>
+            <div class="cal-cell"><div class="cal-slot class"><strong>Academia infantil</strong><small>4 alumnos</small></div></div>
+            <div class="cal-cell"><div class="cal-slot free">＋ libre</div></div>
+            <div class="cal-cell"><div class="cal-slot tentative"><strong>Pareja Alcántara</strong><small>Sin pago · reservar</small></div></div>
+            <div class="cal-cell"><div class="cal-slot free">＋ libre</div></div>
+            <div class="cal-cell"><div class="cal-slot confirmed"><strong>Villalobos / López</strong><small>1 h · $450</small></div></div>
+
+            <div class="cal-time">11:00</div>
+            <div class="cal-cell"><div class="cal-slot free">＋ libre</div></div>
+            <div class="cal-cell"><div class="cal-slot free">＋ libre</div></div>
+            <div class="cal-cell"><div class="cal-slot confirmed"><strong>Fuentes / Márquez</strong><small>1.5 h · $825</small></div></div>
+            <div class="cal-cell"><div class="cal-slot free">＋ libre</div></div>
+            <div class="cal-cell"><div class="cal-slot free">＋ libre</div></div>
+            <div class="cal-cell"><div class="cal-slot free">＋ libre</div></div>
+
+            <div class="cal-time">13:00</div>
+            <div class="cal-cell"><div class="cal-slot confirmed"><strong>Ejecutivos B2B</strong><small>Corporativo</small></div></div>
+            <div class="cal-cell"><div class="cal-slot free">＋ libre</div></div>
+            <div class="cal-cell"><div class="cal-slot free">＋ libre</div></div>
+            <div class="cal-cell"><div class="cal-slot tentative"><strong>Sin nombre</strong><small>Sujeto a confirmar</small></div></div>
+            <div class="cal-cell"><div class="cal-slot free">＋ libre</div></div>
+            <div class="cal-cell"><div class="cal-slot free">＋ libre</div></div>
+
+            <div class="cal-time">15:00</div>
+            <div class="cal-cell"><div class="cal-slot confirmed"><strong>Salazar / García</strong><small>1 h · $600</small></div></div>
+            <div class="cal-cell"><div class="cal-slot confirmed"><strong>Torres / Rueda</strong><small>1.5 h · $900</small></div></div>
+            <div class="cal-cell"><div class="cal-slot class"><strong>Clase · Julieta Márquez</strong><small>2 alumnos</small></div></div>
+            <div class="cal-cell"><div class="cal-slot free">＋ libre</div></div>
+            <div class="cal-cell"><div class="cal-slot confirmed"><strong>Reta femenil</strong><small>Nivel 4</small></div></div>
+            <div class="cal-cell"><div class="cal-slot free">＋ libre</div></div>
+
+            <div class="cal-time">17:00</div>
+            <div class="cal-cell"><div class="cal-slot confirmed"><strong>Corcuera / Padilla</strong><small>Membresía Premium</small></div></div>
+            <div class="cal-cell"><div class="cal-slot confirmed"><strong>Nava / Robles</strong><small>1.5 h · $900</small></div></div>
+            <div class="cal-cell"><div class="cal-slot class"><strong>Clase técnica</strong><small>6 alumnos</small></div></div>
+            <div class="cal-cell"><div class="cal-slot confirmed"><strong>Zambrano / Solís</strong><small>1 h · $550</small></div></div>
+            <div class="cal-cell"><div class="cal-slot tourney"><strong>Torneo 2ª Cat.</strong><small>Cuadrangular</small></div></div>
+            <div class="cal-cell"><div class="cal-slot tourney"><strong>Torneo 2ª Cat.</strong><small>Cuadrangular</small></div></div>
+
+            <div class="cal-time">19:00</div>
+            <div class="cal-cell"><div class="cal-slot confirmed"><strong>Villalobos / Yáñez</strong><small>2 h · $1,200</small></div></div>
+            <div class="cal-cell"><div class="cal-slot confirmed"><strong>García / Mendoza</strong><small>2 h · $1,200</small></div></div>
+            <div class="cal-cell"><div class="cal-slot confirmed"><strong>Corporativo Bimbo</strong><small>Paquete 4 canchas</small></div></div>
+            <div class="cal-cell"><div class="cal-slot confirmed"><strong>Corporativo Bimbo</strong><small>Paquete 4 canchas</small></div></div>
+            <div class="cal-cell"><div class="cal-slot confirmed"><strong>Corporativo Bimbo</strong><small>Paquete 4 canchas</small></div></div>
+            <div class="cal-cell"><div class="cal-slot confirmed"><strong>Corporativo Bimbo</strong><small>Paquete 4 canchas</small></div></div>
+
+            <div class="cal-time">21:00</div>
+            <div class="cal-cell"><div class="cal-slot confirmed"><strong>Última reta</strong><small>Nivel 5</small></div></div>
+            <div class="cal-cell"><div class="cal-slot confirmed"><strong>Última reta</strong><small>Nivel 5</small></div></div>
+            <div class="cal-cell"><div class="cal-slot free">＋ libre</div></div>
+            <div class="cal-cell"><div class="cal-slot free">＋ libre</div></div>
+            <div class="cal-cell"><div class="cal-slot free">＋ libre</div></div>
+            <div class="cal-cell"><div class="cal-slot free">＋ libre</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Summary -->
+      <section class="grid gap-3 mt-4" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))">
+        <div class="card"><div class="kpi"><span class="kpi-label">Total reservas</span><span class="kpi-value">42</span></div></div>
+        <div class="card"><div class="kpi"><span class="kpi-label">Ingreso esperado</span><span class="kpi-value">$35,240</span></div></div>
+        <div class="card"><div class="kpi"><span class="kpi-label">Ocupación día</span><span class="kpi-value">78 %</span></div></div>
+        <div class="card"><div class="kpi"><span class="kpi-label">Pendientes de pago</span><span class="kpi-value">4</span><span class="kpi-delta">$2,150 por cobrar</span></div></div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- MODAL Nueva reserva -->
+<div data-modal="nueva-reserva" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-panel">
+    <div class="modal-header">
+      <h3>Nueva reserva</h3>
+      <button class="modal-close" data-close-modal aria-label="Cerrar">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="grid grid-cols-2 gap-3">
+        <div class="field"><label>Cliente</label><input value="Andrea Villalobos" /></div>
+        <div class="field"><label>Teléfono</label><input value="55 4482 1730" /></div>
+        <div class="field"><label>Cancha</label><select><option>Cancha 4 (Cristal)</option><option>Cancha 1 (Panorámica)</option></select></div>
+        <div class="field"><label>Fecha</label><input type="date" value="2026-07-26" /></div>
+        <div class="field"><label>Hora inicio</label><input type="time" value="17:00" /></div>
+        <div class="field"><label>Duración</label><select><option>1 hora</option><option>1.5 horas</option><option>2 horas</option></select></div>
+        <div class="field col-span-2"><label>Notas</label><textarea rows="2">Cliente con membresía Premium activa.</textarea></div>
+      </div>
+      <div class="mt-2 p-3 rounded" style="background: rgb(var(--accent) / .1);">
+        <div class="flex justify-between text-sm"><span>Precio base</span><strong>$550</strong></div>
+        <div class="flex justify-between text-sm"><span>Descuento Premium (15%)</span><strong>−$82</strong></div>
+        <div class="flex justify-between font-bold mt-1 pt-1" style="border-top: 1px solid rgb(var(--muted) / .3)"><span>Total</span><span>$468</span></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" data-close-modal>Cancelar</button>
+      <a class="btn btn-primary" href="cobros.html" data-loading="Guardando…" data-toast="Reserva creada">Reservar y cobrar</a>
+    </div>
+  </div>
+</div>
+
+<div id="proto-controls">
+  <div class="proto-bar">
+    <div class="proto-bar-section"><span class="proto-bar-label">Tema</span><div class="proto-seg-group">
+      <button class="proto-seg" data-theme-option="light" aria-pressed="true">Claro</button>
+      <button class="proto-seg" data-theme-option="dark" aria-pressed="false">Oscuro</button></div></div>
+    <div class="proto-bar-section"><span class="proto-bar-label">Densidad</span><div class="proto-seg-group">
+      <button class="proto-seg" data-layout-option="comodo" aria-pressed="true">Cómodo</button>
+      <button class="proto-seg" data-layout-option="compacto" aria-pressed="false">Compacto</button></div></div>
+    <div class="proto-bar-section"><span class="proto-bar-label">Rol</span><div class="proto-seg-group">
+      <button class="proto-seg" data-persona-option="admin" aria-pressed="true">Admin</button>
+      <button class="proto-seg" data-persona-option="gerente" aria-pressed="false">Gerente</button>
+      <button class="proto-seg" data-persona-option="recepcion" aria-pressed="false">Recepción</button></div></div>
+    <div class="proto-bar-section">
+      <button class="proto-seg" data-share title="Copiar URL">🔗 Compartir</button>
+      <button class="proto-seg" data-feedback-toggle title="Comentar">💬 Comentar</button>
+    </div>
+  </div>
+  <p class="proto-hint">Shift + ? · pantallas recientes</p>
+</div>
+
+<script src="js/state.js"></script><script src="js/theme.js"></script><script src="js/layout.js"></script>
+<script src="js/data.js"></script><script src="js/persona.js"></script><script src="js/ui.js"></script>
+<script src="js/app.js"></script><script src="js/feedback.js"></script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="es" data-theme="light" data-layout="comodo" data-persona="admin">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pro Padel — Membresías</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{surface:'rgb(var(--surface) / <alpha-value>)',elevated:'rgb(var(--elevated) / <alpha-value>)',accent:'rgb(var(--accent) / <alpha-value>)',muted:'rgb(var(--muted) / <alpha-value>)',ink:'rgb(var(--ink) / <alpha-value>)',ink2:'rgb(var(--ink2) / <alpha-value>)'},fontFamily:{heading:['Manrope','system-ui','sans-serif'],body:['Inter','system-ui','sans-serif']},borderRadius:{proto:'var(--radius)'}}}};</script>
+  <link rel="stylesheet" href="css/styles.css" /><link rel="stylesheet" href="css/feedback.css" />
+  <style>body { font-family: 'Inter', system-ui, sans-serif; }
+  .plan-card { position: relative; padding: 1.35rem 1.2rem; border: 1px solid rgb(var(--muted) / .25); border-radius: var(--radius); background: rgb(var(--elevated)); display: flex; flex-direction: column; }
+  .plan-card.featured { border-color: rgb(var(--accent)); box-shadow: 0 0 0 1px rgb(var(--accent) / .2); }
+  .plan-card .price { font-family: 'Manrope', system-ui, sans-serif; font-weight: 700; font-size: 1.85rem; letter-spacing: -.02em; margin: .35rem 0; }
+  .plan-card .price small { font-size: .78rem; font-weight: 500; color: rgb(var(--ink2)); }
+  .plan-card ul { display: grid; gap: .35rem; margin: .75rem 0; font-size: .85rem; }
+  .plan-card ul li::before { content: '✓ '; color: rgb(var(--accent)); font-weight: 700; }
+  .plan-card .featured-flag { position: absolute; top: -10px; right: 16px; background: rgb(var(--accent)); color: #fff; font-size: .7rem; font-weight: 600; padding: 2px 10px; border-radius: 999px; }
+  </style>
+</head>
+<body class="bg-surface text-ink antialiased">
+<div class="app-shell">
+  <aside class="app-sidebar">
+    <div class="brand-row"><div class="brand-mark">PP</div><div><div class="brand-name text-white">Pro Padel</div><span class="brand-city">Polanco · CDMX</span></div></div>
+    <div class="nav-section-label">Operación</div>
+    <a href="dashboard.html" class="nav-link"><span class="nav-icon">📊</span>Tablero</a>
+    <a href="reservas.html" class="nav-link"><span class="nav-icon">📅</span>Reservas <span class="nav-badge">12</span></a>
+    <a href="cobros.html" class="nav-link"><span class="nav-icon">💳</span>Cobros</a>
+    <a href="clientes.html" class="nav-link"><span class="nav-icon">👥</span>Clientes</a>
+    <a href="pos.html" class="nav-link"><span class="nav-icon">🛒</span>Punto de venta</a>
+    <a href="caja.html" class="nav-link"><span class="nav-icon">💰</span>Caja</a>
+    <div class="nav-section-label">Comercial</div>
+    <a href="membresias.html" class="nav-link active"><span class="nav-icon">🎫</span>Membresías</a>
+    <a href="promociones.html" class="nav-link"><span class="nav-icon">🏷️</span>Promociones</a>
+    <a href="torneos.html" class="nav-link"><span class="nav-icon">🏆</span>Torneos y ligas</a>
+    <div class="nav-section-label">Gestión</div>
+    <a href="inventario.html" class="nav-link"><span class="nav-icon">📦</span>Inventario</a>
+    <a href="reportes.html" class="nav-link"><span class="nav-icon">📈</span>Reportes</a>
+    <a href="usuarios.html" class="nav-link" data-persona-show="admin"><span class="nav-icon">⚙️</span>Usuarios y permisos</a>
+    <div class="sidebar-user"><div class="avatar" data-persona-text="user.initials">RS</div>
+    <div class="sidebar-user-info"><strong data-persona-text="user.name">Roberto Salazar</strong><span data-persona-text="user.role">Administrador general</span></div></div>
+  </aside>
+
+  <div class="app-main">
+    <header class="topbar">
+      <button class="sidebar-mobile-btn" data-sidebar-toggle>☰</button>
+      <div><h1>Membresías y paquetes</h1><div class="breadcrumbs"><a href="dashboard.html">Tablero</a> / Membresías</div></div>
+      <button class="btn btn-secondary btn-sm ml-auto" data-toast="Alertas configuradas">🔔 Alertas</button>
+      <button class="btn btn-primary btn-sm" data-open-modal="nuevo-plan">＋ Nuevo plan</button>
+    </header>
+
+    <main class="app-content">
+      <section class="grid gap-3 mb-4" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))">
+        <div class="card"><div class="kpi"><span class="kpi-label">Membresías activas</span><span class="kpi-value">318</span><span class="kpi-delta up">▲ 24 este mes</span></div></div>
+        <div class="card"><div class="kpi"><span class="kpi-label">Ingreso recurrente</span><span class="kpi-value">$412,850</span><span class="kpi-delta">/ mes estimado</span></div></div>
+        <div class="card"><div class="kpi"><span class="kpi-label">Renovaciones (mes)</span><span class="kpi-value">89 %</span><span class="kpi-delta up">▲ 3 pp</span></div></div>
+        <div class="card"><div class="kpi"><span class="kpi-label">Vencidas / por vencer</span><span class="kpi-value">12 / 24</span><span class="kpi-delta">próximos 15 días</span></div></div>
+      </section>
+
+      <h3 class="font-heading font-semibold mb-2">Planes vigentes</h3>
+      <section class="grid gap-3 mb-6" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))">
+        <div class="plan-card">
+          <div class="chip is-info">Básica</div>
+          <div class="price">$890<small> /mes</small></div>
+          <div class="text-sm text-ink2">Ideal para jugadores casuales</div>
+          <ul>
+            <li>4 reservas/mes</li>
+            <li>Horarios 07:00 – 15:00</li>
+            <li>10% descuento en tienda</li>
+            <li>0 invitados incluidos</li>
+          </ul>
+          <div class="mt-auto text-xs text-ink2">Activos: 78 clientes</div>
+        </div>
+
+        <div class="plan-card featured">
+          <span class="featured-flag">Más popular</span>
+          <div class="chip is-accent">Premium</div>
+          <div class="price">$1,850<small> /mes</small></div>
+          <div class="text-sm text-ink2">Para jugadores frecuentes</div>
+          <ul>
+            <li>12 reservas/mes</li>
+            <li>Todos los horarios</li>
+            <li>15% descuento en tienda y bar</li>
+            <li>2 invitados incluidos/mes</li>
+            <li>Prioridad en torneos</li>
+          </ul>
+          <div class="mt-auto text-xs text-ink2">Activos: 142 clientes</div>
+        </div>
+
+        <div class="plan-card">
+          <div class="chip is-warning">Familiar</div>
+          <div class="price">$3,200<small> /mes</small></div>
+          <div class="text-sm text-ink2">Hasta 4 personas mismo hogar</div>
+          <ul>
+            <li>20 reservas/mes compartidas</li>
+            <li>Todos los horarios</li>
+            <li>Clases infantiles con 25% desc.</li>
+            <li>4 invitados/mes</li>
+          </ul>
+          <div class="mt-auto text-xs text-ink2">Activos: 46 familias</div>
+        </div>
+
+        <div class="plan-card">
+          <div class="chip is-danger">Corporativa</div>
+          <div class="price">$8,900<small> /mes</small></div>
+          <div class="text-sm text-ink2">Empresas de hasta 10 colaboradores</div>
+          <ul>
+            <li>Bloques exclusivos 3 horas/sem</li>
+            <li>Facturación centralizada</li>
+            <li>Torneo interno anual sin costo</li>
+            <li>Coach corporativo incluido</li>
+          </ul>
+          <div class="mt-auto text-xs text-ink2">Activas: 8 empresas</div>
+        </div>
+
+        <div class="plan-card">
+          <div class="chip">Anual</div>
+          <div class="price">$18,900<small> /año</small></div>
+          <div class="text-sm text-ink2">15% de ahorro vs mensual</div>
+          <ul>
+            <li>Beneficios Premium × 12</li>
+            <li>1 mes de congelamiento gratis</li>
+            <li>Kit de bienvenida</li>
+          </ul>
+          <div class="mt-auto text-xs text-ink2">Activos: 44 clientes</div>
+        </div>
+      </section>
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Clientes con membresía activa</div>
+            <div class="card-sub">318 activos · filtro: todos</div>
+          </div>
+          <div class="proto-actions">
+            <button class="btn btn-secondary btn-sm">Congelamientos</button>
+            <button class="btn btn-secondary btn-sm">Adeudos</button>
+            <button class="btn btn-ghost btn-sm">Exportar</button>
+          </div>
+        </div>
+        <div class="proto-table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr><th>Cliente</th><th>Plan</th><th>Inicio</th><th>Vence</th><th class="num">Reservas usadas</th><th>Estado</th><th class="num">Acciones</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Andrea Villalobos</td><td>Premium</td><td>15 mar 2026</td><td>15 ago 2026</td>
+                <td class="num">7 / 12</td><td><span class="chip is-success">Activa</span></td>
+                <td class="num"><button class="btn btn-ghost btn-sm">Congelar</button><button class="btn btn-ghost btn-sm">Renovar</button></td>
+              </tr>
+              <tr>
+                <td>Emilio Corcuera</td><td>Familiar</td><td>02 ene 2026</td><td>02 ago 2026</td>
+                <td class="num">14 / 20</td><td><span class="chip is-warning">Vence en 7</span></td>
+                <td class="num"><button class="btn btn-ghost btn-sm">Congelar</button><button class="btn btn-primary btn-sm">Renovar</button></td>
+              </tr>
+              <tr>
+                <td>Rodrigo Fuentes</td><td>Corporativa (Bimbo)</td><td>01 abr 2026</td><td>01 ago 2026</td>
+                <td class="num">96 / 120</td><td><span class="chip is-warning">Vence en 6</span></td>
+                <td class="num"><button class="btn btn-ghost btn-sm">Detalle</button><button class="btn btn-primary btn-sm">Renovar</button></td>
+              </tr>
+              <tr>
+                <td>Paola Estrada</td><td>Premium</td><td>15 jul 2026</td><td>15 ago 2026</td>
+                <td class="num">2 / 12</td><td><span class="chip is-success">Activa</span></td>
+                <td class="num"><button class="btn btn-ghost btn-sm">Congelar</button></td>
+              </tr>
+              <tr>
+                <td>Laura Zambrano</td><td>Básica</td><td>25 jun 2026</td><td>25 jul 2026</td>
+                <td class="num">4 / 4</td><td><span class="chip is-danger">Vencida ayer</span></td>
+                <td class="num"><button class="btn btn-danger btn-sm">Reactivar</button></td>
+              </tr>
+              <tr>
+                <td>Nicolás Herrera</td><td>Familiar</td><td>10 feb 2026</td><td>10 ago 2026</td>
+                <td class="num">18 / 20</td><td><span class="chip is-warning">Adeudo $450</span></td>
+                <td class="num"><button class="btn btn-ghost btn-sm">Cobrar</button></td>
+              </tr>
+              <tr>
+                <td>Sergio Márquez</td><td>Anual Premium</td><td>08 nov 2025</td><td>08 nov 2026</td>
+                <td class="num">61 / ∞</td><td><span class="chip is-success">Activa</span></td>
+                <td class="num"><button class="btn btn-ghost btn-sm">Detalle</button></td>
+              </tr>
+              <tr>
+                <td>Marta Padilla</td><td>Premium</td><td>01 jun 2026</td><td>01 sep 2026</td>
+                <td class="num">3 / 12</td><td><span class="chip is-info">Congelada</span></td>
+                <td class="num"><button class="btn btn-primary btn-sm">Reactivar</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<div data-modal="nuevo-plan" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-panel">
+    <div class="modal-header"><h3>Crear plan de membresía</h3><button class="modal-close" data-close-modal>×</button></div>
+    <div class="modal-body">
+      <div class="grid grid-cols-2 gap-3">
+        <div class="field"><label>Nombre del plan</label><input placeholder="Ej. Premium Plus" /></div>
+        <div class="field"><label>Precio</label><input value="$0.00" /></div>
+        <div class="field"><label>Duración</label><select><option>1 mes</option><option>3 meses</option><option>6 meses</option><option>12 meses</option></select></div>
+        <div class="field"><label>Reservas incluidas</label><input value="12" /></div>
+        <div class="field"><label>Horarios permitidos</label><select><option>Todos</option><option>Solo mañana</option><option>Solo noche</option><option>Personalizado</option></select></div>
+        <div class="field"><label>Invitados incluidos</label><input value="2" /></div>
+        <div class="field col-span-2"><label>Descuentos aplicables</label><input placeholder="Ej. 15% en tienda y bar" /></div>
+        <div class="field col-span-2">
+          <label class="inline-flex gap-2 items-center"><input type="checkbox" checked /> Permitir congelamientos</label>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" data-close-modal>Cancelar</button>
+      <button class="btn btn-primary" data-close-modal data-toast="Plan creado" data-loading="Guardando…">Crear plan</button>
+    </div>
+  </div>
+</div>
+
+<div id="proto-controls">
+  <div class="proto-bar">
+    <div class="proto-bar-section"><span class="proto-bar-label">Tema</span><div class="proto-seg-group">
+      <button class="proto-seg" data-theme-option="light" aria-pressed="true">Claro</button>
+      <button class="proto-seg" data-theme-option="dark" aria-pressed="false">Oscuro</button></div></div>
+    <div class="proto-bar-section"><span class="proto-bar-label">Densidad</span><div class="proto-seg-group">
+      <button class="proto-seg" data-layout-option="comodo" aria-pressed="true">Cómodo</button>
+      <button class="proto-seg" data-layout-option="compacto" aria-pressed="false">Compacto</button></div></div>
+    <div class="proto-bar-section"><span class="proto-bar-label">Rol</span><div class="proto-seg-group">
+      <button class="proto-seg" data-persona-option="admin" aria-pressed="true">Admin</button>
+      <button class="proto-seg" data-persona-option="gerente" aria-pressed="false">Gerente</button>
+      <button class="proto-seg" data-persona-option="recepcion" aria-pressed="false">Recepción</button></div></div>
+    <div class="proto-bar-section">
+      <button class="proto-seg" data-share>🔗 Compartir</button>
+      <button class="proto-seg" data-feedback-toggle>💬 Comentar</button>
+    </div>
+  </div>
+  <p class="proto-hint">Shift + ? · pantallas recientes</p>
+</div>
+
+<script src="js/state.js"></script><script src="js/theme.js"></script><script src="js/layout.js"></script>
+<script src="js/data.js"></script><script src="js/persona.js"></script><script src="js/ui.js"></script>
+<script src="js/app.js"></script><script src="js/feedback.js"></script>
+</body>
+</html>

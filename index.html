@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="es" data-theme="light" data-layout="comodo" data-persona="admin">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pro Padel — Iniciar sesión</title>
+  <meta name="description" content="Sistema de gestión integral para clubes de pádel." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            surface:  'rgb(var(--surface)  / <alpha-value>)',
+            elevated: 'rgb(var(--elevated) / <alpha-value>)',
+            accent:   'rgb(var(--accent)   / <alpha-value>)',
+            muted:    'rgb(var(--muted)    / <alpha-value>)',
+            ink:      'rgb(var(--ink)      / <alpha-value>)',
+            ink2:     'rgb(var(--ink2)     / <alpha-value>)',
+          },
+          fontFamily: {
+            heading: ['Manrope', 'system-ui', 'sans-serif'],
+            body:    ['Inter',   'system-ui', 'sans-serif'],
+          },
+          borderRadius: { proto: 'var(--radius)' },
+        },
+      },
+    };
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/feedback.css" />
+  <style>body { font-family: 'Inter', system-ui, sans-serif; }</style>
+</head>
+<body class="bg-surface text-ink antialiased">
+
+  <div class="login-shell">
+    <!-- HERO -->
+    <div class="login-hero">
+      <div>
+        <div class="flex items-center gap-3">
+          <div class="brand-mark">PP</div>
+          <div>
+            <div class="brand-name text-white">Pro Padel</div>
+            <div class="brand-city">Sistema de gestión</div>
+          </div>
+        </div>
+        <h2 class="mt-14">Tu club, operando en un solo sistema.</h2>
+        <p class="mt-4 text-sm max-w-md" style="color: rgb(var(--sidebar-ink2))">
+          Reservas, cobros, membresías, torneos, inventario y reportes — todo desde una misma pantalla, en tiempo real.
+        </p>
+        <div class="badge-row">
+          <span class="chip is-accent">6 canchas</span>
+          <span class="chip is-accent">10 tipos de usuario</span>
+          <span class="chip is-accent">11 módulos</span>
+        </div>
+      </div>
+
+      <div class="stat-strip">
+        <div>
+          <small>Ocupación hoy</small>
+          <strong>78 %</strong>
+        </div>
+        <div>
+          <small>Reservas activas</small>
+          <strong>42</strong>
+        </div>
+        <div>
+          <small>Ingresos del día</small>
+          <strong>$28,540</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="login-form-side">
+      <div class="login-form">
+        <h1>Iniciar sesión</h1>
+        <p class="sub">Selecciona tu tipo de acceso y entra al sistema.</p>
+
+        <div class="role-picker" role="group" aria-label="Selecciona tu rol">
+          <button type="button" class="selected" data-role="admin">Administrador</button>
+          <button type="button" data-role="gerente">Gerente</button>
+          <button type="button" data-role="recepcion">Recepción</button>
+          <button type="button" data-role="entrenador">Entrenador</button>
+          <button type="button" data-role="bar">Bar</button>
+          <button type="button" data-role="almacen">Almacén</button>
+        </div>
+
+        <form onsubmit="event.preventDefault(); document.getElementById('go-in').click();">
+          <div class="field">
+            <label for="usr">Usuario o correo</label>
+            <input id="usr" type="text" value="rsalazar@propadel.mx" autocomplete="username" />
+          </div>
+          <div class="field">
+            <label for="pwd">Contraseña</label>
+            <input id="pwd" type="password" value="••••••••••" autocomplete="current-password" />
+          </div>
+          <div class="flex items-center justify-between text-sm mb-4">
+            <label class="inline-flex items-center gap-2 text-ink2">
+              <input type="checkbox" checked /> Recordarme
+            </label>
+            <a href="#" class="text-accent hover:underline" data-toast="Se envió un enlace de recuperación">¿Olvidaste tu contraseña?</a>
+          </div>
+          <a id="go-in" class="btn btn-primary btn-lg w-full justify-center"
+             href="dashboard.html"
+             data-loading="Verificando…"
+             data-toast="Bienvenido, Roberto">Entrar al sistema</a>
+        </form>
+
+        <div class="mt-6 text-center text-xs text-ink2">
+          Doble autenticación activa para administradores · v1.0
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTROL BAR -->
+  <div id="proto-controls">
+    <div class="proto-bar">
+      <div class="proto-bar-section">
+        <span class="proto-bar-label">Tema</span>
+        <div class="proto-seg-group">
+          <button class="proto-seg" data-theme-option="light" aria-pressed="true">Claro</button>
+          <button class="proto-seg" data-theme-option="dark"  aria-pressed="false">Oscuro</button>
+        </div>
+      </div>
+      <div class="proto-bar-section">
+        <span class="proto-bar-label">Densidad</span>
+        <div class="proto-seg-group">
+          <button class="proto-seg" data-layout-option="comodo"   aria-pressed="true">Cómodo</button>
+          <button class="proto-seg" data-layout-option="compacto" aria-pressed="false">Compacto</button>
+        </div>
+      </div>
+      <div class="proto-bar-section">
+        <span class="proto-bar-label">Rol</span>
+        <div class="proto-seg-group">
+          <button class="proto-seg" data-persona-option="admin"     aria-pressed="true">Admin</button>
+          <button class="proto-seg" data-persona-option="gerente"   aria-pressed="false">Gerente</button>
+          <button class="proto-seg" data-persona-option="recepcion" aria-pressed="false">Recepción</button>
+        </div>
+      </div>
+      <div class="proto-bar-section">
+        <button class="proto-seg" data-share title="Copiar URL para compartir">🔗 Compartir</button>
+        <button class="proto-seg" data-feedback-toggle title="Comentar el prototipo">💬 Comentar</button>
+      </div>
+    </div>
+    <p class="proto-hint">Shift + ? · pantallas recientes</p>
+  </div>
+
+  <script>
+    // Role picker visual toggle (mock)
+    document.querySelectorAll('.role-picker button').forEach(b => {
+      b.addEventListener('click', () => {
+        document.querySelectorAll('.role-picker button').forEach(x => x.classList.remove('selected'));
+        b.classList.add('selected');
+      });
+    });
+  </script>
+
+  <script src="js/state.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/persona.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/feedback.js"></script>
+</body>
+</html>

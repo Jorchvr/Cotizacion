@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="es" data-theme="light" data-layout="comodo" data-persona="admin">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pro Padel — Usuarios y permisos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{surface:'rgb(var(--surface) / <alpha-value>)',elevated:'rgb(var(--elevated) / <alpha-value>)',accent:'rgb(var(--accent) / <alpha-value>)',muted:'rgb(var(--muted) / <alpha-value>)',ink:'rgb(var(--ink) / <alpha-value>)',ink2:'rgb(var(--ink2) / <alpha-value>)'},fontFamily:{heading:['Manrope','system-ui','sans-serif'],body:['Inter','system-ui','sans-serif']},borderRadius:{proto:'var(--radius)'}}}};</script>
+  <link rel="stylesheet" href="css/styles.css" /><link rel="stylesheet" href="css/feedback.css" />
+  <style>body { font-family: 'Inter', system-ui, sans-serif; }
+  .perm-cell { text-align: center; }
+  .perm-cell input { transform: scale(1.15); }
+  </style>
+</head>
+<body class="bg-surface text-ink antialiased">
+<div class="app-shell">
+  <aside class="app-sidebar">
+    <div class="brand-row"><div class="brand-mark">PP</div><div><div class="brand-name text-white">Pro Padel</div><span class="brand-city">Polanco · CDMX</span></div></div>
+    <div class="nav-section-label">Operación</div>
+    <a href="dashboard.html" class="nav-link"><span class="nav-icon">📊</span>Tablero</a>
+    <a href="reservas.html" class="nav-link"><span class="nav-icon">📅</span>Reservas <span class="nav-badge">12</span></a>
+    <a href="cobros.html" class="nav-link"><span class="nav-icon">💳</span>Cobros</a>
+    <a href="clientes.html" class="nav-link"><span class="nav-icon">👥</span>Clientes</a>
+    <a href="pos.html" class="nav-link"><span class="nav-icon">🛒</span>Punto de venta</a>
+    <a href="caja.html" class="nav-link"><span class="nav-icon">💰</span>Caja</a>
+    <div class="nav-section-label">Comercial</div>
+    <a href="membresias.html" class="nav-link"><span class="nav-icon">🎫</span>Membresías</a>
+    <a href="promociones.html" class="nav-link"><span class="nav-icon">🏷️</span>Promociones</a>
+    <a href="torneos.html" class="nav-link"><span class="nav-icon">🏆</span>Torneos y ligas</a>
+    <div class="nav-section-label">Gestión</div>
+    <a href="inventario.html" class="nav-link"><span class="nav-icon">📦</span>Inventario</a>
+    <a href="reportes.html" class="nav-link"><span class="nav-icon">📈</span>Reportes</a>
+    <a href="usuarios.html" class="nav-link active"><span class="nav-icon">⚙️</span>Usuarios y permisos</a>
+    <div class="sidebar-user"><div class="avatar" data-persona-text="user.initials">RS</div>
+    <div class="sidebar-user-info"><strong data-persona-text="user.name">Roberto Salazar</strong><span data-persona-text="user.role">Administrador general</span></div></div>
+  </aside>
+
+  <div class="app-main">
+    <header class="topbar">
+      <button class="sidebar-mobile-btn" data-sidebar-toggle>☰</button>
+      <div><h1>Usuarios y permisos</h1><div class="breadcrumbs"><a href="dashboard.html">Tablero</a> / Configuración / Usuarios</div></div>
+      <button class="btn btn-secondary btn-sm ml-auto" data-toast="Configuración de seguridad guardada">🔒 Seguridad</button>
+      <button class="btn btn-primary btn-sm" data-open-modal="nuevo-usuario">＋ Nuevo usuario</button>
+    </header>
+
+    <main class="app-content">
+      <div class="tabs">
+        <button data-tab="usuarios" aria-selected="true">Usuarios · 18</button>
+        <button data-tab="roles" aria-selected="false">Roles y permisos · 10</button>
+        <button data-tab="seguridad" aria-selected="false">Seguridad</button>
+      </div>
+
+      <!-- USUARIOS -->
+      <div data-tab-panel="usuarios">
+        <div class="card">
+          <div class="proto-table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Usuario</th><th>Rol</th><th>Correo</th><th>Estado</th><th>Último acceso</th><th>2FA</th><th class="num">Acciones</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><div class="flex items-center gap-2"><div class="avatar" style="background: rgb(var(--accent))">RS</div><div><div class="font-medium">Roberto Salazar</div><div class="text-xs text-ink2">rsalazar@propadel.mx</div></div></div></td>
+                  <td>Administrador general</td><td>rsalazar@propadel.mx</td>
+                  <td><span class="chip is-success">Activo</span></td><td>Hoy 13:44</td>
+                  <td><span class="chip is-success">Activada</span></td>
+                  <td class="num"><button class="btn btn-ghost btn-sm">Editar</button></td>
+                </tr>
+                <tr>
+                  <td><div class="flex items-center gap-2"><div class="avatar" style="background: rgb(var(--info))">MO</div><div><div class="font-medium">Mariana Ochoa</div><div class="text-xs text-ink2">mochoa@propadel.mx</div></div></div></td>
+                  <td>Gerente</td><td>mochoa@propadel.mx</td>
+                  <td><span class="chip is-success">Activo</span></td><td>Hoy 15:20</td>
+                  <td><span class="chip is-success">Activada</span></td>
+                  <td class="num"><button class="btn btn-ghost btn-sm">Editar</button></td>
+                </tr>
+                <tr>
+                  <td><div class="flex items-center gap-2"><div class="avatar" style="background: rgb(var(--warning))">DR</div><div><div class="font-medium">Diego Ramírez</div><div class="text-xs text-ink2">dramirez@propadel.mx</div></div></div></td>
+                  <td>Recepción</td><td>dramirez@propadel.mx</td>
+                  <td><span class="chip is-success">Activo</span></td><td>Hoy 17:24</td>
+                  <td><span class="chip">Sin 2FA</span></td>
+                  <td class="num"><button class="btn btn-ghost btn-sm">Editar</button></td>
+                </tr>
+                <tr>
+                  <td><div class="flex items-center gap-2"><div class="avatar" style="background: rgb(var(--info))">FL</div><div><div class="font-medium">Fernando López</div><div class="text-xs text-ink2">flopez@propadel.mx</div></div></div></td>
+                  <td>Entrenador</td><td>flopez@propadel.mx</td>
+                  <td><span class="chip is-success">Activo</span></td><td>Hoy 07:00</td>
+                  <td><span class="chip">Sin 2FA</span></td>
+                  <td class="num"><button class="btn btn-ghost btn-sm">Editar</button></td>
+                </tr>
+                <tr>
+                  <td><div class="flex items-center gap-2"><div class="avatar" style="background: rgb(var(--danger))">JM</div><div><div class="font-medium">Julieta Márquez</div><div class="text-xs text-ink2">jmarquez@propadel.mx</div></div></div></td>
+                  <td>Entrenador</td><td>jmarquez@propadel.mx</td>
+                  <td><span class="chip is-success">Activo</span></td><td>Ayer 20:14</td>
+                  <td><span class="chip">Sin 2FA</span></td>
+                  <td class="num"><button class="btn btn-ghost btn-sm">Editar</button></td>
+                </tr>
+                <tr>
+                  <td><div class="flex items-center gap-2"><div class="avatar" style="background: rgb(var(--warning))">GB</div><div><div class="font-medium">Gerardo Bautista</div><div class="text-xs text-ink2">gbautista@propadel.mx</div></div></div></td>
+                  <td>Bar / restaurante</td><td>gbautista@propadel.mx</td>
+                  <td><span class="chip is-success">Activo</span></td><td>Hoy 14:30</td>
+                  <td><span class="chip">Sin 2FA</span></td>
+                  <td class="num"><button class="btn btn-ghost btn-sm">Editar</button></td>
+                </tr>
+                <tr>
+                  <td><div class="flex items-center gap-2"><div class="avatar" style="background: rgb(var(--info))">VA</div><div><div class="font-medium">Valeria Aguirre</div><div class="text-xs text-ink2">vaguirre@propadel.mx</div></div></div></td>
+                  <td>Almacén y compras</td><td>vaguirre@propadel.mx</td>
+                  <td><span class="chip is-success">Activo</span></td><td>Hoy 10:15</td>
+                  <td><span class="chip is-success">Activada</span></td>
+                  <td class="num"><button class="btn btn-ghost btn-sm">Editar</button></td>
+                </tr>
+                <tr>
+                  <td><div class="flex items-center gap-2"><div class="avatar" style="background: rgb(var(--muted))">MG</div><div><div class="font-medium">Miguel Garza</div><div class="text-xs text-ink2">mgarza@propadel.mx</div></div></div></td>
+                  <td>Mantenimiento</td><td>mgarza@propadel.mx</td>
+                  <td><span class="chip is-warning">Sin actividad</span></td><td>Hace 8 días</td>
+                  <td><span class="chip">Sin 2FA</span></td>
+                  <td class="num"><button class="btn btn-ghost btn-sm">Editar</button></td>
+                </tr>
+                <tr>
+                  <td><div class="flex items-center gap-2"><div class="avatar" style="background: rgb(var(--accent))">TC</div><div><div class="font-medium">Teresa Cárdenas</div><div class="text-xs text-ink2">tcardenas@propadel.mx</div></div></div></td>
+                  <td>Contabilidad</td><td>tcardenas@propadel.mx</td>
+                  <td><span class="chip is-success">Activo</span></td><td>Ayer 18:00</td>
+                  <td><span class="chip is-success">Activada</span></td>
+                  <td class="num"><button class="btn btn-ghost btn-sm">Editar</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROLES -->
+      <div data-tab-panel="roles" hidden>
+        <div class="card mb-3">
+          <div class="text-sm text-ink2 mb-2">Marca los permisos para cada rol. Los cambios se aplican de inmediato.</div>
+          <div class="proto-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Permiso</th>
+                  <th class="perm-cell">Admin</th>
+                  <th class="perm-cell">Gerente</th>
+                  <th class="perm-cell">Recepción</th>
+                  <th class="perm-cell">Entrenador</th>
+                  <th class="perm-cell">Bar</th>
+                  <th class="perm-cell">Almacén</th>
+                  <th class="perm-cell">Mantenim.</th>
+                  <th class="perm-cell">Contabil.</th>
+                  <th class="perm-cell">Socios</th>
+                  <th class="perm-cell">Clientes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Ver información general</td>
+                  <td class="perm-cell"><input type="checkbox" checked disabled /></td>
+                  <td class="perm-cell"><input type="checkbox" checked /></td>
+                  <td class="perm-cell"><input type="checkbox" checked /></td>
+                  <td class="perm-cell"><input type="checkbox" checked /></td>
+                  <td class="perm-cell"><input type="checkbox" checked /></td>
+                  <td class="perm-cell"><input type="checkbox" checked /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" checked /></td>
+                  <td class="perm-cell"><input type="checkbox" checked /></td>
+                  <td class="perm-cell"><input type="checkbox" checked /></td>
+                </tr>
+                <tr><td>Crear/modificar reservas</td>
+                  <td class="perm-cell"><input type="checkbox" checked disabled /></td>
+                  <td class="perm-cell"><input type="checkbox" checked /></td>
+                  <td class="perm-cell"><input type="checkbox" checked /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" checked /></td>
+                </tr>
+                <tr><td>Aplicar descuentos</td>
+                  <td class="perm-cell"><input type="checkbox" checked disabled /></td>
+                  <td class="perm-cell"><input type="checkbox" checked /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                </tr>
+                <tr><td>Cancelar pagos / reembolsos</td>
+                  <td class="perm-cell"><input type="checkbox" checked disabled /></td>
+                  <td class="perm-cell"><input type="checkbox" checked /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                </tr>
+                <tr><td>Abrir/cerrar caja</td>
+                  <td class="perm-cell"><input type="checkbox" checked disabled /></td>
+                  <td class="perm-cell"><input type="checkbox" checked /></td>
+                  <td class="perm-cell"><input type="checkbox" checked /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" checked /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                </tr>
+                <tr><td>Consultar reportes financieros</td>
+                  <td class="perm-cell"><input type="checkbox" checked disabled /></td>
+                  <td class="perm-cell"><input type="checkbox" checked /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" checked /></td>
+                  <td class="perm-cell"><input type="checkbox" checked /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                </tr>
+                <tr><td>Modificar inventarios</td>
+                  <td class="perm-cell"><input type="checkbox" checked disabled /></td>
+                  <td class="perm-cell"><input type="checkbox" checked /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" checked /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                </tr>
+                <tr><td>Autorizar cortesías/devoluciones</td>
+                  <td class="perm-cell"><input type="checkbox" checked disabled /></td>
+                  <td class="perm-cell"><input type="checkbox" checked /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                </tr>
+                <tr><td>Administrar usuarios</td>
+                  <td class="perm-cell"><input type="checkbox" checked disabled /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                  <td class="perm-cell"><input type="checkbox" /></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="mt-3 flex justify-end gap-2">
+            <button class="btn btn-ghost">Restablecer</button>
+            <button class="btn btn-primary" data-toast="Permisos guardados" data-loading="Guardando…">Guardar cambios</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEGURIDAD -->
+      <div data-tab-panel="seguridad" hidden>
+        <div class="grid gap-3" style="grid-template-columns: 1fr 1fr">
+          <div class="card">
+            <div class="card-header"><div class="card-title">Autenticación</div></div>
+            <div class="stat-row"><span class="lbl">Doble autenticación (2FA)</span><span class="val"><span class="chip is-success">Obligatoria para admin/gerente</span></span></div>
+            <div class="stat-row"><span class="lbl">Longitud mínima de contraseña</span><span class="val">10 caracteres</span></div>
+            <div class="stat-row"><span class="lbl">Cambio de contraseña cada</span><span class="val">90 días</span></div>
+            <div class="stat-row"><span class="lbl">Cierre automático por inactividad</span><span class="val">15 min</span></div>
+            <div class="stat-row"><span class="lbl">Restricción por IP / dispositivo</span><span class="val">Solo admin desde red del club</span></div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><div class="card-title">Respaldos</div></div>
+            <div class="stat-row"><span class="lbl">Respaldo automático</span><span class="val"><span class="chip is-success">Diario a las 03:00</span></span></div>
+            <div class="stat-row"><span class="lbl">Cifrado</span><span class="val">AES-256</span></div>
+            <div class="stat-row"><span class="lbl">Retención</span><span class="val">30 días + histórico mensual 1 año</span></div>
+            <div class="stat-row"><span class="lbl">Ubicación remota</span><span class="val">Backblaze B2 · MX</span></div>
+            <div class="stat-row"><span class="lbl">Último respaldo verificado</span><span class="val" style="color: rgb(var(--success))">Hoy 03:04 · 4.2 GB</span></div>
+            <div class="proto-actions mt-3">
+              <button class="btn btn-primary btn-sm" data-toast="Descargando SQL dump…">⬇︎ Exportar base (SQL)</button>
+              <button class="btn btn-secondary btn-sm" data-toast="Restauración solicitada">↻ Restaurar</button>
+            </div>
+          </div>
+
+          <div class="card col-span-2">
+            <div class="card-header"><div class="card-title">Cláusula de propiedad de datos</div></div>
+            <p class="text-sm text-ink2">
+              La información contenida en este sistema pertenece exclusivamente al club, no al desarrollador.
+              En cualquier momento puede exportarse en formato estándar (SQL dump firmado) y trasladarse a otro
+              proveedor. La base de datos usa PostgreSQL de código abierto, sin dependencias propietarias.
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<div data-modal="nuevo-usuario" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-panel">
+    <div class="modal-header"><h3>Crear usuario</h3><button class="modal-close" data-close-modal>×</button></div>
+    <div class="modal-body">
+      <div class="grid grid-cols-2 gap-3">
+        <div class="field"><label>Nombre completo</label><input /></div>
+        <div class="field"><label>Correo</label><input type="email" placeholder="usuario@propadel.mx" /></div>
+        <div class="field"><label>Rol</label><select>
+          <option>Administrador general</option><option>Gerente</option><option>Recepción</option>
+          <option>Entrenador</option><option>Bar / restaurante</option><option>Almacén y compras</option>
+          <option>Mantenimiento</option><option>Contabilidad</option><option>Socio / dueño</option><option>Cliente</option>
+        </select></div>
+        <div class="field"><label>Contraseña temporal</label><input value="••••••••••" /></div>
+        <div class="field col-span-2"><label class="inline-flex items-center gap-2"><input type="checkbox" checked /> Exigir doble autenticación</label></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" data-close-modal>Cancelar</button>
+      <button class="btn btn-primary" data-close-modal data-toast="Usuario creado · invitación enviada">Crear usuario</button>
+    </div>
+  </div>
+</div>
+
+<div id="proto-controls">
+  <div class="proto-bar">
+    <div class="proto-bar-section"><span class="proto-bar-label">Tema</span><div class="proto-seg-group">
+      <button class="proto-seg" data-theme-option="light" aria-pressed="true">Claro</button>
+      <button class="proto-seg" data-theme-option="dark" aria-pressed="false">Oscuro</button></div></div>
+    <div class="proto-bar-section"><span class="proto-bar-label">Densidad</span><div class="proto-seg-group">
+      <button class="proto-seg" data-layout-option="comodo" aria-pressed="true">Cómodo</button>
+      <button class="proto-seg" data-layout-option="compacto" aria-pressed="false">Compacto</button></div></div>
+    <div class="proto-bar-section"><span class="proto-bar-label">Rol</span><div class="proto-seg-group">
+      <button class="proto-seg" data-persona-option="admin" aria-pressed="true">Admin</button>
+      <button class="proto-seg" data-persona-option="gerente" aria-pressed="false">Gerente</button>
+      <button class="proto-seg" data-persona-option="recepcion" aria-pressed="false">Recepción</button></div></div>
+    <div class="proto-bar-section">
+      <button class="proto-seg" data-share>🔗 Compartir</button>
+      <button class="proto-seg" data-feedback-toggle>💬 Comentar</button>
+    </div>
+  </div>
+  <p class="proto-hint">Shift + ? · pantallas recientes</p>
+</div>
+
+<script src="js/state.js"></script><script src="js/theme.js"></script><script src="js/layout.js"></script>
+<script src="js/data.js"></script><script src="js/persona.js"></script><script src="js/ui.js"></script>
+<script src="js/app.js"></script><script src="js/feedback.js"></script>
+</body>
+</html>

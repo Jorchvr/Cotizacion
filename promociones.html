@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="es" data-theme="light" data-layout="comodo" data-persona="admin">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pro Padel — Promociones</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{surface:'rgb(var(--surface) / <alpha-value>)',elevated:'rgb(var(--elevated) / <alpha-value>)',accent:'rgb(var(--accent) / <alpha-value>)',muted:'rgb(var(--muted) / <alpha-value>)',ink:'rgb(var(--ink) / <alpha-value>)',ink2:'rgb(var(--ink2) / <alpha-value>)'},fontFamily:{heading:['Manrope','system-ui','sans-serif'],body:['Inter','system-ui','sans-serif']},borderRadius:{proto:'var(--radius)'}}}};</script>
+  <link rel="stylesheet" href="css/styles.css" /><link rel="stylesheet" href="css/feedback.css" />
+  <style>body { font-family: 'Inter', system-ui, sans-serif; }
+  .promo-card { padding: 1.1rem; border: 1px solid rgb(var(--muted) / .25); border-radius: var(--radius); background: rgb(var(--elevated)); position: relative; }
+  .promo-code { font-family: ui-monospace, monospace; font-size: .82rem; background: rgb(var(--ink)); color: rgb(var(--surface)); padding: 3px 8px; border-radius: 4px; display: inline-block; }
+  </style>
+</head>
+<body class="bg-surface text-ink antialiased">
+<div class="app-shell">
+  <aside class="app-sidebar">
+    <div class="brand-row"><div class="brand-mark">PP</div><div><div class="brand-name text-white">Pro Padel</div><span class="brand-city">Polanco · CDMX</span></div></div>
+    <div class="nav-section-label">Operación</div>
+    <a href="dashboard.html" class="nav-link"><span class="nav-icon">📊</span>Tablero</a>
+    <a href="reservas.html" class="nav-link"><span class="nav-icon">📅</span>Reservas <span class="nav-badge">12</span></a>
+    <a href="cobros.html" class="nav-link"><span class="nav-icon">💳</span>Cobros</a>
+    <a href="clientes.html" class="nav-link"><span class="nav-icon">👥</span>Clientes</a>
+    <a href="pos.html" class="nav-link"><span class="nav-icon">🛒</span>Punto de venta</a>
+    <a href="caja.html" class="nav-link"><span class="nav-icon">💰</span>Caja</a>
+    <div class="nav-section-label">Comercial</div>
+    <a href="membresias.html" class="nav-link"><span class="nav-icon">🎫</span>Membresías</a>
+    <a href="promociones.html" class="nav-link active"><span class="nav-icon">🏷️</span>Promociones</a>
+    <a href="torneos.html" class="nav-link"><span class="nav-icon">🏆</span>Torneos y ligas</a>
+    <div class="nav-section-label">Gestión</div>
+    <a href="inventario.html" class="nav-link"><span class="nav-icon">📦</span>Inventario</a>
+    <a href="reportes.html" class="nav-link"><span class="nav-icon">📈</span>Reportes</a>
+    <a href="usuarios.html" class="nav-link" data-persona-show="admin"><span class="nav-icon">⚙️</span>Usuarios y permisos</a>
+    <div class="sidebar-user"><div class="avatar" data-persona-text="user.initials">RS</div>
+    <div class="sidebar-user-info"><strong data-persona-text="user.name">Roberto Salazar</strong><span data-persona-text="user.role">Administrador general</span></div></div>
+  </aside>
+
+  <div class="app-main">
+    <header class="topbar">
+      <button class="sidebar-mobile-btn" data-sidebar-toggle>☰</button>
+      <div><h1>Promociones y descuentos</h1><div class="breadcrumbs"><a href="dashboard.html">Tablero</a> / Promociones</div></div>
+      <button class="btn btn-primary btn-sm ml-auto" data-open-modal="nueva-promo">＋ Nueva promoción</button>
+    </header>
+
+    <main class="app-content">
+      <section class="grid gap-3 mb-4" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))">
+        <div class="card"><div class="kpi"><span class="kpi-label">Promociones activas</span><span class="kpi-value">14</span></div></div>
+        <div class="card"><div class="kpi"><span class="kpi-label">Cupones canjeados (mes)</span><span class="kpi-value">248</span></div></div>
+        <div class="card"><div class="kpi"><span class="kpi-label">Descuento aplicado</span><span class="kpi-value">$32,180</span></div></div>
+        <div class="card"><div class="kpi"><span class="kpi-label">Referidos activados</span><span class="kpi-value">42</span></div></div>
+      </section>
+
+      <h3 class="font-heading font-semibold mb-2">Promociones activas</h3>
+      <section class="grid gap-3 mb-6" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr))">
+        <div class="promo-card">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="chip is-accent">Cupón</div>
+              <h4 class="font-heading font-semibold mt-2">Verano 2026</h4>
+              <div class="text-sm text-ink2">−15 % en cancha entre semana</div>
+            </div>
+            <span class="chip is-success">Activa</span>
+          </div>
+          <div class="mt-3 flex items-center justify-between text-sm">
+            <span class="promo-code">VERANO26</span>
+            <span class="text-ink2">Hasta 31 ago</span>
+          </div>
+          <div class="mt-3 text-xs text-ink2">Usada 87 veces · $8,240 descuento</div>
+        </div>
+
+        <div class="promo-card">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="chip is-info">Por horario</div>
+              <h4 class="font-heading font-semibold mt-2">Hora feliz</h4>
+              <div class="text-sm text-ink2">−25 % de 11:00 a 13:00, lun–jue</div>
+            </div>
+            <span class="chip is-success">Activa</span>
+          </div>
+          <div class="mt-3 text-xs text-ink2">Automática · sin código · 132 aplicaciones</div>
+        </div>
+
+        <div class="promo-card">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="chip is-warning">Cumpleaños</div>
+              <h4 class="font-heading font-semibold mt-2">Regalo de cumpleaños</h4>
+              <div class="text-sm text-ink2">Cancha 2×1 y una copa gratis</div>
+            </div>
+            <span class="chip is-success">Activa</span>
+          </div>
+          <div class="mt-3 text-xs text-ink2">Automática · notificación 7 días antes</div>
+        </div>
+
+        <div class="promo-card">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="chip">Socios</div>
+              <h4 class="font-heading font-semibold mt-2">15 % socios Premium</h4>
+              <div class="text-sm text-ink2">Tienda y bar</div>
+            </div>
+            <span class="chip is-success">Activa</span>
+          </div>
+          <div class="mt-3 text-xs text-ink2">Automática por membresía · 218 aplicaciones/mes</div>
+        </div>
+
+        <div class="promo-card">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="chip is-accent">Referidos</div>
+              <h4 class="font-heading font-semibold mt-2">Trae a un amigo</h4>
+              <div class="text-sm text-ink2">$200 saldo para ti y $200 para el referido</div>
+            </div>
+            <span class="chip is-success">Activa</span>
+          </div>
+          <div class="mt-3 text-xs text-ink2">42 referidos activados · $16,800 en saldo</div>
+        </div>
+
+        <div class="promo-card">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="chip is-info">Paquete</div>
+              <h4 class="font-heading font-semibold mt-2">10 horas anticipadas</h4>
+              <div class="text-sm text-ink2">$4,800 (regular $5,500)</div>
+            </div>
+            <span class="chip is-success">Activa</span>
+          </div>
+          <div class="mt-3 text-xs text-ink2">28 paquetes vendidos · $134,400 ingreso</div>
+        </div>
+
+        <div class="promo-card">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="chip">Empleados</div>
+              <h4 class="font-heading font-semibold mt-2">30 % staff club</h4>
+              <div class="text-sm text-ink2">En canchas fuera de horario pico</div>
+            </div>
+            <span class="chip is-success">Activa</span>
+          </div>
+          <div class="mt-3 text-xs text-ink2">18 empleados · uso mensual limitado</div>
+        </div>
+
+        <div class="promo-card">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="chip is-danger">Vencida</div>
+              <h4 class="font-heading font-semibold mt-2">Aniversario club</h4>
+              <div class="text-sm text-ink2">−20 % en todo · 3 días</div>
+            </div>
+            <span class="chip">Cerrada</span>
+          </div>
+          <div class="mt-3 text-xs text-ink2">14–16 may 2026 · 512 aplicaciones · $48,120 desc.</div>
+        </div>
+      </section>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Historial de descuentos autorizados manualmente</div>
+          <div class="text-xs text-ink2">Cada descuento fuera de promoción requiere autorización de gerente</div>
+        </div>
+        <div class="proto-table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Fecha</th><th>Cliente</th><th>Concepto</th><th class="num">Original</th><th class="num">Descuento</th><th class="num">Final</th><th>Autoriza</th></tr></thead>
+            <tbody>
+              <tr><td>26 jul 15:12</td><td>Corp. Bimbo</td><td>Paquete 4 canchas (cliente VIP)</td><td class="num">$5,400</td><td class="num" style="color: rgb(var(--danger))">−$600</td><td class="num">$4,800</td><td>Mariana O.</td></tr>
+              <tr><td>26 jul 14:20</td><td>N. Herrera</td><td>Cortesía por queja</td><td class="num">$450</td><td class="num" style="color: rgb(var(--danger))">−$450</td><td class="num">$0</td><td>Roberto S.</td></tr>
+              <tr><td>25 jul 20:14</td><td>F. Torres</td><td>Ajuste torneo</td><td class="num">$900</td><td class="num" style="color: rgb(var(--danger))">−$100</td><td class="num">$800</td><td>Mariana O.</td></tr>
+              <tr><td>24 jul 17:48</td><td>K. Ochoa</td><td>Descuento cortesía inauguración</td><td class="num">$600</td><td class="num" style="color: rgb(var(--danger))">−$150</td><td class="num">$450</td><td>Roberto S.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<div data-modal="nueva-promo" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-panel">
+    <div class="modal-header"><h3>Crear promoción</h3><button class="modal-close" data-close-modal>×</button></div>
+    <div class="modal-body">
+      <div class="grid grid-cols-2 gap-3">
+        <div class="field"><label>Nombre</label><input placeholder="Ej. Vuelta al cole" /></div>
+        <div class="field"><label>Tipo</label><select><option>Cupón</option><option>Descuento por horario</option><option>Descuento por membresía</option><option>Cumpleaños</option><option>Paquete</option><option>Referidos</option></select></div>
+        <div class="field"><label>Código (opcional)</label><input placeholder="VUELTA26" /></div>
+        <div class="field"><label>Valor del descuento</label><input placeholder="15% o $150" /></div>
+        <div class="field"><label>Aplicable a</label><select><option>Todo</option><option>Solo canchas</option><option>Solo tienda</option><option>Solo bar</option></select></div>
+        <div class="field"><label>Vigencia</label><input type="date" /></div>
+        <div class="field col-span-2"><label>Restricciones</label><textarea rows="2" placeholder="Ej. no combinable con otras promos, máximo 1 uso por cliente…"></textarea></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" data-close-modal>Cancelar</button>
+      <button class="btn btn-primary" data-close-modal data-toast="Promoción creada">Crear</button>
+    </div>
+  </div>
+</div>
+
+<div id="proto-controls">
+  <div class="proto-bar">
+    <div class="proto-bar-section"><span class="proto-bar-label">Tema</span><div class="proto-seg-group">
+      <button class="proto-seg" data-theme-option="light" aria-pressed="true">Claro</button>
+      <button class="proto-seg" data-theme-option="dark" aria-pressed="false">Oscuro</button></div></div>
+    <div class="proto-bar-section"><span class="proto-bar-label">Densidad</span><div class="proto-seg-group">
+      <button class="proto-seg" data-layout-option="comodo" aria-pressed="true">Cómodo</button>
+      <button class="proto-seg" data-layout-option="compacto" aria-pressed="false">Compacto</button></div></div>
+    <div class="proto-bar-section"><span class="proto-bar-label">Rol</span><div class="proto-seg-group">
+      <button class="proto-seg" data-persona-option="admin" aria-pressed="true">Admin</button>
+      <button class="proto-seg" data-persona-option="gerente" aria-pressed="false">Gerente</button>
+      <button class="proto-seg" data-persona-option="recepcion" aria-pressed="false">Recepción</button></div></div>
+    <div class="proto-bar-section">
+      <button class="proto-seg" data-share>🔗 Compartir</button>
+      <button class="proto-seg" data-feedback-toggle>💬 Comentar</button>
+    </div>
+  </div>
+  <p class="proto-hint">Shift + ? · pantallas recientes</p>
+</div>
+
+<script src="js/state.js"></script><script src="js/theme.js"></script><script src="js/layout.js"></script>
+<script src="js/data.js"></script><script src="js/persona.js"></script><script src="js/ui.js"></script>
+<script src="js/app.js"></script><script src="js/feedback.js"></script>
+</body>
+</html>

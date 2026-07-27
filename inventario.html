@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="es" data-theme="light" data-layout="comodo" data-persona="admin">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pro Padel — Inventario</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{surface:'rgb(var(--surface) / <alpha-value>)',elevated:'rgb(var(--elevated) / <alpha-value>)',accent:'rgb(var(--accent) / <alpha-value>)',muted:'rgb(var(--muted) / <alpha-value>)',ink:'rgb(var(--ink) / <alpha-value>)',ink2:'rgb(var(--ink2) / <alpha-value>)'},fontFamily:{heading:['Manrope','system-ui','sans-serif'],body:['Inter','system-ui','sans-serif']},borderRadius:{proto:'var(--radius)'}}}};</script>
+  <link rel="stylesheet" href="css/styles.css" /><link rel="stylesheet" href="css/feedback.css" />
+  <style>body { font-family: 'Inter', system-ui, sans-serif; }</style>
+</head>
+<body class="bg-surface text-ink antialiased">
+<div class="app-shell">
+  <aside class="app-sidebar">
+    <div class="brand-row"><div class="brand-mark">PP</div><div><div class="brand-name text-white">Pro Padel</div><span class="brand-city">Polanco · CDMX</span></div></div>
+    <div class="nav-section-label">Operación</div>
+    <a href="dashboard.html" class="nav-link"><span class="nav-icon">📊</span>Tablero</a>
+    <a href="reservas.html" class="nav-link"><span class="nav-icon">📅</span>Reservas <span class="nav-badge">12</span></a>
+    <a href="cobros.html" class="nav-link"><span class="nav-icon">💳</span>Cobros</a>
+    <a href="clientes.html" class="nav-link"><span class="nav-icon">👥</span>Clientes</a>
+    <a href="pos.html" class="nav-link"><span class="nav-icon">🛒</span>Punto de venta</a>
+    <a href="caja.html" class="nav-link"><span class="nav-icon">💰</span>Caja</a>
+    <div class="nav-section-label">Comercial</div>
+    <a href="membresias.html" class="nav-link"><span class="nav-icon">🎫</span>Membresías</a>
+    <a href="promociones.html" class="nav-link"><span class="nav-icon">🏷️</span>Promociones</a>
+    <a href="torneos.html" class="nav-link"><span class="nav-icon">🏆</span>Torneos y ligas</a>
+    <div class="nav-section-label">Gestión</div>
+    <a href="inventario.html" class="nav-link active"><span class="nav-icon">📦</span>Inventario</a>
+    <a href="reportes.html" class="nav-link"><span class="nav-icon">📈</span>Reportes</a>
+    <a href="usuarios.html" class="nav-link" data-persona-show="admin"><span class="nav-icon">⚙️</span>Usuarios y permisos</a>
+    <div class="sidebar-user"><div class="avatar" data-persona-text="user.initials">RS</div>
+    <div class="sidebar-user-info"><strong data-persona-text="user.name">Roberto Salazar</strong><span data-persona-text="user.role">Administrador general</span></div></div>
+  </aside>
+
+  <div class="app-main">
+    <header class="topbar">
+      <button class="sidebar-mobile-btn" data-sidebar-toggle>☰</button>
+      <div><h1>Inventario</h1><div class="breadcrumbs"><a href="dashboard.html">Tablero</a> / Inventario</div></div>
+      <div class="topbar-search"><span>🔎</span><input type="text" placeholder="Producto, código, proveedor…" /></div>
+      <button class="btn btn-secondary btn-sm" data-open-modal="movimiento">＋ Movimiento</button>
+      <button class="btn btn-primary btn-sm" data-open-modal="entrada">＋ Entrada mercancía</button>
+    </header>
+
+    <main class="app-content">
+      <section class="grid gap-3 mb-4" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))">
+        <div class="card"><div class="kpi"><span class="kpi-label">Productos activos</span><span class="kpi-value">148</span></div></div>
+        <div class="card"><div class="kpi"><span class="kpi-label">Valor de inventario</span><span class="kpi-value">$487,340</span><span class="kpi-delta">al costo</span></div></div>
+        <div class="card"><div class="kpi"><span class="kpi-label">Stock bajo</span><span class="kpi-value" style="color: rgb(var(--danger))">7</span><span class="kpi-delta">requieren reorden</span></div></div>
+        <div class="card"><div class="kpi"><span class="kpi-label">Caducidades próximas</span><span class="kpi-value" style="color: rgb(var(--warning))">4</span><span class="kpi-delta">próximos 30 días</span></div></div>
+      </section>
+
+      <div class="tabs">
+        <button data-tab="stock" aria-selected="true">Existencias · 148</button>
+        <button data-tab="movs" aria-selected="false">Movimientos</button>
+        <button data-tab="alertas" aria-selected="false">Alertas · 11</button>
+        <button data-tab="fisico" aria-selected="false">Inventario físico</button>
+        <button data-tab="proveedores" aria-selected="false">Proveedores</button>
+      </div>
+
+      <div class="card">
+        <div data-tab-panel="stock">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Existencias por producto</div>
+              <div class="card-sub">Almacén principal · última actualización 17:14</div>
+            </div>
+            <div class="proto-actions">
+              <button class="btn btn-ghost btn-sm">Filtros</button>
+              <button class="btn btn-ghost btn-sm">Exportar</button>
+            </div>
+          </div>
+          <div class="proto-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr><th>Código</th><th>Producto</th><th>Categoría</th><th>Proveedor</th><th class="num">Costo</th><th class="num">P. venta</th><th class="num">Margen</th><th class="num">Existencia</th><th>Ubicación</th><th>Estado</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>PEL-HED-01</td><td>Bote pelotas Head Pro (3)</td><td>Deportivos</td><td>Head México</td><td class="num">$142.00</td><td class="num">$220.00</td><td class="num">35%</td><td class="num" style="color: rgb(var(--danger))">8</td><td>Almacén A · Estante 3</td><td><span class="chip is-danger">Stock bajo</span></td></tr>
+                <tr><td>PEL-WLS-01</td><td>Bote pelotas Wilson X2 (3)</td><td>Deportivos</td><td>Wilson Latam</td><td class="num">$115.00</td><td class="num">$180.00</td><td class="num">36%</td><td class="num">24</td><td>Almacén A · Estante 3</td><td><span class="chip is-success">OK</span></td></tr>
+                <tr><td>PAL-HED-24</td><td>Pala Head Delta Pro 2024</td><td>Deportivos</td><td>Head México</td><td class="num">$3,120.00</td><td class="num">$4,890.00</td><td class="num">36%</td><td class="num">3</td><td>Vitrina · Recepción</td><td><span class="chip is-success">OK</span></td></tr>
+                <tr><td>PAL-BLL-03</td><td>Pala Bullpadel Vertex 03</td><td>Deportivos</td><td>Bullpadel Iberia</td><td class="num">$3,450.00</td><td class="num">$5,290.00</td><td class="num">35%</td><td class="num" style="color: rgb(var(--warning))">2</td><td>Vitrina · Recepción</td><td><span class="chip is-warning">Bajo</span></td></tr>
+                <tr><td>OVR-WLS-P3</td><td>Overgrip Wilson Pro (3)</td><td>Accesorios</td><td>Wilson Latam</td><td class="num">$92.00</td><td class="num">$180.00</td><td class="num">49%</td><td class="num">46</td><td>Almacén A · Cajón 2</td><td><span class="chip is-success">OK</span></td></tr>
+                <tr><td>PLR-CLB-M</td><td>Playera oficial talla M</td><td>Ropa</td><td>Textiles del Sur</td><td class="num">$180.00</td><td class="num">$350.00</td><td class="num">49%</td><td class="num">28</td><td>Almacén B · Estante 1</td><td><span class="chip is-success">OK</span></td></tr>
+                <tr><td>PLR-CLB-XL</td><td>Playera oficial talla XL</td><td>Ropa</td><td>Textiles del Sur</td><td class="num">$180.00</td><td class="num">$350.00</td><td class="num">49%</td><td class="num" style="color: rgb(var(--danger))">4</td><td>Almacén B · Estante 1</td><td><span class="chip is-danger">Stock bajo</span></td></tr>
+                <tr><td>BEB-GTR-N</td><td>Gatorade 600 ml Naranja</td><td>Bebidas</td><td>Pepsico MX</td><td class="num">$28.00</td><td class="num">$45.00</td><td class="num">38%</td><td class="num">42</td><td>Bar · Refrigerador</td><td><span class="chip is-warning">Vence 21d</span></td></tr>
+                <tr><td>BEB-COR-355</td><td>Corona 355 ml</td><td>Bebidas</td><td>Modelo MX</td><td class="num">$32.00</td><td class="num">$65.00</td><td class="num">51%</td><td class="num">60</td><td>Bar · Refrigerador</td><td><span class="chip is-success">OK</span></td></tr>
+                <tr><td>BEB-CIL-1L</td><td>Agua Ciel 1 L</td><td>Bebidas</td><td>Coca-Cola MX</td><td class="num">$12.00</td><td class="num">$25.00</td><td class="num">52%</td><td class="num">88</td><td>Bar · Estante</td><td><span class="chip is-success">OK</span></td></tr>
+                <tr><td>SNK-RXB-01</td><td>Barra RXBar (12 pzs)</td><td>Snacks</td><td>Nutrimex</td><td class="num">$35.00</td><td class="num">$70.00</td><td class="num">50%</td><td class="num">30</td><td>Bar · Estante</td><td><span class="chip is-success">OK</span></td></tr>
+                <tr><td>CAL-ASC-08</td><td>Calzado Asics Gel Padel T.8</td><td>Calzado</td><td>Asics MX</td><td class="num">$2,110.00</td><td class="num">$3,290.00</td><td class="num">36%</td><td class="num">5</td><td>Vitrina · Recepción</td><td><span class="chip is-success">OK</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div data-tab-panel="movs" hidden>
+          <div class="proto-table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Fecha</th><th>Tipo</th><th>Producto</th><th class="num">Cantidad</th><th>Motivo</th><th>Usuario</th></tr></thead>
+              <tbody>
+                <tr><td>26 jul 17:24</td><td><span class="chip is-danger">Salida</span></td><td>Bote pelotas Head Pro</td><td class="num">−1</td><td>Venta POS #742</td><td>Diego R.</td></tr>
+                <tr><td>26 jul 16:52</td><td><span class="chip is-danger">Salida</span></td><td>Corona 355 ml</td><td class="num">−4</td><td>Venta POS #741</td><td>Diego R.</td></tr>
+                <tr><td>26 jul 14:00</td><td><span class="chip is-info">Ajuste</span></td><td>Playera oficial XL</td><td class="num">−2</td><td>Merma · daño en almacén</td><td>Mariana O.</td></tr>
+                <tr><td>26 jul 10:15</td><td><span class="chip is-success">Entrada</span></td><td>Bote pelotas Wilson X2</td><td class="num">+24</td><td>Compra proveedor · OC-0089</td><td>Roberto S.</td></tr>
+                <tr><td>25 jul 18:44</td><td><span class="chip is-warning">Cortesía</span></td><td>Overgrip Wilson Pro</td><td class="num">−3</td><td>Regalo VIP · autorizada</td><td>Mariana O.</td></tr>
+                <tr><td>25 jul 12:20</td><td><span class="chip is-info">Consumo interno</span></td><td>Agua Ciel 1 L</td><td class="num">−12</td><td>Torneo interno personal</td><td>Roberto S.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div data-tab-panel="alertas" hidden>
+          <ul style="display: grid; gap: .5rem">
+            <li class="p-3 rounded flex items-start gap-3" style="background: rgb(var(--danger) / .08)">
+              <span class="dot is-danger mt-1.5"></span>
+              <div class="flex-1">
+                <div class="font-medium">Bote pelotas Head Pro — stock bajo</div>
+                <div class="text-xs text-ink2">Quedan 8, mínimo 20. Sugerencia: reordenar 40 unidades.</div>
+              </div>
+              <button class="btn btn-primary btn-sm">Crear orden</button>
+            </li>
+            <li class="p-3 rounded flex items-start gap-3" style="background: rgb(var(--danger) / .08)">
+              <span class="dot is-danger mt-1.5"></span>
+              <div class="flex-1"><div class="font-medium">Playera oficial XL — stock bajo</div><div class="text-xs text-ink2">Quedan 4, mínimo 10.</div></div>
+              <button class="btn btn-primary btn-sm">Crear orden</button>
+            </li>
+            <li class="p-3 rounded flex items-start gap-3" style="background: rgb(var(--warning) / .1)">
+              <span class="dot is-warning mt-1.5"></span>
+              <div class="flex-1"><div class="font-medium">Gatorade Naranja — caducidad próxima</div><div class="text-xs text-ink2">12 unidades vencen el 16 ago. Sugerencia: promoción 2×1.</div></div>
+              <button class="btn btn-secondary btn-sm">Ver</button>
+            </li>
+            <li class="p-3 rounded flex items-start gap-3" style="background: rgb(var(--warning) / .1)">
+              <span class="dot is-warning mt-1.5"></span>
+              <div class="flex-1"><div class="font-medium">Pala Bullpadel Vertex 03 — solo 2 en existencia</div><div class="text-xs text-ink2">Sin ventas en 45 días. Sugerencia: descuento.</div></div>
+              <button class="btn btn-secondary btn-sm">Ver</button>
+            </li>
+            <li class="p-3 rounded flex items-start gap-3" style="background: rgb(var(--info) / .08)">
+              <span class="dot is-info mt-1.5"></span>
+              <div class="flex-1"><div class="font-medium">Producto sin movimiento: Gorra club</div><div class="text-xs text-ink2">0 ventas en 90 días. Existencia: 15.</div></div>
+              <button class="btn btn-ghost btn-sm">Ignorar</button>
+            </li>
+          </ul>
+        </div>
+
+        <div data-tab-panel="fisico" hidden>
+          <div class="empty-state">
+            <h3>Sin toma de inventario activa</h3>
+            <p>Última toma completada el 15 de julio de 2026. Diferencia: <strong>−$1,240 MXN</strong> (0.25 % del valor total).</p>
+            <div class="actions">
+              <button class="btn btn-primary" data-toast="Iniciando toma de inventario…">Iniciar toma física</button>
+              <button class="btn btn-secondary">Ver historial</button>
+            </div>
+          </div>
+        </div>
+
+        <div data-tab-panel="proveedores" hidden>
+          <div class="proto-table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Proveedor</th><th>Contacto</th><th>Categorías</th><th class="num">Órdenes YTD</th><th class="num">Total compras</th><th>Último pedido</th></tr></thead>
+              <tbody>
+                <tr><td>Head México</td><td>Carlos Muñoz · 55 55880123</td><td>Palas, Pelotas</td><td class="num">14</td><td class="num">$186,400</td><td>18 jul 2026</td></tr>
+                <tr><td>Wilson Latam</td><td>Diana Rojas · 55 55880045</td><td>Palas, Overgrips</td><td class="num">9</td><td class="num">$92,100</td><td>10 jul 2026</td></tr>
+                <tr><td>Modelo MX</td><td>Ventas mayoreo · 800 200 3300</td><td>Bebidas</td><td class="num">21</td><td class="num">$54,320</td><td>22 jul 2026</td></tr>
+                <tr><td>Nutrimex</td><td>Alejandro Prieto · 55 22019874</td><td>Snacks</td><td class="num">6</td><td class="num">$18,900</td><td>05 jul 2026</td></tr>
+                <tr><td>Textiles del Sur</td><td>Josefina Cruz · 55 34412873</td><td>Ropa</td><td class="num">4</td><td class="num">$62,800</td><td>28 jun 2026</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<div data-modal="entrada" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-panel">
+    <div class="modal-header"><h3>Registrar entrada de mercancía</h3><button class="modal-close" data-close-modal>×</button></div>
+    <div class="modal-body">
+      <div class="grid grid-cols-2 gap-3">
+        <div class="field"><label>Proveedor</label><select><option>Head México</option><option>Wilson Latam</option></select></div>
+        <div class="field"><label>Nº orden compra</label><input value="OC-2026-0090" /></div>
+        <div class="field col-span-2"><label>Producto</label><input placeholder="Buscar producto…" value="Bote pelotas Head Pro" /></div>
+        <div class="field"><label>Cantidad</label><input value="40" /></div>
+        <div class="field"><label>Costo unitario</label><input value="$142.00" /></div>
+        <div class="field"><label>Fecha entrada</label><input type="date" value="2026-07-26" /></div>
+        <div class="field"><label>Caducidad (si aplica)</label><input type="date" /></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" data-close-modal>Cancelar</button>
+      <button class="btn btn-primary" data-close-modal data-toast="Entrada registrada · 40 pzs" data-loading="Guardando…">Registrar entrada</button>
+    </div>
+  </div>
+</div>
+
+<div data-modal="movimiento" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-panel">
+    <div class="modal-header"><h3>Registrar movimiento</h3><button class="modal-close" data-close-modal>×</button></div>
+    <div class="modal-body">
+      <div class="field"><label>Tipo</label><select><option>Merma</option><option>Consumo interno</option><option>Cortesía</option><option>Ajuste</option></select></div>
+      <div class="field"><label>Producto</label><input placeholder="Buscar…" /></div>
+      <div class="grid grid-cols-2 gap-3">
+        <div class="field"><label>Cantidad</label><input value="1" /></div>
+        <div class="field"><label>Motivo</label><input /></div>
+      </div>
+      <div class="chip is-warning">Movimientos negativos requieren autorización de gerente</div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" data-close-modal>Cancelar</button>
+      <button class="btn btn-primary" data-close-modal data-toast="Movimiento registrado">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<div id="proto-controls">
+  <div class="proto-bar">
+    <div class="proto-bar-section"><span class="proto-bar-label">Tema</span><div class="proto-seg-group">
+      <button class="proto-seg" data-theme-option="light" aria-pressed="true">Claro</button>
+      <button class="proto-seg" data-theme-option="dark" aria-pressed="false">Oscuro</button></div></div>
+    <div class="proto-bar-section"><span class="proto-bar-label">Densidad</span><div class="proto-seg-group">
+      <button class="proto-seg" data-layout-option="comodo" aria-pressed="true">Cómodo</button>
+      <button class="proto-seg" data-layout-option="compacto" aria-pressed="false">Compacto</button></div></div>
+    <div class="proto-bar-section"><span class="proto-bar-label">Rol</span><div class="proto-seg-group">
+      <button class="proto-seg" data-persona-option="admin" aria-pressed="true">Admin</button>
+      <button class="proto-seg" data-persona-option="gerente" aria-pressed="false">Gerente</button>
+      <button class="proto-seg" data-persona-option="recepcion" aria-pressed="false">Recepción</button></div></div>
+    <div class="proto-bar-section">
+      <button class="proto-seg" data-share>🔗 Compartir</button>
+      <button class="proto-seg" data-feedback-toggle>💬 Comentar</button>
+    </div>
+  </div>
+  <p class="proto-hint">Shift + ? · pantallas recientes</p>
+</div>
+
+<script src="js/state.js"></script><script src="js/theme.js"></script><script src="js/layout.js"></script>
+<script src="js/data.js"></script><script src="js/persona.js"></script><script src="js/ui.js"></script>
+<script src="js/app.js"></script><script src="js/feedback.js"></script>
+</body>
+</html>

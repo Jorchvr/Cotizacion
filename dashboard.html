@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="es" data-theme="light" data-layout="comodo" data-persona="admin">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pro Padel — Tablero de control</title>
+  <meta name="description" content="Tablero con KPIs deportivos, comerciales y financieros del club." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: {
+        surface:  'rgb(var(--surface)  / <alpha-value>)',
+        elevated: 'rgb(var(--elevated) / <alpha-value>)',
+        accent:   'rgb(var(--accent)   / <alpha-value>)',
+        muted:    'rgb(var(--muted)    / <alpha-value>)',
+        ink:      'rgb(var(--ink)      / <alpha-value>)',
+        ink2:     'rgb(var(--ink2)     / <alpha-value>)',
+      },
+      fontFamily: {
+        heading: ['Manrope','system-ui','sans-serif'],
+        body:    ['Inter','system-ui','sans-serif'],
+      },
+      borderRadius: { proto: 'var(--radius)' },
+    }}};
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/feedback.css" />
+  <style>body { font-family: 'Inter', system-ui, sans-serif; }</style>
+</head>
+<body class="bg-surface text-ink antialiased">
+
+<div class="app-shell">
+  <!-- SIDEBAR -->
+  <aside class="app-sidebar">
+    <div class="brand-row">
+      <div class="brand-mark">PP</div>
+      <div>
+        <div class="brand-name text-white">Pro Padel</div>
+        <span class="brand-city">Polanco · CDMX</span>
+      </div>
+    </div>
+
+    <div class="nav-section-label">Operación</div>
+    <a href="dashboard.html"   class="nav-link active"><span class="nav-icon">📊</span>Tablero</a>
+    <a href="reservas.html"    class="nav-link"><span class="nav-icon">📅</span>Reservas <span class="nav-badge">12</span></a>
+    <a href="cobros.html"      class="nav-link"><span class="nav-icon">💳</span>Cobros</a>
+    <a href="clientes.html"    class="nav-link"><span class="nav-icon">👥</span>Clientes</a>
+    <a href="pos.html"         class="nav-link"><span class="nav-icon">🛒</span>Punto de venta</a>
+    <a href="caja.html"        class="nav-link"><span class="nav-icon">💰</span>Caja</a>
+
+    <div class="nav-section-label">Comercial</div>
+    <a href="membresias.html"  class="nav-link"><span class="nav-icon">🎫</span>Membresías</a>
+    <a href="promociones.html" class="nav-link"><span class="nav-icon">🏷️</span>Promociones</a>
+    <a href="torneos.html"     class="nav-link"><span class="nav-icon">🏆</span>Torneos y ligas</a>
+
+    <div class="nav-section-label">Gestión</div>
+    <a href="inventario.html"  class="nav-link"><span class="nav-icon">📦</span>Inventario</a>
+    <a href="reportes.html"    class="nav-link"><span class="nav-icon">📈</span>Reportes</a>
+    <a href="usuarios.html"    class="nav-link" data-persona-show="admin"><span class="nav-icon">⚙️</span>Usuarios y permisos</a>
+
+    <div class="sidebar-user">
+      <div class="avatar" data-persona-text="user.initials">RS</div>
+      <div class="sidebar-user-info">
+        <strong data-persona-text="user.name">Roberto Salazar</strong>
+        <span data-persona-text="user.role">Administrador general</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="app-main">
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <button class="sidebar-mobile-btn" data-sidebar-toggle aria-label="Abrir menú">☰</button>
+      <div>
+        <h1>Tablero de control</h1>
+        <div class="breadcrumbs">Hoy · <span id="today-str">viernes 26 de julio, 2026</span></div>
+      </div>
+      <div class="topbar-search">
+        <span>🔎</span>
+        <input type="text" placeholder="Buscar cliente, folio, producto…" />
+      </div>
+      <button class="icon-btn" title="Notificaciones" data-toast="3 nuevas notificaciones">🔔</button>
+      <button class="icon-btn" title="Ayuda" data-toast="Centro de ayuda">?</button>
+      <a href="index.html" class="btn btn-ghost btn-sm" data-toast="Sesión cerrada">Salir</a>
+    </header>
+
+    <main class="app-content">
+      <!-- KPIs -->
+      <section class="grid gap-3 mb-4"
+               style="grid-template-columns: repeat(auto-fit, minmax(210px, 1fr))">
+        <div class="card">
+          <div class="kpi">
+            <span class="kpi-label">Ingresos del día</span>
+            <span class="kpi-value">$28,540</span>
+            <span class="kpi-delta up">▲ 12.4 % vs ayer</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="kpi">
+            <span class="kpi-label">Ocupación</span>
+            <span class="kpi-value">78 %</span>
+            <div class="progress" style="margin-top: .35rem"><span style="width: 78%"></span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="kpi">
+            <span class="kpi-label">Reservas activas</span>
+            <span class="kpi-value">42</span>
+            <span class="kpi-delta up">▲ 6 más que ayer</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="kpi">
+            <span class="kpi-label">Ticket promedio</span>
+            <span class="kpi-value">$487</span>
+            <span class="kpi-delta down">▼ 3.1 %</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="kpi">
+            <span class="kpi-label">Clientes nuevos</span>
+            <span class="kpi-value">7</span>
+            <span class="kpi-delta up">▲ 2 esta semana</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="kpi">
+            <span class="kpi-label">No-shows</span>
+            <span class="kpi-value">3</span>
+            <span class="kpi-delta down">▼ 1 vs ayer</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ROW 2 -->
+      <section class="grid gap-3 mb-4" style="grid-template-columns: 2fr 1fr;">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Ingresos por área</div>
+              <div class="card-sub">Últimos 7 días · en pesos</div>
+            </div>
+            <div class="proto-actions">
+              <button class="btn btn-ghost btn-sm">7 días</button>
+              <button class="btn btn-secondary btn-sm">30 días</button>
+              <button class="btn btn-ghost btn-sm">90 días</button>
+            </div>
+          </div>
+          <div class="mini-chart"></div>
+          <div class="grid grid-cols-2 md:grid-cols-5 gap-2 mt-4 text-sm">
+            <div><div class="text-xs text-ink2">Canchas</div><div class="font-semibold">$92,340</div></div>
+            <div><div class="text-xs text-ink2">Clases</div><div class="font-semibold">$34,800</div></div>
+            <div><div class="text-xs text-ink2">Membresías</div><div class="font-semibold">$58,200</div></div>
+            <div><div class="text-xs text-ink2">Tienda</div><div class="font-semibold">$21,650</div></div>
+            <div><div class="text-xs text-ink2">Bar</div><div class="font-semibold">$18,940</div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Membresías por vencer</div>
+            <a href="membresias.html" class="text-accent text-sm">Ver todas</a>
+          </div>
+          <ul class="text-sm" style="display: grid; gap: .55rem;">
+            <li class="flex items-center justify-between">
+              <div>
+                <div class="font-medium">Andrea Villalobos</div>
+                <div class="text-xs text-ink2">Premium mensual</div>
+              </div>
+              <span class="chip is-warning">Vence en 3 días</span>
+            </li>
+            <li class="flex items-center justify-between">
+              <div>
+                <div class="font-medium">Emilio Corcuera</div>
+                <div class="text-xs text-ink2">Familiar 12 meses</div>
+              </div>
+              <span class="chip is-warning">Vence en 7 días</span>
+            </li>
+            <li class="flex items-center justify-between">
+              <div>
+                <div class="font-medium">Laura Zambrano</div>
+                <div class="text-xs text-ink2">Básica mensual</div>
+              </div>
+              <span class="chip is-danger">Vencida ayer</span>
+            </li>
+            <li class="flex items-center justify-between">
+              <div>
+                <div class="font-medium">Rodrigo Fuentes</div>
+                <div class="text-xs text-ink2">Corporativa</div>
+              </div>
+              <span class="chip is-warning">Vence en 12 días</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ROW 3 -->
+      <section class="grid gap-3 mb-4" style="grid-template-columns: 1.5fr 1fr;">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Ocupación por cancha (hoy)</div>
+            <div class="text-xs text-ink2">Total: 6 canchas · 88 horas operativas</div>
+          </div>
+          <div class="proto-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Cancha</th>
+                  <th>Ocupada</th>
+                  <th class="num">Horas</th>
+                  <th class="num">Ingresos</th>
+                  <th class="num">Ticket avg</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Cancha 1 (Panorámica)</td>
+                  <td><div class="progress" style="width: 140px"><span style="width: 92%"></span></div></td>
+                  <td class="num">13.5</td>
+                  <td class="num">$8,100</td>
+                  <td class="num">$600</td>
+                </tr>
+                <tr>
+                  <td>Cancha 2 (Panorámica)</td>
+                  <td><div class="progress" style="width: 140px"><span style="width: 84%"></span></div></td>
+                  <td class="num">12.0</td>
+                  <td class="num">$7,200</td>
+                  <td class="num">$600</td>
+                </tr>
+                <tr>
+                  <td>Cancha 3 (Cristal)</td>
+                  <td><div class="progress" style="width: 140px"><span style="width: 71%"></span></div></td>
+                  <td class="num">10.5</td>
+                  <td class="num">$5,775</td>
+                  <td class="num">$550</td>
+                </tr>
+                <tr>
+                  <td>Cancha 4 (Cristal)</td>
+                  <td><div class="progress" style="width: 140px"><span style="width: 78%"></span></div></td>
+                  <td class="num">11.5</td>
+                  <td class="num">$6,325</td>
+                  <td class="num">$550</td>
+                </tr>
+                <tr>
+                  <td>Cancha 5 (Muro)</td>
+                  <td><div class="progress" style="width: 140px"><span style="width: 58%"></span></div></td>
+                  <td class="num">8.0</td>
+                  <td class="num">$3,600</td>
+                  <td class="num">$450</td>
+                </tr>
+                <tr>
+                  <td>Cancha 6 (Muro)</td>
+                  <td><div class="progress" style="width: 140px"><span style="width: 66%"></span></div></td>
+                  <td class="num">9.5</td>
+                  <td class="num">$4,275</td>
+                  <td class="num">$450</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Alertas activas</div>
+            <span class="chip is-danger">4</span>
+          </div>
+          <ul style="display: grid; gap: .6rem; font-size: .85rem;">
+            <li class="flex gap-2 items-start">
+              <span class="dot is-danger mt-1.5"></span>
+              <div>
+                <div class="font-medium">Stock bajo: Pelotas Head Pro</div>
+                <div class="text-xs text-ink2">Quedan 8 · mínimo 20 · almacén principal</div>
+              </div>
+            </li>
+            <li class="flex gap-2 items-start">
+              <span class="dot is-warning mt-1.5"></span>
+              <div>
+                <div class="font-medium">Caducidad próxima: Gatorade Naranja</div>
+                <div class="text-xs text-ink2">12 unidades vencen en 21 días</div>
+              </div>
+            </li>
+            <li class="flex gap-2 items-start">
+              <span class="dot is-warning mt-1.5"></span>
+              <div>
+                <div class="font-medium">Diferencia en corte de caja</div>
+                <div class="text-xs text-ink2">Turno vespertino ayer · $ -85 pesos</div>
+              </div>
+            </li>
+            <li class="flex gap-2 items-start">
+              <span class="dot is-info mt-1.5"></span>
+              <div>
+                <div class="font-medium">Torneo cerrado a inscripciones</div>
+                <div class="text-xs text-ink2">Cuadrangular 2ª Categoría · empieza sábado</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ROW 4 -->
+      <section class="grid gap-3" style="grid-template-columns: 1fr 1fr 1fr;">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Movimientos recientes</div>
+            <a href="cobros.html" class="text-accent text-sm">Ver todo</a>
+          </div>
+          <ul class="text-sm" style="display: grid; gap: .5rem;">
+            <li class="flex justify-between"><span>Cancha 1 · 14:00 · S. Márquez</span><strong>$600</strong></li>
+            <li class="flex justify-between"><span>Membresía Premium · A. Villalobos</span><strong>$1,850</strong></li>
+            <li class="flex justify-between"><span>POS · Pelota Head + Gatorade</span><strong>$385</strong></li>
+            <li class="flex justify-between"><span>Cancha 4 · 16:00 · Pareja Corcuera</span><strong>$550</strong></li>
+            <li class="flex justify-between"><span>Clase técnica · Coach López</span><strong>$450</strong></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Horarios pico</div>
+            <div class="text-xs text-ink2">Últimos 30 días</div>
+          </div>
+          <ul class="text-sm" style="display: grid; gap: .55rem;">
+            <li><div class="flex justify-between"><span>19:00 – 21:00</span><strong>96 %</strong></div><div class="progress"><span style="width: 96%"></span></div></li>
+            <li><div class="flex justify-between"><span>07:00 – 09:00</span><strong>84 %</strong></div><div class="progress"><span style="width: 84%"></span></div></li>
+            <li><div class="flex justify-between"><span>17:00 – 19:00</span><strong>71 %</strong></div><div class="progress"><span style="width: 71%"></span></div></li>
+            <li><div class="flex justify-between"><span>13:00 – 15:00</span><strong>34 %</strong></div><div class="progress"><span style="width: 34%"></span></div></li>
+            <li><div class="flex justify-between"><span>11:00 – 13:00</span><strong>22 %</strong></div><div class="progress"><span style="width: 22%"></span></div></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Entrenadores del día</div>
+            <a href="reservas.html" class="text-accent text-sm">Ver clases</a>
+          </div>
+          <ul class="text-sm" style="display: grid; gap: .55rem;">
+            <li class="flex justify-between items-center">
+              <div class="flex gap-2 items-center">
+                <div class="avatar" style="background: rgb(var(--info))">FL</div>
+                <div><div class="font-medium">Fernando López</div><div class="text-xs text-ink2">6 clases · 4 alumnos</div></div>
+              </div>
+              <span class="chip is-success">En cancha</span>
+            </li>
+            <li class="flex justify-between items-center">
+              <div class="flex gap-2 items-center">
+                <div class="avatar" style="background: rgb(var(--warning))">JM</div>
+                <div><div class="font-medium">Julieta Márquez</div><div class="text-xs text-ink2">4 clases · 6 alumnos</div></div>
+              </div>
+              <span class="chip">En descanso</span>
+            </li>
+            <li class="flex justify-between items-center">
+              <div class="flex gap-2 items-center">
+                <div class="avatar" style="background: rgb(var(--danger))">PS</div>
+                <div><div class="font-medium">Pablo Sánchez</div><div class="text-xs text-ink2">3 clases · 2 alumnos</div></div>
+              </div>
+              <span class="chip is-success">En cancha</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- CONTROL BAR -->
+<div id="proto-controls">
+  <div class="proto-bar">
+    <div class="proto-bar-section">
+      <span class="proto-bar-label">Tema</span>
+      <div class="proto-seg-group">
+        <button class="proto-seg" data-theme-option="light" aria-pressed="true">Claro</button>
+        <button class="proto-seg" data-theme-option="dark"  aria-pressed="false">Oscuro</button>
+      </div>
+    </div>
+    <div class="proto-bar-section">
+      <span class="proto-bar-label">Densidad</span>
+      <div class="proto-seg-group">
+        <button class="proto-seg" data-layout-option="comodo"   aria-pressed="true">Cómodo</button>
+        <button class="proto-seg" data-layout-option="compacto" aria-pressed="false">Compacto</button>
+      </div>
+    </div>
+    <div class="proto-bar-section">
+      <span class="proto-bar-label">Rol</span>
+      <div class="proto-seg-group">
+        <button class="proto-seg" data-persona-option="admin"     aria-pressed="true">Admin</button>
+        <button class="proto-seg" data-persona-option="gerente"   aria-pressed="false">Gerente</button>
+        <button class="proto-seg" data-persona-option="recepcion" aria-pressed="false">Recepción</button>
+      </div>
+    </div>
+    <div class="proto-bar-section">
+      <button class="proto-seg" data-share title="Copiar URL para compartir">🔗 Compartir</button>
+      <button class="proto-seg" data-feedback-toggle title="Comentar el prototipo">💬 Comentar</button>
+    </div>
+  </div>
+  <p class="proto-hint">Shift + ? · pantallas recientes</p>
+</div>
+
+<script src="js/state.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/data.js"></script>
+<script src="js/persona.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/app.js"></script>
+<script src="js/feedback.js"></script>
+</body>
+</html>

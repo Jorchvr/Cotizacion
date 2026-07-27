@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="es" data-theme="light" data-layout="comodo" data-persona="admin">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pro Padel — Caja</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{surface:'rgb(var(--surface) / <alpha-value>)',elevated:'rgb(var(--elevated) / <alpha-value>)',accent:'rgb(var(--accent) / <alpha-value>)',muted:'rgb(var(--muted) / <alpha-value>)',ink:'rgb(var(--ink) / <alpha-value>)',ink2:'rgb(var(--ink2) / <alpha-value>)'},fontFamily:{heading:['Manrope','system-ui','sans-serif'],body:['Inter','system-ui','sans-serif']},borderRadius:{proto:'var(--radius)'}}}};</script>
+  <link rel="stylesheet" href="css/styles.css" /><link rel="stylesheet" href="css/feedback.css" />
+  <style>body { font-family: 'Inter', system-ui, sans-serif; }</style>
+</head>
+<body class="bg-surface text-ink antialiased">
+<div class="app-shell">
+  <aside class="app-sidebar">
+    <div class="brand-row"><div class="brand-mark">PP</div><div><div class="brand-name text-white">Pro Padel</div><span class="brand-city">Polanco · CDMX</span></div></div>
+    <div class="nav-section-label">Operación</div>
+    <a href="dashboard.html" class="nav-link"><span class="nav-icon">📊</span>Tablero</a>
+    <a href="reservas.html" class="nav-link"><span class="nav-icon">📅</span>Reservas <span class="nav-badge">12</span></a>
+    <a href="cobros.html" class="nav-link"><span class="nav-icon">💳</span>Cobros</a>
+    <a href="clientes.html" class="nav-link"><span class="nav-icon">👥</span>Clientes</a>
+    <a href="pos.html" class="nav-link"><span class="nav-icon">🛒</span>Punto de venta</a>
+    <a href="caja.html" class="nav-link active"><span class="nav-icon">💰</span>Caja</a>
+    <div class="nav-section-label">Comercial</div>
+    <a href="membresias.html" class="nav-link"><span class="nav-icon">🎫</span>Membresías</a>
+    <a href="promociones.html" class="nav-link"><span class="nav-icon">🏷️</span>Promociones</a>
+    <a href="torneos.html" class="nav-link"><span class="nav-icon">🏆</span>Torneos y ligas</a>
+    <div class="nav-section-label">Gestión</div>
+    <a href="inventario.html" class="nav-link"><span class="nav-icon">📦</span>Inventario</a>
+    <a href="reportes.html" class="nav-link"><span class="nav-icon">📈</span>Reportes</a>
+    <a href="usuarios.html" class="nav-link" data-persona-show="admin"><span class="nav-icon">⚙️</span>Usuarios y permisos</a>
+    <div class="sidebar-user"><div class="avatar" data-persona-text="user.initials">RS</div>
+    <div class="sidebar-user-info"><strong data-persona-text="user.name">Roberto Salazar</strong><span data-persona-text="user.role">Administrador general</span></div></div>
+  </aside>
+
+  <div class="app-main">
+    <header class="topbar">
+      <button class="sidebar-mobile-btn" data-sidebar-toggle>☰</button>
+      <div><h1>Caja — Turno vespertino</h1><div class="breadcrumbs"><a href="dashboard.html">Tablero</a> / Caja</div></div>
+      <span class="chip is-info ml-auto">Abierta desde 14:00 · Diego R.</span>
+      <button class="btn btn-secondary btn-sm" data-toast="Corte X impreso · $22,340 hasta el momento">🖨️ Corte X</button>
+      <button class="btn btn-primary btn-sm" data-open-modal="cierre-caja">Cerrar caja (Z)</button>
+    </header>
+
+    <main class="app-content">
+      <div class="grid gap-3 mb-4" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))">
+        <div class="card"><div class="kpi"><span class="kpi-label">Fondo inicial</span><span class="kpi-value">$2,000</span></div></div>
+        <div class="card"><div class="kpi"><span class="kpi-label">Ingresos del turno</span><span class="kpi-value">$22,340</span><span class="kpi-delta up">▲ 8 % vs turno anterior</span></div></div>
+        <div class="card"><div class="kpi"><span class="kpi-label">Efectivo en caja</span><span class="kpi-value">$8,420</span></div></div>
+        <div class="card"><div class="kpi"><span class="kpi-label">Retiros / gastos</span><span class="kpi-value">$650</span><span class="kpi-delta">2 movimientos</span></div></div>
+      </div>
+
+      <div class="grid gap-3 mb-4" style="grid-template-columns: 1.5fr 1fr;">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Desglose del turno actual</div>
+              <div class="card-sub">14:00 – ahora · Diego Ramírez · terminal iPad-01</div>
+            </div>
+          </div>
+          <div class="grid gap-3" style="grid-template-columns: 1fr 1fr;">
+            <div>
+              <h4 class="text-xs uppercase text-ink2 tracking-wider mb-2 font-semibold">Por forma de pago</h4>
+              <div class="stat-row"><span class="lbl">💵 Efectivo</span><span class="val">$6,420</span></div>
+              <div class="stat-row"><span class="lbl">💳 Tarjeta</span><span class="val">$9,180</span></div>
+              <div class="stat-row"><span class="lbl">🏦 Transferencia</span><span class="val">$5,240</span></div>
+              <div class="stat-row"><span class="lbl">🎫 Membresía</span><span class="val">$1,500</span></div>
+              <div class="stat-row"><span class="lbl">🌟 Cortesías</span><span class="val" style="color: rgb(var(--danger))">$450</span></div>
+              <div class="grand-total"><span>Total</span><span>$22,340</span></div>
+            </div>
+            <div>
+              <h4 class="text-xs uppercase text-ink2 tracking-wider mb-2 font-semibold">Por área de ingreso</h4>
+              <div class="stat-row"><span class="lbl">Canchas</span><span class="val">$12,340</span></div>
+              <div class="stat-row"><span class="lbl">Clases</span><span class="val">$2,700</span></div>
+              <div class="stat-row"><span class="lbl">Membresías</span><span class="val">$1,850</span></div>
+              <div class="stat-row"><span class="lbl">Tienda deportiva</span><span class="val">$2,890</span></div>
+              <div class="stat-row"><span class="lbl">Bar / cocina</span><span class="val">$1,680</span></div>
+              <div class="stat-row"><span class="lbl">Torneos (inscrip.)</span><span class="val">$900</span></div>
+              <div class="grand-total"><span>Total</span><span>$22,340</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><div class="card-title">Movimientos manuales</div><button class="btn btn-secondary btn-sm" data-open-modal="mov-caja">＋ Registrar</button></div>
+          <div class="stat-row"><span class="lbl">15:20 · Compra hielo (efectivo)</span><span class="val" style="color: rgb(var(--danger))">−$450</span></div>
+          <div class="stat-row"><span class="lbl">14:48 · Propina cocinero</span><span class="val" style="color: rgb(var(--danger))">−$200</span></div>
+          <div class="stat-row"><span class="lbl">17:14 · Propina bar (repartida)</span><span class="val">$185</span></div>
+          <div class="stat-row"><span class="lbl">17:22 · Propina electrónica (mesa)</span><span class="val">$260</span></div>
+          <hr class="divider" />
+          <div class="text-xs text-ink2">Todos los movimientos requieren firma o autorización de gerente.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Movimientos del turno · en vivo</div>
+          <div class="text-xs text-ink2">Ordenados por hora, más recientes primero</div>
+        </div>
+        <div class="proto-table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Hora</th><th>Folio</th><th>Concepto</th><th>Cliente</th><th>Método</th><th>Área</th><th class="num">Monto</th></tr></thead>
+            <tbody>
+              <tr><td>17:24</td><td>PP-0742</td><td>Venta POS (4 items)</td><td>A. Villalobos</td><td>💳 Tarjeta</td><td>Tienda/Bar</td><td class="num">$910</td></tr>
+              <tr><td>17:14</td><td>—</td><td>Propina electrónica</td><td>Mesa 4</td><td>💳 Tarjeta</td><td>Bar</td><td class="num">$260</td></tr>
+              <tr><td>16:52</td><td>PP-0741</td><td>Cancha 1 · 1 h</td><td>S. Márquez</td><td>💳 Tarjeta</td><td>Canchas</td><td class="num">$696</td></tr>
+              <tr><td>16:35</td><td>PP-0740</td><td>Membresía Premium</td><td>P. Estrada</td><td>🏦 Transf.</td><td>Membresías</td><td class="num">$1,850</td></tr>
+              <tr><td>16:14</td><td>PP-0739</td><td>Renta pala + bote</td><td>R. Ceballos</td><td>💵 Efectivo</td><td>Tienda</td><td class="num">$385</td></tr>
+              <tr><td>15:48</td><td>PP-0738</td><td>Cancha 4 · anticipo</td><td>M. Alcántara</td><td>💳 Tarjeta</td><td>Canchas</td><td class="num">$300</td></tr>
+              <tr><td>15:20</td><td>—</td><td>Compra hielo (gasto)</td><td>—</td><td>💵 Efectivo</td><td>Bar</td><td class="num" style="color: rgb(var(--danger))">−$450</td></tr>
+              <tr><td>15:12</td><td>PP-0737</td><td>Paquete 4 canchas</td><td>Corp. Bimbo</td><td>🏦 Transf.</td><td>Canchas</td><td class="num">$4,800</td></tr>
+              <tr><td>14:48</td><td>—</td><td>Propina cocinero</td><td>—</td><td>💵 Efectivo</td><td>Cocina</td><td class="num" style="color: rgb(var(--danger))">−$200</td></tr>
+              <tr><td>14:20</td><td>PP-0736</td><td>Clínica infantil (reversa)</td><td>N. Herrera</td><td>💳 Tarjeta</td><td>Clases</td><td class="num" style="color: rgb(var(--danger))">−$450</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<div data-modal="cierre-caja" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-panel">
+    <div class="modal-header"><h3>Cierre de caja (Corte Z)</h3><button class="modal-close" data-close-modal>×</button></div>
+    <div class="modal-body">
+      <div class="chip is-info mb-3">Cuenta el efectivo físico y captura el total</div>
+      <div class="stat-row"><span class="lbl">Fondo inicial</span><span class="val">$2,000</span></div>
+      <div class="stat-row"><span class="lbl">Efectivo esperado en caja</span><span class="val">$8,420</span></div>
+      <div class="field mt-3"><label>Efectivo contado (físico)</label><input value="$8,335" /></div>
+      <div class="stat-row" style="border: 0"><span class="lbl">Diferencia</span><span class="val" style="color: rgb(var(--danger))">−$85</span></div>
+      <div class="field"><label>Motivo de la diferencia</label><textarea rows="2">Cambio dado de más en venta 15:48 · reconocido por operador.</textarea></div>
+      <div class="field"><label>Autoriza (gerente)</label><select><option>Mariana Ochoa · Gerente</option><option>Roberto Salazar · Admin</option></select></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" data-close-modal>Cancelar</button>
+      <a class="btn btn-primary" href="dashboard.html" data-loading="Cerrando caja…" data-toast="Corte Z registrado y caja cerrada">Confirmar cierre</a>
+    </div>
+  </div>
+</div>
+
+<div data-modal="mov-caja" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-panel">
+    <div class="modal-header"><h3>Registrar movimiento manual</h3><button class="modal-close" data-close-modal>×</button></div>
+    <div class="modal-body">
+      <div class="field"><label>Tipo</label><select><option>Retiro / gasto</option><option>Depósito</option><option>Propina</option></select></div>
+      <div class="field"><label>Concepto</label><input placeholder="Ej. Compra de hielo" /></div>
+      <div class="field"><label>Monto</label><input value="$0" /></div>
+      <div class="field"><label>Método</label><select><option>Efectivo</option><option>Tarjeta</option></select></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" data-close-modal>Cancelar</button>
+      <button class="btn btn-primary" data-close-modal data-toast="Movimiento registrado">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<div id="proto-controls">
+  <div class="proto-bar">
+    <div class="proto-bar-section"><span class="proto-bar-label">Tema</span><div class="proto-seg-group">
+      <button class="proto-seg" data-theme-option="light" aria-pressed="true">Claro</button>
+      <button class="proto-seg" data-theme-option="dark" aria-pressed="false">Oscuro</button></div></div>
+    <div class="proto-bar-section"><span class="proto-bar-label">Densidad</span><div class="proto-seg-group">
+      <button class="proto-seg" data-layout-option="comodo" aria-pressed="true">Cómodo</button>
+      <button class="proto-seg" data-layout-option="compacto" aria-pressed="false">Compacto</button></div></div>
+    <div class="proto-bar-section"><span class="proto-bar-label">Rol</span><div class="proto-seg-group">
+      <button class="proto-seg" data-persona-option="admin" aria-pressed="true">Admin</button>
+      <button class="proto-seg" data-persona-option="gerente" aria-pressed="false">Gerente</button>
+      <button class="proto-seg" data-persona-option="recepcion" aria-pressed="false">Recepción</button></div></div>
+    <div class="proto-bar-section">
+      <button class="proto-seg" data-share>🔗 Compartir</button>
+      <button class="proto-seg" data-feedback-toggle>💬 Comentar</button>
+    </div>
+  </div>
+  <p class="proto-hint">Shift + ? · pantallas recientes</p>
+</div>
+
+<script src="js/state.js"></script><script src="js/theme.js"></script><script src="js/layout.js"></script>
+<script src="js/data.js"></script><script src="js/persona.js"></script><script src="js/ui.js"></script>
+<script src="js/app.js"></script><script src="js/feedback.js"></script>
+</body>
+</html>

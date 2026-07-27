@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="es" data-theme="light" data-layout="comodo" data-persona="admin">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pro Padel — Torneos y ligas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{surface:'rgb(var(--surface) / <alpha-value>)',elevated:'rgb(var(--elevated) / <alpha-value>)',accent:'rgb(var(--accent) / <alpha-value>)',muted:'rgb(var(--muted) / <alpha-value>)',ink:'rgb(var(--ink) / <alpha-value>)',ink2:'rgb(var(--ink2) / <alpha-value>)'},fontFamily:{heading:['Manrope','system-ui','sans-serif'],body:['Inter','system-ui','sans-serif']},borderRadius:{proto:'var(--radius)'}}}};</script>
+  <link rel="stylesheet" href="css/styles.css" /><link rel="stylesheet" href="css/feedback.css" />
+  <style>body { font-family: 'Inter', system-ui, sans-serif; }</style>
+</head>
+<body class="bg-surface text-ink antialiased">
+<div class="app-shell">
+  <aside class="app-sidebar">
+    <div class="brand-row"><div class="brand-mark">PP</div><div><div class="brand-name text-white">Pro Padel</div><span class="brand-city">Polanco · CDMX</span></div></div>
+    <div class="nav-section-label">Operación</div>
+    <a href="dashboard.html" class="nav-link"><span class="nav-icon">📊</span>Tablero</a>
+    <a href="reservas.html" class="nav-link"><span class="nav-icon">📅</span>Reservas <span class="nav-badge">12</span></a>
+    <a href="cobros.html" class="nav-link"><span class="nav-icon">💳</span>Cobros</a>
+    <a href="clientes.html" class="nav-link"><span class="nav-icon">👥</span>Clientes</a>
+    <a href="pos.html" class="nav-link"><span class="nav-icon">🛒</span>Punto de venta</a>
+    <a href="caja.html" class="nav-link"><span class="nav-icon">💰</span>Caja</a>
+    <div class="nav-section-label">Comercial</div>
+    <a href="membresias.html" class="nav-link"><span class="nav-icon">🎫</span>Membresías</a>
+    <a href="promociones.html" class="nav-link"><span class="nav-icon">🏷️</span>Promociones</a>
+    <a href="torneos.html" class="nav-link active"><span class="nav-icon">🏆</span>Torneos y ligas</a>
+    <div class="nav-section-label">Gestión</div>
+    <a href="inventario.html" class="nav-link"><span class="nav-icon">📦</span>Inventario</a>
+    <a href="reportes.html" class="nav-link"><span class="nav-icon">📈</span>Reportes</a>
+    <a href="usuarios.html" class="nav-link" data-persona-show="admin"><span class="nav-icon">⚙️</span>Usuarios y permisos</a>
+    <div class="sidebar-user"><div class="avatar" data-persona-text="user.initials">RS</div>
+    <div class="sidebar-user-info"><strong data-persona-text="user.name">Roberto Salazar</strong><span data-persona-text="user.role">Administrador general</span></div></div>
+  </aside>
+
+  <div class="app-main">
+    <header class="topbar">
+      <button class="sidebar-mobile-btn" data-sidebar-toggle>☰</button>
+      <div><h1>Torneo Verano 2026</h1><div class="breadcrumbs"><a href="dashboard.html">Tablero</a> / Torneos / Verano 2026 · 2ª Categoría</div></div>
+      <button class="btn btn-secondary btn-sm ml-auto" data-toast="Bracket exportado a PDF">📄 Exportar bracket</button>
+      <button class="btn btn-primary btn-sm" data-open-modal="nuevo-torneo">＋ Nuevo torneo</button>
+    </header>
+
+    <main class="app-content">
+      <section class="grid gap-3 mb-4" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))">
+        <div class="card"><div class="kpi"><span class="kpi-label">Estado</span><span class="kpi-value" style="font-size: 1.2rem">Semifinales</span><span class="kpi-delta">Sábado 27 jul</span></div></div>
+        <div class="card"><div class="kpi"><span class="kpi-label">Parejas inscritas</span><span class="kpi-value">16 / 16</span><span class="kpi-delta">Cerrado a inscripciones</span></div></div>
+        <div class="card"><div class="kpi"><span class="kpi-label">Recaudación</span><span class="kpi-value">$28,800</span><span class="kpi-delta">32 pagos · $900 c/u</span></div></div>
+        <div class="card"><div class="kpi"><span class="kpi-label">Premio 1er lugar</span><span class="kpi-value">$15,000</span><span class="kpi-delta">+ trofeo + kit</span></div></div>
+      </section>
+
+      <div class="tabs">
+        <button data-tab="bracket" aria-selected="true">Bracket</button>
+        <button data-tab="parejas" aria-selected="false">Parejas · 16</button>
+        <button data-tab="pagos" aria-selected="false">Pagos</button>
+        <button data-tab="calendario" aria-selected="false">Calendario</button>
+        <button data-tab="listado" aria-selected="false">Todos los torneos</button>
+      </div>
+
+      <div class="card" style="padding: .5rem;">
+        <div data-tab-panel="bracket">
+          <div class="bracket">
+            <div class="bracket-round">
+              <h4>Cuartos de final</h4>
+              <div class="match">
+                <div class="match-row winner"><span>Villalobos / Corcuera</span><span class="score">6-3 · 6-4</span></div>
+                <div class="match-row"><span>Márquez / Ochoa</span><span class="score">3-6 · 4-6</span></div>
+              </div>
+              <div class="match">
+                <div class="match-row"><span>García / Mendoza</span><span class="score">4-6 · 5-7</span></div>
+                <div class="match-row winner"><span>Fuentes / Ruiz</span><span class="score">6-4 · 7-5</span></div>
+              </div>
+              <div class="match">
+                <div class="match-row winner"><span>Padilla / Yáñez</span><span class="score">7-6 · 6-2</span></div>
+                <div class="match-row"><span>Estrada / Cruz</span><span class="score">6-7 · 2-6</span></div>
+              </div>
+              <div class="match">
+                <div class="match-row"><span>Torres / Alcántara</span><span class="score">5-7 · 6-4 · 4-6</span></div>
+                <div class="match-row winner"><span>Zambrano / Solís</span><span class="score">7-5 · 4-6 · 6-4</span></div>
+              </div>
+            </div>
+
+            <div class="bracket-round">
+              <h4>Semifinales · Sáb 27 jul</h4>
+              <div class="match">
+                <div class="match-row"><span>Villalobos / Corcuera</span><span class="score">—</span></div>
+                <div class="match-row"><span>Fuentes / Ruiz</span><span class="score">—</span></div>
+              </div>
+              <div class="match">
+                <div class="match-row"><span>Padilla / Yáñez</span><span class="score">—</span></div>
+                <div class="match-row"><span>Zambrano / Solís</span><span class="score">—</span></div>
+              </div>
+            </div>
+
+            <div class="bracket-round">
+              <h4>Final · Dom 28 jul</h4>
+              <div class="match">
+                <div class="match-row"><span>Por definir</span><span class="score">—</span></div>
+                <div class="match-row"><span>Por definir</span><span class="score">—</span></div>
+              </div>
+            </div>
+
+            <div class="bracket-round">
+              <h4>Campeón</h4>
+              <div class="match">
+                <div class="match-row" style="padding: 1.5rem .65rem; text-align: center; display: block;">
+                  🏆 <div class="text-xs text-ink2 mt-1">Ceremonia dom 20:00</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div data-tab-panel="parejas" hidden>
+          <div class="proto-table-wrap">
+            <table class="data-table">
+              <thead><tr><th>#</th><th>Jugador 1</th><th>Jugador 2</th><th>Categoría</th><th>Pago</th><th>Estado</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>Andrea Villalobos</td><td>Emilio Corcuera</td><td>2ª Categoría</td><td><span class="chip is-success">Pagado</span></td><td><span class="chip is-info">Semifinal</span></td></tr>
+                <tr><td>2</td><td>Rodrigo Fuentes</td><td>Miguel Ruiz</td><td>2ª Categoría</td><td><span class="chip is-success">Pagado</span></td><td><span class="chip is-info">Semifinal</span></td></tr>
+                <tr><td>3</td><td>Marta Padilla</td><td>Julio Yáñez</td><td>2ª Categoría</td><td><span class="chip is-success">Pagado</span></td><td><span class="chip is-info">Semifinal</span></td></tr>
+                <tr><td>4</td><td>Laura Zambrano</td><td>Pablo Solís</td><td>2ª Categoría</td><td><span class="chip is-success">Pagado</span></td><td><span class="chip is-info">Semifinal</span></td></tr>
+                <tr><td>5</td><td>Sergio Márquez</td><td>Karina Ochoa</td><td>2ª Categoría</td><td><span class="chip is-success">Pagado</span></td><td><span class="chip">Eliminada</span></td></tr>
+                <tr><td>6</td><td>Diego García</td><td>Renato Mendoza</td><td>2ª Categoría</td><td><span class="chip is-success">Pagado</span></td><td><span class="chip">Eliminada</span></td></tr>
+                <tr><td>7</td><td>Paola Estrada</td><td>Mónica Cruz</td><td>2ª Categoría</td><td><span class="chip is-success">Pagado</span></td><td><span class="chip">Eliminada</span></td></tr>
+                <tr><td>8</td><td>Fernando Torres</td><td>Miguel Alcántara</td><td>2ª Categoría</td><td><span class="chip is-warning">Parcial</span></td><td><span class="chip">Eliminada</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div data-tab-panel="pagos" hidden>
+          <div class="empty-state">
+            <h3>32 pagos registrados · $28,800 recaudados</h3>
+            <p>Todos los pagos aparecen en <a href="cobros.html" class="text-accent">Cobros</a> con el concepto "Inscripción Torneo Verano 2026".</p>
+          </div>
+        </div>
+
+        <div data-tab-panel="calendario" hidden>
+          <div class="proto-table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Fecha / hora</th><th>Cancha</th><th>Partido</th><th>Ronda</th></tr></thead>
+              <tbody>
+                <tr><td>Sáb 27 · 09:00</td><td>Cancha 1 (Panorámica)</td><td>Villalobos/Corcuera vs Fuentes/Ruiz</td><td>Semifinal 1</td></tr>
+                <tr><td>Sáb 27 · 11:00</td><td>Cancha 2 (Panorámica)</td><td>Padilla/Yáñez vs Zambrano/Solís</td><td>Semifinal 2</td></tr>
+                <tr><td>Sáb 27 · 17:00</td><td>Cancha 1 (Panorámica)</td><td>Consolación 3er lugar</td><td>Bronce</td></tr>
+                <tr><td>Dom 28 · 12:00</td><td>Cancha Central</td><td>Final</td><td>🏆 Final</td></tr>
+                <tr><td>Dom 28 · 20:00</td><td>Salón principal</td><td>Ceremonia de premiación</td><td>Cierre</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div data-tab-panel="listado" hidden>
+          <div class="proto-table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Torneo</th><th>Categoría</th><th>Fechas</th><th>Parejas</th><th>Recaudación</th><th>Estado</th></tr></thead>
+              <tbody>
+                <tr><td>Torneo Verano 2026</td><td>2ª Categoría Mixto</td><td>26–28 jul</td><td>16 / 16</td><td>$28,800</td><td><span class="chip is-info">En curso</span></td></tr>
+                <tr><td>Cuadrangular Corporativo</td><td>Empresas</td><td>02 ago</td><td>4 / 4</td><td>$12,000</td><td><span class="chip is-warning">Programado</span></td></tr>
+                <tr><td>Liga Anual 2026</td><td>Femenil A · B</td><td>ago – dic</td><td>24 / 24</td><td>$96,000</td><td><span class="chip is-info">En curso</span></td></tr>
+                <tr><td>Clínica Junior</td><td>Sub 12</td><td>10 ago</td><td>18 / 24</td><td>$5,400</td><td><span class="chip is-success">Abierto</span></td></tr>
+                <tr><td>Torneo Primavera 2026</td><td>Todas categorías</td><td>abr</td><td>32 / 32</td><td>$54,000</td><td><span class="chip">Cerrado</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<div data-modal="nuevo-torneo" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-panel">
+    <div class="modal-header"><h3>Crear torneo o evento</h3><button class="modal-close" data-close-modal>×</button></div>
+    <div class="modal-body">
+      <div class="grid grid-cols-2 gap-3">
+        <div class="field col-span-2"><label>Nombre</label><input value="Torneo Otoño 2026" /></div>
+        <div class="field"><label>Tipo</label><select><option>Torneo</option><option>Liga</option><option>Reta especial</option><option>Clínica</option><option>Evento corporativo</option><option>Cumpleaños</option></select></div>
+        <div class="field"><label>Formato</label><select><option>Eliminación directa</option><option>Doble eliminación</option><option>Round robin</option><option>Suizo</option></select></div>
+        <div class="field"><label>Categoría</label><select><option>2ª · Mixto</option><option>1ª · Femenil</option><option>3ª · Varonil</option></select></div>
+        <div class="field"><label>Parejas máx.</label><input value="16" /></div>
+        <div class="field"><label>Inscripción por pareja</label><input value="$900" /></div>
+        <div class="field"><label>Premio 1er lugar</label><input value="$15,000" /></div>
+        <div class="field"><label>Fecha inicio</label><input type="date" /></div>
+        <div class="field"><label>Fecha fin</label><input type="date" /></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" data-close-modal>Cancelar</button>
+      <button class="btn btn-primary" data-close-modal data-toast="Torneo creado y publicado">Crear torneo</button>
+    </div>
+  </div>
+</div>
+
+<div id="proto-controls">
+  <div class="proto-bar">
+    <div class="proto-bar-section"><span class="proto-bar-label">Tema</span><div class="proto-seg-group">
+      <button class="proto-seg" data-theme-option="light" aria-pressed="true">Claro</button>
+      <button class="proto-seg" data-theme-option="dark" aria-pressed="false">Oscuro</button></div></div>
+    <div class="proto-bar-section"><span class="proto-bar-label">Densidad</span><div class="proto-seg-group">
+      <button class="proto-seg" data-layout-option="comodo" aria-pressed="true">Cómodo</button>
+      <button class="proto-seg" data-layout-option="compacto" aria-pressed="false">Compacto</button></div></div>
+    <div class="proto-bar-section"><span class="proto-bar-label">Rol</span><div class="proto-seg-group">
+      <button class="proto-seg" data-persona-option="admin" aria-pressed="true">Admin</button>
+      <button class="proto-seg" data-persona-option="gerente" aria-pressed="false">Gerente</button>
+      <button class="proto-seg" data-persona-option="recepcion" aria-pressed="false">Recepción</button></div></div>
+    <div class="proto-bar-section">
+      <button class="proto-seg" data-share>🔗 Compartir</button>
+      <button class="proto-seg" data-feedback-toggle>💬 Comentar</button>
+    </div>
+  </div>
+  <p class="proto-hint">Shift + ? · pantallas recientes</p>
+</div>
+
+<script src="js/state.js"></script><script src="js/theme.js"></script><script src="js/layout.js"></script>
+<script src="js/data.js"></script><script src="js/persona.js"></script><script src="js/ui.js"></script>
+<script src="js/app.js"></script><script src="js/feedback.js"></script>
+</body>
+</html>

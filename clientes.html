@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="es" data-theme="light" data-layout="comodo" data-persona="admin">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pro Padel — Clientes</title>
+  <meta name="description" content="Expediente y base de datos de clientes del club." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{surface:'rgb(var(--surface) / <alpha-value>)',elevated:'rgb(var(--elevated) / <alpha-value>)',accent:'rgb(var(--accent) / <alpha-value>)',muted:'rgb(var(--muted) / <alpha-value>)',ink:'rgb(var(--ink) / <alpha-value>)',ink2:'rgb(var(--ink2) / <alpha-value>)'},fontFamily:{heading:['Manrope','system-ui','sans-serif'],body:['Inter','system-ui','sans-serif']},borderRadius:{proto:'var(--radius)'}}}};</script>
+  <link rel="stylesheet" href="css/styles.css" /><link rel="stylesheet" href="css/feedback.css" />
+  <style>body { font-family: 'Inter', system-ui, sans-serif; }
+  .client-list { display: grid; gap: .35rem; }
+  .client-item { display: grid; grid-template-columns: auto 1fr auto; gap: .6rem; align-items: center; padding: .55rem .65rem; border-radius: 8px; cursor: pointer; border: 1px solid transparent; }
+  .client-item:hover { background: rgb(var(--muted) / .08); }
+  .client-item.active { background: rgb(var(--accent) / .1); border-color: rgb(var(--accent) / .3); }
+  .client-item .name { font-weight: 500; font-size: .88rem; line-height: 1.2; }
+  .client-item .meta { color: rgb(var(--ink2)); font-size: .74rem; }
+  </style>
+</head>
+<body class="bg-surface text-ink antialiased">
+<div class="app-shell">
+  <aside class="app-sidebar">
+    <div class="brand-row"><div class="brand-mark">PP</div><div><div class="brand-name text-white">Pro Padel</div><span class="brand-city">Polanco · CDMX</span></div></div>
+    <div class="nav-section-label">Operación</div>
+    <a href="dashboard.html" class="nav-link"><span class="nav-icon">📊</span>Tablero</a>
+    <a href="reservas.html" class="nav-link"><span class="nav-icon">📅</span>Reservas <span class="nav-badge">12</span></a>
+    <a href="cobros.html" class="nav-link"><span class="nav-icon">💳</span>Cobros</a>
+    <a href="clientes.html" class="nav-link active"><span class="nav-icon">👥</span>Clientes</a>
+    <a href="pos.html" class="nav-link"><span class="nav-icon">🛒</span>Punto de venta</a>
+    <a href="caja.html" class="nav-link"><span class="nav-icon">💰</span>Caja</a>
+    <div class="nav-section-label">Comercial</div>
+    <a href="membresias.html" class="nav-link"><span class="nav-icon">🎫</span>Membresías</a>
+    <a href="promociones.html" class="nav-link"><span class="nav-icon">🏷️</span>Promociones</a>
+    <a href="torneos.html" class="nav-link"><span class="nav-icon">🏆</span>Torneos y ligas</a>
+    <div class="nav-section-label">Gestión</div>
+    <a href="inventario.html" class="nav-link"><span class="nav-icon">📦</span>Inventario</a>
+    <a href="reportes.html" class="nav-link"><span class="nav-icon">📈</span>Reportes</a>
+    <a href="usuarios.html" class="nav-link" data-persona-show="admin"><span class="nav-icon">⚙️</span>Usuarios y permisos</a>
+    <div class="sidebar-user"><div class="avatar" data-persona-text="user.initials">RS</div>
+    <div class="sidebar-user-info"><strong data-persona-text="user.name">Roberto Salazar</strong><span data-persona-text="user.role">Administrador general</span></div></div>
+  </aside>
+
+  <div class="app-main">
+    <header class="topbar">
+      <button class="sidebar-mobile-btn" data-sidebar-toggle>☰</button>
+      <div><h1>Base de clientes</h1><div class="breadcrumbs"><a href="dashboard.html">Tablero</a> / Clientes</div></div>
+      <div class="topbar-search"><span>🔎</span><input type="text" placeholder="Buscar por nombre, teléfono, correo…" value="villa" /></div>
+      <button class="btn btn-primary btn-sm" data-open-modal="nuevo-cliente">＋ Nuevo cliente</button>
+    </header>
+
+    <main class="app-content">
+      <div class="grid gap-3" style="grid-template-columns: 320px 1fr;">
+        <!-- LIST -->
+        <div>
+          <div class="card mb-3" style="padding: .6rem .7rem">
+            <div class="text-xs text-ink2 mb-2">1,247 clientes · 3 duplicados detectados</div>
+            <div class="proto-actions" style="gap: .3rem">
+              <button class="btn btn-secondary btn-sm">Todos</button>
+              <button class="btn btn-ghost btn-sm">Con membresía</button>
+              <button class="btn btn-ghost btn-sm">Con adeudo</button>
+              <button class="btn btn-ghost btn-sm">Nuevos</button>
+            </div>
+          </div>
+          <div class="card" style="padding: .5rem">
+            <div class="client-list">
+              <div class="client-item active">
+                <div class="avatar" style="background: rgb(var(--accent))">AV</div>
+                <div><div class="name">Andrea Villalobos Peña</div><div class="meta">Premium · Nivel 4 · 55 44821730</div></div>
+                <span class="chip is-success">Activo</span>
+              </div>
+              <div class="client-item">
+                <div class="avatar" style="background: rgb(var(--info))">EC</div>
+                <div><div class="name">Emilio Corcuera Ruiz</div><div class="meta">Familiar · Nivel 3 · 55 55123840</div></div>
+                <span class="chip is-warning">Vence en 7</span>
+              </div>
+              <div class="client-item">
+                <div class="avatar" style="background: rgb(var(--warning))">SM</div>
+                <div><div class="name">Sergio Márquez Ortiz</div><div class="meta">Sin membresía · Nivel 3 · 55 21738492</div></div>
+                <span class="chip">Casual</span>
+              </div>
+              <div class="client-item">
+                <div class="avatar" style="background: rgb(var(--danger))">LZ</div>
+                <div><div class="name">Laura Zambrano Solís</div><div class="meta">Básica · Nivel 2 · 55 39482017</div></div>
+                <span class="chip is-danger">Vencida</span>
+              </div>
+              <div class="client-item">
+                <div class="avatar" style="background: rgb(var(--info))">RF</div>
+                <div><div class="name">Rodrigo Fuentes Domínguez</div><div class="meta">Corporativa · Nivel 5 · 55 87621390</div></div>
+                <span class="chip is-success">Activo</span>
+              </div>
+              <div class="client-item">
+                <div class="avatar" style="background: rgb(var(--accent))">PE</div>
+                <div><div class="name">Paola Estrada Vega</div><div class="meta">Premium · Nivel 4 · 55 47182930</div></div>
+                <span class="chip is-success">Activo</span>
+              </div>
+              <div class="client-item">
+                <div class="avatar" style="background: rgb(var(--warning))">MP</div>
+                <div><div class="name">Marta Padilla Ochoa</div><div class="meta">Sin membresía · Nivel 3 · 55 12938470</div></div>
+                <span class="chip">Casual</span>
+              </div>
+              <div class="client-item">
+                <div class="avatar" style="background: rgb(var(--info))">NH</div>
+                <div><div class="name">Nicolás Herrera Bermúdez</div><div class="meta">Familiar · Nivel 2 · 55 30281740</div></div>
+                <span class="chip is-warning">Adeudo $450</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DETAIL -->
+        <div>
+          <div class="card mb-3">
+            <div class="flex items-center gap-4">
+              <div class="avatar" style="background: rgb(var(--accent)); width: 64px; height: 64px; font-size: 1.4rem">AV</div>
+              <div class="flex-1">
+                <div class="text-xs text-ink2">Cliente · ID 003842</div>
+                <h2 class="font-heading text-xl font-bold">Andrea Villalobos Peña</h2>
+                <div class="text-sm text-ink2">55 4482 1730 · andrea.villalobos@correo.mx · CDMX</div>
+              </div>
+              <div class="proto-actions">
+                <button class="btn btn-secondary btn-sm">Editar</button>
+                <a href="reservas.html" class="btn btn-primary btn-sm">＋ Nueva reserva</a>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-4 gap-3 mt-4 text-sm">
+              <div><div class="text-xs text-ink2">Nivel de juego</div><div class="font-medium">4 · Avanzado</div></div>
+              <div><div class="text-xs text-ink2">Categoría</div><div class="font-medium">Femenil A</div></div>
+              <div><div class="text-xs text-ink2">Fecha nacimiento</div><div class="font-medium">15 feb 1989 · 37 años</div></div>
+              <div><div class="text-xs text-ink2">Cliente desde</div><div class="font-medium">Mar 2023 · 3.4 años</div></div>
+              <div><div class="text-xs text-ink2">Contacto emergencia</div><div class="font-medium">Julio Yáñez · 55 12938471</div></div>
+              <div><div class="text-xs text-ink2">Saldo a favor</div><div class="font-medium text-accent">$185.00</div></div>
+              <div><div class="text-xs text-ink2">Adeudos</div><div class="font-medium" style="color: rgb(var(--success))">$0.00</div></div>
+              <div><div class="text-xs text-ink2">RFC</div><div class="font-medium">VIPA890215QW3</div></div>
+            </div>
+          </div>
+
+          <div class="tabs">
+            <button data-tab="reservas" aria-selected="true">Reservas · 84</button>
+            <button data-tab="pagos" aria-selected="false">Pagos · 46</button>
+            <button data-tab="productos" aria-selected="false">Productos · 12</button>
+            <button data-tab="torneos" aria-selected="false">Torneos · 6</button>
+            <button data-tab="notas" aria-selected="false">Notas internas</button>
+          </div>
+
+          <div class="card">
+            <div data-tab-panel="reservas">
+              <div class="proto-table-wrap">
+                <table class="data-table">
+                  <thead><tr><th>Fecha</th><th>Cancha</th><th>Compañeros</th><th class="num">Duración</th><th class="num">Monto</th><th>Estado</th></tr></thead>
+                  <tbody>
+                    <tr><td>26 jul, 17:00</td><td>Cancha 4 (Cristal)</td><td>Corcuera, Padilla, Yáñez</td><td class="num">1.5 h</td><td class="num">$468</td><td><span class="chip is-info">Programada</span></td></tr>
+                    <tr><td>22 jul, 19:00</td><td>Cancha 1 (Panorámica)</td><td>Corcuera, Fuentes, Márquez</td><td class="num">2 h</td><td class="num">$1,020</td><td><span class="chip is-success">Jugada</span></td></tr>
+                    <tr><td>18 jul, 17:00</td><td>Cancha 3 (Cristal)</td><td>Padilla, Zambrano, García</td><td class="num">1.5 h</td><td class="num">$468</td><td><span class="chip is-success">Jugada</span></td></tr>
+                    <tr><td>15 jul, 20:00</td><td>Cancha 2 (Panorámica)</td><td>Yáñez, Estrada, Ceballos</td><td class="num">1 h</td><td class="num">$510</td><td><span class="chip is-success">Jugada</span></td></tr>
+                    <tr><td>12 jul, 19:00</td><td>Cancha 4 (Cristal)</td><td>Corcuera, Padilla, Yáñez</td><td class="num">2 h</td><td class="num">$1,020</td><td><span class="chip is-danger">Cancelada</span></td></tr>
+                    <tr><td>08 jul, 09:00</td><td>Cancha 1 (Panorámica)</td><td>Ochoa, Márquez, Ruiz</td><td class="num">1.5 h</td><td class="num">$468</td><td><span class="chip is-success">Jugada</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div data-tab-panel="pagos" hidden>
+              <div class="proto-table-wrap">
+                <table class="data-table">
+                  <thead><tr><th>Folio</th><th>Fecha</th><th>Concepto</th><th>Método</th><th class="num">Monto</th></tr></thead>
+                  <tbody>
+                    <tr><td>PP-2026-0672</td><td>22 jul</td><td>Cancha 1 · 2 h</td><td>💳 Tarjeta</td><td class="num">$1,020</td></tr>
+                    <tr><td>PP-2026-0611</td><td>15 jul</td><td>Membresía Premium (renov.)</td><td>🏦 Transferencia</td><td class="num">$1,850</td></tr>
+                    <tr><td>PP-2026-0578</td><td>12 jul</td><td>Bote pelotas Head Pro</td><td>💵 Efectivo</td><td class="num">$220</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div data-tab-panel="productos" hidden>
+              <div class="proto-table-wrap">
+                <table class="data-table">
+                  <thead><tr><th>Producto</th><th>Fecha</th><th class="num">Cantidad</th><th class="num">Total</th></tr></thead>
+                  <tbody>
+                    <tr><td>Pala Head Delta Pro 2024</td><td>15 abr 2026</td><td class="num">1</td><td class="num">$4,890</td></tr>
+                    <tr><td>Bote pelotas Head Pro</td><td>12 jul 2026</td><td class="num">1</td><td class="num">$220</td></tr>
+                    <tr><td>Overgrip Wilson Pro (paquete 3)</td><td>03 jul 2026</td><td class="num">1</td><td class="num">$180</td></tr>
+                    <tr><td>Playera oficial club</td><td>20 jun 2026</td><td class="num">2</td><td class="num">$700</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div data-tab-panel="torneos" hidden>
+              <div class="proto-table-wrap">
+                <table class="data-table">
+                  <thead><tr><th>Torneo</th><th>Categoría</th><th>Pareja</th><th>Resultado</th></tr></thead>
+                  <tbody>
+                    <tr><td>Torneo Verano 2026</td><td>Femenil A</td><td>con Marta Padilla</td><td>Semifinalista</td></tr>
+                    <tr><td>Cuadrangular Primavera</td><td>Mixto B</td><td>con Emilio Corcuera</td><td>Campeona</td></tr>
+                    <tr><td>Liga Anual 2025</td><td>Femenil A</td><td>con Paola Estrada</td><td>3er lugar</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div data-tab-panel="notas" hidden>
+              <ul class="text-sm" style="display: grid; gap: .6rem;">
+                <li class="p-3 rounded" style="background: rgb(var(--muted) / .08)">
+                  <div class="text-xs text-ink2 mb-1">Diego R. · 12 jul 2026</div>
+                  Alergia a pelotas Bullpadel — usar siempre Head Pro.
+                </li>
+                <li class="p-3 rounded" style="background: rgb(var(--muted) / .08)">
+                  <div class="text-xs text-ink2 mb-1">Mariana O. · 03 may 2026</div>
+                  Interesada en clases privadas con Julieta Márquez. Presupuesto aprobado hasta $650/clase.
+                </li>
+                <li class="p-3 rounded" style="background: rgb(var(--muted) / .08)">
+                  <div class="text-xs text-ink2 mb-1">Roberto S. · 15 mar 2026</div>
+                  Cliente VIP — descuento adicional autorizado en compras &gt; $3,000.
+                </li>
+              </ul>
+              <button class="btn btn-secondary btn-sm mt-3">＋ Agregar nota</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- Nuevo cliente modal -->
+<div data-modal="nuevo-cliente" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-panel" style="max-width: 640px">
+    <div class="modal-header"><h3>Registrar cliente</h3><button class="modal-close" data-close-modal>×</button></div>
+    <div class="modal-body">
+      <div class="chip is-info mb-3">El sistema detectará automáticamente duplicados por teléfono o correo</div>
+      <div class="grid grid-cols-2 gap-3">
+        <div class="field"><label>Nombre completo *</label><input placeholder="Nombre y apellidos" /></div>
+        <div class="field"><label>Teléfono *</label><input placeholder="55 0000 0000" /></div>
+        <div class="field"><label>Correo</label><input type="email" placeholder="cliente@correo.mx" /></div>
+        <div class="field"><label>Fecha de nacimiento</label><input type="date" /></div>
+        <div class="field"><label>Nivel de juego</label><select><option>1 · Iniciante</option><option>2 · Básico</option><option>3 · Intermedio</option><option>4 · Avanzado</option><option>5 · Experto</option></select></div>
+        <div class="field"><label>Categoría</label><select><option>Femenil A</option><option>Femenil B</option><option>Varonil A</option><option>Varonil B</option><option>Mixto</option><option>Juvenil</option></select></div>
+        <div class="field"><label>Contacto de emergencia</label><input placeholder="Nombre" /></div>
+        <div class="field"><label>Teléfono emergencia</label><input placeholder="55 0000 0000" /></div>
+        <div class="field col-span-2"><label>Notas internas</label><textarea rows="2" placeholder="Preferencias, alergias, observaciones…"></textarea></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" data-close-modal>Cancelar</button>
+      <button class="btn btn-primary" data-close-modal data-toast="Cliente registrado" data-loading="Guardando…">Guardar cliente</button>
+    </div>
+  </div>
+</div>
+
+<div id="proto-controls">
+  <div class="proto-bar">
+    <div class="proto-bar-section"><span class="proto-bar-label">Tema</span><div class="proto-seg-group">
+      <button class="proto-seg" data-theme-option="light" aria-pressed="true">Claro</button>
+      <button class="proto-seg" data-theme-option="dark" aria-pressed="false">Oscuro</button></div></div>
+    <div class="proto-bar-section"><span class="proto-bar-label">Densidad</span><div class="proto-seg-group">
+      <button class="proto-seg" data-layout-option="comodo" aria-pressed="true">Cómodo</button>
+      <button class="proto-seg" data-layout-option="compacto" aria-pressed="false">Compacto</button></div></div>
+    <div class="proto-bar-section"><span class="proto-bar-label">Rol</span><div class="proto-seg-group">
+      <button class="proto-seg" data-persona-option="admin" aria-pressed="true">Admin</button>
+      <button class="proto-seg" data-persona-option="gerente" aria-pressed="false">Gerente</button>
+      <button class="proto-seg" data-persona-option="recepcion" aria-pressed="false">Recepción</button></div></div>
+    <div class="proto-bar-section">
+      <button class="proto-seg" data-share>🔗 Compartir</button>
+      <button class="proto-seg" data-feedback-toggle>💬 Comentar</button>
+    </div>
+  </div>
+  <p class="proto-hint">Shift + ? · pantallas recientes</p>
+</div>
+
+<script src="js/state.js"></script><script src="js/theme.js"></script><script src="js/layout.js"></script>
+<script src="js/data.js"></script><script src="js/persona.js"></script><script src="js/ui.js"></script>
+<script src="js/app.js"></script><script src="js/feedback.js"></script>
+</body>
+</html>
